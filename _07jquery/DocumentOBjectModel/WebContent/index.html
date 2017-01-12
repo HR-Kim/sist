@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+</head>
+<body>
+
+<!-- 
+
+Document Object Model
+Script가 동적으로 Content에 접근하고 업데이트 또는
+조작할 수 있는 Interface
+
+Content 취득 
+text()	- p, div
+HTML()
+val()	- input(text)
+
+ -->
+ 
+<p id="test">여기가 p태그입니다</p>
+
+<p>Name:<input type="text" id="textF" value="홍길동"></p>
+
+<button id="btn1">Show Text</button> 
+<button id="btn2">Show HTML</button>
+
+<button id="btn3">Show Value</button>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#btn1").click(function() {
+	//	console.log("btn1 click");
+		alert("Text:" + $("#test").text());
+	});
+	$("#btn2").click(function() {
+		alert("HTML:" + $("#test").html());
+	});
+	$("#btn3").click(function() {
+		alert("Value:" + $("#textF").val());
+	});
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+
+<p><a href="http://www.naver.com" title="Naver" id="url">Naver.com</a>
+</p>
+
+<p><a href="http://www.tutorialspoint.com" id="tuto">tutorialspoint</a>
+</p>
+
+<button id="btn1">Change href and title</button>
+
+<button id="btn2">Change href Value</button>
+
+<script type="text/javascript">
+$(document).ready(function(){
+   $("#btn1").click(function(){ // 버튼이 하나일땐 $("Button")으로 해도됨 
+      $("#url").attr({
+         "href":"http://www.daum.net",
+         "title":"Daum" // href값과 title값을 변경해서 버튼을 누르면 네이버가아닌 다음으로 이동하게된다. 
+      });
+   });
+   $("#btn2").click(function(){
+      //$("#tuto").attr("href", "http://www.daum.net"); // 위에꺼랑 같은 기능 
+      $("#tuto").attr("href", function(i, orig){ // 펑션으로해서 할수도있음 
+         return orig + "/jsp"; // return되는건 원래꺼 뒤에 /jsp가 붙는거라서 바로 jsp로 들어가진다?
+      });
+      
+   });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+</head>
+<body>
+
+<!-- 
+attr
+ -->
+ 
+<p>
+	<a href="http://www.naver.com" id="naver">Naver.com</a>
+</p> 
+
+<button>href attribute get</button>
+
+<script type="text/javascript">
+$(function() {
+	$("button").click(function() {		
+		alert( $("#naver").attr("href") );
+	});
+});
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
