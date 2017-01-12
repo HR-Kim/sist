@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<button onclick="myFunc()">클릭</button>
+<p id="demo">여기가 p태그입니다.</p>
+<br><br><br><br><br><br><br><br>
+<p id="p1">abcabcabv</p>
+<script type="text/javascript">
+function myFunc() {
+	/* var str = document.getElementById('p1').innerHTML;
+	var pos = str.indexOf("abc");
+	var pos1 = str.search("cab");
+	var str1 = str.slice(2, 5);
+	var len = str.length;
+	var _str = str.substring(2, 5); // 음수값 사용 불가, 시작위치부터 끝위치
+	var _str1 = str.substr(-1, 2); // 시작 위치 부터 갯수  */
+	/* var _str2 = str.replace('abc', 'aaa');
+	_str2 = str.toUpperCase();
+	var text1 = 'Hello';
+	var text2 = 'world';
+	var text3 = "";
+	text3 = text3.concat(text1, text2);
+	var str = 'sdf';
+	var _str = str.charAt(2); */
+	//indexOf보다 search가  검색하는 데 기능이 더 뛰어나다.
+	var str1 = "a,b,c,d,e,f";
+	var arr = str1.split(",");
+	var text = "";
+	
+	for(i=0; i< arr.length; i++){
+		text += arr[i];
+	}
+	
+	var text1 = 'Hello';
+	var text2 = 'World';
+	var text3 = "";
+	
+	text3 = text3.concat(text1, text2);
+	
+	// number -> string toString
+	/* var tt = 2;
+	alert(typeof tt);
+	tt = String(tt);
+	alert(typeof tt); */
+	
+	var strNum = "2";
+	alert(typeof strNum);
+	strNum = Number(strNum);
+	alert(typeof strNum);
+	// string -> number Integer.ParseInt();
+	
+	document.getElementById('demo').innerHTML = text3;
+	
+}
+</script>
+</body>
+</html>

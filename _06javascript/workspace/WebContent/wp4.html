@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>체육관 이용 요금</h1>
+<p>
+기본 사용료(2면,4시간)40,800원
+<br>
+<form name="f1">
+<input type="checkbox" name="야간조명" onclick="myFunc(0)">야간조명(20,000원)
+<br>
+<input type="checkbox" name="배구네트" onclick="myFunc(1)">배구네트x2면(4,000원)
+<br>
+<input type="checkbox" name="배구" onclick="myFunc(2)">배구x10개(5,000원)
+<br>
+<br>
+합계금액<input type="text" id="res" value="40,800">원형
+</p>
+</form>
+
+<script type="text/javascript">
+var fee = 40800;
+function myFunc(n){
+	if(n==0){
+		if(document.f1.elements[n].checked == true){
+			fee += 20000;
+			document.getElementById('res').value = comma(fee);
+		}else{
+			fee -= 20000;
+			document.getElementById('res').value = comma(fee);
+		}
+	}else if(n==1){
+		if(document.f1.elements[n].checked == true){
+			fee += 4000;
+			document.getElementById('res').value = comma(fee);
+		}else{
+			fee -= 4000;
+			document.getElementById('res').value = comma(fee);
+		}
+	}else if(n==2){
+		if(document.f1.elements[n].checked == true){
+			fee += 5000;
+			document.getElementById('res').value = comma(fee);
+		}else{
+			fee -= 5000;
+			document.getElementById('res').value = comma(fee);
+		}
+	}
+function comma(num){
+    var len, point, str;  
+       
+    num = num + "";  
+    point = num.length % 3 ;
+    len = num.length;  
+   
+    str = num.substring(0, point);  
+    while (point < len) {  
+        if (str != "") str += ",";  
+        str += num.substring(point, point + 3);  
+        point += 3;  
+    }  
+     
+    return str;
+ 
+}	
+}
+</script>
+</body>
+</html>

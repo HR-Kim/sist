@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#box{
+	background-color: blue;
+}
+</style>
+</head>
+<body id="box">
+<form name="f1" >
+<input type="button" value="빨강" onclick="myFunc(0)">&nbsp&nbsp&nbsp
+<input type="button" value="녹색" onclick="myFunc(1)">&nbsp&nbsp&nbsp
+<input type="button" value="청색" onclick="myFunc(2)">&nbsp&nbsp&nbsp
+<input type="button" value="주황색" onclick="myFunc(3)">&nbsp&nbsp&nbsp
+<input type="button" value="검정색" onclick="myFunc(4)">&nbsp&nbsp&nbsp
+<input type="button" value="흰색" onclick="myFunc(5)">&nbsp&nbsp&nbsp
+</form>
+<script type="text/javascript">
+function myFunc(n) {
+	var box = document.getElementById('box');
+	if(n==0){
+		box.style.backgroundColor="red";
+	}else if(n==1){
+		box.style.backgroundColor="green";
+	}else if(n==2){
+		box.style.backgroundColor="blue";
+	}else if(n==3){
+		box.style.backgroundColor="orange";
+	}else if(n==4){
+		box.style.backgroundColor="black";
+	}else if(n==5){
+		box.style.backgroundColor="white";
+	}
+}
+</script>
+</body>
+</html>

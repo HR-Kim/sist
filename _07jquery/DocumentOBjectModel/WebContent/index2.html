@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+
+<p id="test1">마스크는 현대사회에서 필수품이 됬다. </p>
+<ul id="list">
+	<li>홍차</li>
+	<li>우유</li>
+</ul>
+
+<p id="test2">마스크는 현대사회에서 필수품이 됬다.123123 </p>
+
+<button id="btn1">showOld/newText</button>
+<button id="btn2">showOld/newHTML</button>
+
+<script type="text/javascript">
+$(function(){
+   $("#btn1").click(function(){
+      $("#list").text(function(i, origText){ //파라메터로 들어오는건 게터라고 보면된다? i는 index넘버,
+         return "Old Text:" + origText +
+         "new Text: Hello <b>JQuery</b>(index:"+i+")"; // 리턴부분은 세터라고보면됨?
+      });
+   });
+   // 위에껀 text 아래껀 HTML코드라서 아래껏만 <b>가먹힘 
+   $("#btn2").click(function(){
+         $("#list").html(function(i, origText){
+            return "old html:"+ origText + "new html: Hello <b>JQuery</b>(index:"+i+")" ;
+            
+         });
+   });
+});
+
+</script>
+
+</body>
+</html>

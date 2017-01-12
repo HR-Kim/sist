@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+th, td{
+	border: 1px solid black;
+	width: 100px;
+	text-align: center;
+}
+th{
+	background-color: gray;
+}
+</style>
+</head>
+<body>
+<table style="border: 1px solid black;">
+	<tr>
+		<th>첨자</th>
+		<th>a</th>
+		<th>b</th>
+		<th>axb을 계산</th>
+	</tr>
+	<tr>
+		<th>0</th>
+		<td id="a0">5</td>
+		<td id="b0">33</td>
+		<td><button onclick="calc(0)">계산결과</button></td>
+	</tr>
+	<tr>
+		<th>1</th>
+		<td id="a1">12</td>
+		<td id="b1">14</td>
+		<td><button onclick="calc(1)">계산결과</button></td>
+	</tr>
+	<tr>
+		<th>2</th>
+		<td id="a2">18</td>
+		<td id="b2">65</td>
+		<td><button onclick="calc(2)">계산결과</button></td>
+	</tr>
+</table>
+
+<script type="text/javascript">
+function calc(n){
+	var a = document.getElementById('a'+n).innerHTML;
+	var b = document.getElementById('b'+n).innerHTML;
+	a = Number(a);
+	b = Number(b);
+	alert("계산결과 : " + (a+b));
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<ul>
+	<li id="myLi">커피</li>
+	<li>차</li>
+</ul>
+
+<p id="demo"></p>
+
+<button onclick="myFunc()">클릭</button>
+
+<script type="text/javascript">
+function myFunc(){
+	var x = document.getElementById("myLi").parentNode.nodeName;
+	document.getElementById("demo").innerHTML = x;
+}
+</script>
+</body>
+</html>

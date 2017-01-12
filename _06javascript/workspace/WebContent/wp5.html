@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form name="f1">
+숫자 : <input type="text" id="num" name="num"></form>
+<button id="change" onclick="myFunc()">변환</button>
+<br>
+2진수    : <input type="text" id="two" style="width: 1000px">
+<br>
+8진수    : <input type="text" id="eight" style="width: 1000px">
+<br>
+16진수 : <input type="text" id="sixteen" style="width: 1000px">
+
+
+<script type="text/javascript">
+
+function myFunc(){
+	var x = document.f1.num.value;
+	x = Number(x);
+	document.getElementById('two').value = space(x.toString(2)); 
+	document.getElementById('eight').value = "0" + x.toString(8); 
+	document.getElementById('sixteen').value = "0x"+x.toString(16);
+} 
+
+function space(num){
+    var len, point, str;  
+       
+    //num = num + "";  
+    point = num.length % 4 ;
+    len = num.length;  
+   
+    str = num.substring(0, point);  
+    while (point < len) {  
+        if (str != "") str += " ";  
+        str += num.substring(point, point + 4);  
+        point += 4;  
+    }  
+     
+    return str;
+    
+    
+ 
+}	
+</script>
+</body>
+</html>

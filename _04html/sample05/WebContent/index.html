@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+table, tr, td, th{
+	border:3px solid black;
+	border-collapse: collapse;
+	
+}
+td{
+	text-align: center;
+}
+</style>
+</head>
+<body>
+
+<table border="1" style="width:100%">
+	<caption>주소록</caption> <!-- 테이블의 제목 (HTML5에서 생겨남) -->
+	<tr>
+		<th>성</th>
+		<th>이름</th>
+		<th>나이</th>
+		<th colspan="2">전화</th>
+	</tr>
+	<tr>
+		<td>홍</td>
+		<td>길동</td>
+		<td>24</td>
+		<td>123-5678</td>
+		<td>123-6789</td>
+		</tr>
+	<tr>
+		<td>일</td>
+		<td>지매</td>
+		<td>26</td>
+		<td colspan="2">123-6789</td>
+		</tr>		
+</table>
+<br>
+
+<table style="width:100%">
+	<tr>
+		<td>홍</td>
+		<td>길동</td>
+		<td>24</td>
+		</tr>
+	<tr>
+		<td>일</td>
+		<td>지매</td>
+		<td>26</td>
+		</tr>		
+</table>
+<br>
+<table style="width:100%">
+	<tr>
+		<th>이름</th>
+		<td>빌게이츠</td>
+		</tr>
+	<tr>
+		<th rowspan="2">전화번호</th>
+		<td>123-4567</td>
+		</tr>
+	<tr>
+		<td>234-5678</td>
+	</tr>		
+</table>
+</body>
+</html>

@@ -1,0 +1,70 @@
+--문제1)EMP 테이블에서 이름, 급여, 보너스, 연봉을 출력하여라
+
+SELECT LAST_NAME AS 이름, SALARY AS 급여, NVL(commission_pct*salary,0) AS 보너스, salary*12  AS 연봉
+FROM EMPLOYEES;
+
+--문제2) EMP과 DEPT 테이블에서 업무가 MANAGER인 사원의 정보를 이름, 업무, 부서명, 근무지를 출력하여라
+
+SELECT A.EMPLOYEE_ID, A.LAST_NAME, A.JOB_ID, B.DEPARTMENT_NAME, B.LOCATION_ID
+FROM EMPLOYEES A, DEPARTMENTS B
+WHERE A.DEPARTMENT_ID = B.DEPARTMENT_ID
+AND A.EMPLOYEE_ID IN (SELECT MANAGER_ID FROM EMPLOYEES);
+
+--문제3) EMP 테이블에서 이름의 첫글자가 'K'보다 크고 'Y'보다 적은 사원의 정보를 사원번호, 이름, 업무, 급여, 부서번호를 출력하여라. 단 이름순으로 정렬!
+
+SELECT EMPLOYEE_ID, LAST_NAME, JOB_ID, SALARY, DEPARTMENT_ID
+FROM EMPLOYEES
+WHERE LAST_NAME > 'Kz'  AND LAST_NAME < 'Y'
+ORDER BY LAST_NAME;
+
+--문제4) EMP 테이블에서 입사일부터 현재까지 근무일수를 출력하여라. 단 근무일수가 많은 사람 순으로 출력하여라.
+
+SELECT LAST_NAME, ROUND(SYSDATE-HIRE_DATE)
+FROM EMPLOYEES
+ORDER BY ROUND(SYSDATE-HIRE_DATE) DESC;
+
+--문제5) EMP 테이블에서 10번 부서 사람들의 현재까지의 근무 월수의총합을 계산하여 출력하여라.
+SELECT DEPARTMENT_ID, ROUND(SUM(MONTHS_BETWEEN(SYSDATE, HIRE_DATE))) AS 근무월총합
+FROM EMPLOYEES
+GROUP BY DEPARTMENT_ID
+HAVING DEPARTMENT_ID = 10;
+
+--문제6) EMP테이블ㄹ에서 부서 20중 급여 앞에 $를 삽입하고 3자리마다,를 출력하여라
+SELECT DEPARTMENT_ID, TO_CHAR(SALARY, '$999,999')
+FROM EMPLOYEES
+WHERE DEPARTMENT_ID = 20;
+
+--문제7) EMP테이블에서 모든 SALESMAN에 대하여 급여의 평균, 최고액, 최저액, 합계를 구하여 출력하여라.
+SELECT JOB_ID, AVG(SALARY), MAX(SALARY), MIN(SALARY), SUM(SALARY)
+FROM EMPLOYEES
+GROUP BY JOB_ID
+HAVING JOB_ID = 'SA_MAN';
+
+--문제8) EMP 테이블에서 부서별로 인원수, 평균, 급여, 최저급여, 최고급여, 급여의 합을 구하여 출력하여라.
+SELECT DEPARTMENT_ID, COUNT(*), AVG(SALARY), MIN(SALARY), MAX(SALARY), SUM(SALARY)
+FROM EMPLOYEES
+GROUP BY DEPARTMENT_ID;
+
+--문제9) EMP테이블에서 부서 인원이 4명 보다 많은 부서의 부서번호, 인원수, 급여의 합을 구하여 출력하여라.
+SELECT DEPARTMENT_ID, COUNT(*), SUM(SALARY)
+FROM EMPLOYEES
+GROUP BY DEPARTMENT_ID
+HAVING COUNT(*) > 4;
+
+--문제10) 각 사원별 보너스가 0 또는 NULL이고 부서명 'ING'로 끝나는 사원의 정보를 사우너번호, 사원이름, 보너스, 부서번호, 부서명, 부서위치를 출력하여라.
+-- 단, 보너스가 NULL이면 0으로 출력하여라!
+
+SELECT A.EMPLOYEE_ID, A.LAST_NAME, NVL(A.COMMISSION_PCT, 0), A.DEPARTMENT_ID, B.DEPARTMENT_NAME, B.LOCATION_ID
+FROM EMPLOYEES A, DEPARTMENTS B
+WHERE A.DEPARTMENT_ID = B.DEPARTMENT_ID 
+AND A.COMMISSION_PCT IS NULL
+AND B.DEPARTMENT_NAME LIKE '%ing';
+
+
+
+
+
+
+
+
+KTX 144 16:35 13호차 11A

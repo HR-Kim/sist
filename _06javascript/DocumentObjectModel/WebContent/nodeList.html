@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p>여기는 첫번째 p태그</p>
+<p>여기는 두번째p태그</p>
+
+<p id="demo">Hello</p>
+
+<button onclick="myFunc()">클릭</button>
+
+<script type="text/javascript">
+	var myNodeList = document.getElementsByTagName("p");
+	
+	alert(myNodeList[2].innerHTML);
+	
+	alert("p태그 list의 길이 : " + myNodeList.length);
+	
+	for(var i = 0; i<myNodeList.length; i++){
+		myNodeList[i].style.backgroundColor = "#ff0000";
+	}
+</script>
+</body>
+</html>

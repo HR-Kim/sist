@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!--  
+	Java Script
+	컴파일을 하지 않는다. ==> 가볍다
+	Client 프로그래밍
+	ex) ID가 글자수의 제한 -> 제어
+		PW -> 숫자 포함, 기호 포함
+		특정 tag에 값을 변경 Document Object Model
+		
+-->
+
+<p id="demo">여기가 p태그입니다</p>
+
+<button type="button" onclick="myFunc()">폰트변경</button>
+
+<button type="button" style="width: 100px; height: 50px; border: 0px none; background: rgba(255, 0, 0, 0.4);" onclick="document.getElementById('demo').innerHTML = 'Hello JavaScript'">
+<img alt="이미지없음" src="__.jpg">
+</button>
+<br><br>
+<img alt="이미지없음" src="./lamp.jpg" width="100" height="100"
+	id = "myImg" onclick="changeImage()">
+	
+<script type="text/javascript">
+	var n=0;
+	function changeImage() {
+	//	alert("image click");
+		var image = document.getElementById('myImg');
+		
+		
+		if(n == 0){
+			image.src="./zum.jpg";
+			n = 1;
+		}else{
+			image.src="./lamp.jpg";
+			n = 0;
+		}	
+	}
+	function myFunc(){
+		var x = document.getElementById('demo');
+		x.style.fontSize = "25px";
+		x.style.color = "red";
+	}
+</script>	
+	
+	
+	
+</body>
+</html>
+
+
+
+
+
+
+
+

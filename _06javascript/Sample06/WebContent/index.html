@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form name="myForm">
+전화하는 시간은
+<input type="text" size="10" name="myFormSec">
+입니다.<br>
+전화요금은
+<input type="text" size="10" name="myFormWon">
+입니다.
+</form>
+<script type="text/javascript">
+var myCnt = 1;
+function myFunc() {
+	document.myForm.myFormSec.value = myCnt + "초";
+	document.myForm.myFormWon.value 
+		= ((Math.floor(myCnt/10)*10)+10) + "원";
+	
+	myCnt = myCnt + 1;
+}
+
+setInterval("myFunc()", 1000);
+</script>
+</body>
+</html>

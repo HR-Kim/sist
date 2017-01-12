@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+var myColor = new Array(
+		"000000", "101010", "202020", "303030", "404040",
+		"505050", "606060", "707070", "808080", "909090",
+		"a0a0a0", "b0b0b0", "c0c0c0", "d0d0d0", "e0e0e0",
+		"ffffff"
+		);
+myCount = 0;
+
+function myFade(){
+	if(myCount !=16){
+		document.bgColor="#" + myColor[myCount];
+		var myTime = (myCount == 0 || myCount == 15) ? 1000 : 1000;
+		myCount++;
+		setTimeout("myFade()", myTime);
+	}else{
+		//이동할 html
+		location.href = "table.html";
+	}
+}
+</script>
+</head>
+<body>
+
+<br><br><br><br><br><br><br>
+
+<p align="center">
+<font color="white" size="5">
+<strong>S i s t H o m e P a g e</strong>
+</font><br><br>
+
+<font color="white" size="6">
+<strong>JavaScript</strong>
+</font><br><br>
+
+<font color="#000000" size="6">
+<strong>Presented by sist</strong>
+</font><br><br>
+</p>
+
+<script type="text/javascript">
+myFade();
+</script>
+
+
+</body>
+</html>

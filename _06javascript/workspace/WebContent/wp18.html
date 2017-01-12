@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+td{
+	vertical-align: top;
+	padding-right: 10px;
+}
+img{
+	border: solid 10px oragne;
+}
+</style>
+</head>
+<body bgcolor="black">
+<h1 style="color: white">사진들</h1>
+<iframe name="iframe" src="18_1.html" width="300px" height="400px" style="float: left"></iframe>
+<p style="color: white">사진의 선택</p><br>
+<form name="f1">
+<select name="links" onchange="change()">
+	<option>사진을 선택</option>
+	<option value="1">핼리콥터1</option>
+	<option value="2">핼리콥터2</option>
+	<option value="3">핼리콥터3</option>
+</select>
+</form>
+<script type="text/javascript">
+function change(){
+	var n = document.f1.links.selectedIndex;
+	var selLink = document.f1.links.options[n].value;
+//	alert(n);
+	if(n!=0){
+		document.iframe.src = "18_"+ n+".html";
+	}	
+}
+</script>
+</body>
+</html>

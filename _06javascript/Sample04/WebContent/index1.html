@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p id="demo"></p>
+<script type="text/javascript">
+var cars = ["BMW", "Benz", "Audi"];
+var person = ["길동", "홍", 24];
+/* document.getElementById("demo").innerHTML
+	= person[0] + person[1] + "" + person[2]; */
+	
+//var person = {firstName: "길동", lastName:"홍", age:24};
+//document.getElementById("demo").innerHTML = person.firstName;
+document.getElementById("demo").innerHTML = person["firstName"];
+
+person[3] = "서울";
+document.getElementById("demo").innerHTML = person.length;
+</script>
+</body>
+</html>

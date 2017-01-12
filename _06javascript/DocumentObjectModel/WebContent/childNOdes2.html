@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<select id="mySel" size="4">
+<option>Audi</option>
+<option>BMW</option>
+<option>Saab</option>
+<option>Volvo</option>
+</select>
+<br><br>
+<p id="demo"></p>
+<button onclick="myFunc()">클릭</button>
+
+<script type="text/javascript">
+function myFunc(){
+	var c = document.getElementById("mySel").childNodes;
+	document.getElementById('demo').innerHTML = c[1].text;
+}
+</script>
+</body>
+</html>

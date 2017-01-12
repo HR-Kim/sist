@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form name="f1">
+<input type="text" id="inputId" value="abc">
+<br><br>
+<input type="text" name="inputName" value="123">
+</form>
+
+<script type="text/javascript">
+var id = document.getElementById('inputId').value;
+alert("id = " +id);
+
+var name = document.getElementsByName("inputName");
+alert("name = " + name[0].value);
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form name="f1">
+<input type="text" onclick="myFunc()" id="light" value="환영합니다.">
+</form>
+<script type="text/javascript">
+var n = 0;
+function myFunc() {
+	if(n==0){
+		document.getElementById('light').value = "";
+		n = 1;
+	}else{
+		document.getElementById('light').value = "환영합니다.";
+		n = 0;
+	}
+	
+}
+
+setInterval("myFunc()", 1000);
+</script>
+</body>
+</html>

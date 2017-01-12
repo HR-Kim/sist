@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<input type="text" id="a" style="width: 100px; height: 50px">
++
+<input type="text" id="b" style="width: 100px; height: 50px">
+=
+<button onclick="sum()" id="res" style="width: 100px; height: 50px">?</button>
+<script type="text/javascript">
+function sum() {
+	var a = document.getElementById('a').value;
+	var b = document.getElementById('b').value;
+	a = Number(a);
+	b = Number(b);
+	
+	document.getElementById('res').innerHTML = a + b;
+}
+</script>
+</body>
+</html>

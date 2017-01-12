@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>설문조사</h1>
+<form action="w1_1.jsp">
+이름:<input type="text" name="name" id="name" size="30" maxlength="40"> <!--다른페이지에서 데이터를 찾기위한 변수는 name, 현재페이지에서 데이터를 찾기 위한 이름은 id-->
+<br>
+<br>
+[질문1]<br>
+영어로 대화할 수 있습니까?
+<br>
+<input type="radio" name = "englishTalk" value="yes">예
+<input type="radio" name = "englishTalk" value="unknown">모르겠습니다
+<input type="radio" name = "englishTalk" value="no">아니오
+<br>
+<br>
+[질문2]
+<br>
+영어외에 관심있는 언어가 있으면 선택(복수선택가능)
+<input type="checkbox" name = "language" value="German">독일어
+<input type="checkbox" name = "language" value="Chinese">중국어
+<input type="checkbox" name = "language" value="French">프랑스어
+<br>
+<br>
+[질문3]
+<br>
+영어수업에 대한 의견이 있으시면 기입해 주십시오
+<br>
+<textarea name="msg" rows="10" cols="60">
+</textarea>
+<br>
+<br>
+[질문4]
+<br>
+당신의 연령을 선택해 주십시오
+<select name="age">
+	<option value="10">10대</option>
+	<option value="20">20대</option>
+	<option value="30">30대</option>
+	<option value="40">40대</option>
+	<option value="50">50대</option>
+	<option value="60">60대 이상</option>
+</select>
+<br>
+<br>
+<input type="submit" value="입력" width="20">
+</form>
+</body>
+</html>

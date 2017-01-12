@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<p style="background-color: #ff0000">빨강</p>
+<p style="background-color: #00ff00">녹색</p>
+<p style="background-color: #0000ff">파랑</p>
+
+<button>Return background-color of p</button>
+
+<script type="text/javascript">
+$("button").click(function() {
+//   var bcolor = $("p").css("background-color");
+//   alert(" 배경색 = "+ bcolor);
+   $("p").css({"background-color": "yellow",
+            "font-size":"200%"});
+});
+</script>   
+</body>
+</html>

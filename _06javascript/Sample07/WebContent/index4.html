@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form name="f1">
+<input type="text" size="20" name="myFormMes">
+<script type="text/javascript">
+myMsg = "환영합니다!! 어서오십시오!!"
+myCnt = 0;
+
+function myFunc() {
+	document.f1.myFormMes.value
+		= myMsg.substring(0, myCnt) + "_";
+	myCnt = (myCnt == myMsg.length) ? 0 : myCnt+1;
+}
+
+setInterval(myFunc, 500);
+</script>
+
+
+</form>
+</body>
+</html>

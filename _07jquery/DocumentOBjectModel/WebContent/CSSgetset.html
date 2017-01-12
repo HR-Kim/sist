@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./js/jquery-3.1.1.min.js"></script>
+
+<style type="text/css">
+.important{
+	font-weight: bold;
+	font-size: xx-large;
+}
+.blue{
+	color: blue;
+}
+</style>
+
+</head>
+<body>
+
+<!-- Cascading Style Sheet
+addClass()	-추가
+toggleClass()	-추가 + 삭제	<- 동작을 안할 수가 있다.
+css()	- style 속성을 설정, 반환한다. -->
+
+<h1>h1태그</h1>
+<h2>h2태그</h2>
+<h3>h3태그</h3>
+
+<p>Apache Tomcat5.0 으로 설정되어 있고 이것을 <Edit>버튼을 누르고 들여다 보면 경로가 D:\Tomcat5.0으로 잡혀있습니다.
+</p>
+<p>
+만약 Tomcat을 설정하는 다른 곳이 있는 지 .. 만약 위의 에러를 바로 잡아주기 위해서는 어떻게 해야 할 지 궁금합니다.
+</p>
+
+<div class="important">도 위의 에러가 뜹니다.</div>
+<br>
+<button id="add">Add class to elementsS</button>
+<button id="remove">Remove class to elementsS</button>
+<button id="toggle">toggle elementsS</button>
+
+
+<script type="text/javascript">
+$(function() {
+	$("#add").click(function() {
+		/* $("h1, p, div").addClass("blue");
+		$("div").addClass("important"); */
+		$("div").addClass("important blue");
+	});
+	$("#remove").click(function() {
+		$("div").removeClass("important");
+	});
+	$("#toggle").click(function() {
+		$("div").toggleClass("important blue");
+	});
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

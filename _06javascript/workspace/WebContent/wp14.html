@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+th, td{
+	border: 1px solid black;
+	width: 100px;
+}
+</style>
+</head>
+<body>
+<h2>단가x수량 일람표</h2>
+<table style="border: 1px solid black;">
+	<tr>
+		<th>개수</th>
+		<th>제품A</th>
+		<th>제품B</th>
+		<th>제품C</th>
+	</tr>
+	<tr>
+		<th>1</th>
+		<td id="A1"></td>
+		<td id="B1"></td>
+		<td id="C1"></td>
+	</tr>
+	<tr>
+		<th>2</th>
+		<td id="A2"></td>
+		<td id="B2"></td>
+		<td id="C2"></td>
+	</tr>
+	<tr>
+		<th>3</th>
+		<td id="A3"></td>
+		<td id="B3"></td>
+		<td id="C3"></td>
+	</tr>
+	<tr>
+		<th>4</th>
+		<td id="A4"></td>
+		<td id="B4"></td>
+		<td id="C4"></td>
+	</tr>
+	<tr>
+		<th>5</th>
+		<td id="A5"></td>
+		<td id="B5"></td>
+		<td id="C5"></td>
+	</tr>
+	<tr>
+		<th>6</th>
+		<td id="A6"></td>
+		<td id="B6"></td>
+		<td id="C6"></td>
+	</tr>
+	<tr>
+		<th>7</th>
+		<td id="A7"></td>
+		<td id="B7"></td>
+		<td id="C7"></td>
+	</tr>
+	<tr>
+		<th>8</th>
+		<td id="A8"></td>
+		<td id="B8"></td>
+		<td id="C8"></td>
+	</tr>
+	<tr>
+		<th>9</th>
+		<td id="A9"></td>
+		<td id="B9"></td>
+		<td id="C9"></td>
+	</tr>
+	<tr>
+		<th>10</th>
+		<td id="A10"></td>
+		<td id="B10"></td>
+		<td id="C10"></td>
+	</tr>
+</table>
+<script type="text/javascript">
+var a = 300, b = 450, c = 520;
+var p = 1;
+for(var i=0; i<10; ++i){
+	document.getElementById('A'+p).innerHTML = a * p + "원";
+	document.getElementById('B'+p).innerHTML = b * p + "원";
+	document.getElementById('C'+p).innerHTML = c * p + "원";
+	p++;
+}
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,49 @@
+톰캣5+JRE1.5+이클립스3.2 로 웹개발환경을 구축하고 있습니다.
+
+
+
+먼저 자바깔고 톰캣 깔고 이클립스 깔고 이전에 만든 소스를 부르는데 작업장 지정해도 소스가 안불러 집니다.
+
+그래서 import 이용해서 억지로 소스 부르고 나서 
+
+톰캣5를 실행시키면 아래와 같은 에러가 납니다.
+
+
+
+the archive: C:\winapp\Tomcat5.0\bin\bootstrap.jar which is referenced by the classpath, does not exist
+
+
+
+문제는 위의 경로에 톰캣이 깔려있지 않습니다.
+
+
+
+톰캣은 D:\Tomcat5.0 으로 깔려있습니다.
+
+
+
+위의 설정은 예전의 설정인 것 같은데...
+
+
+
+이클립스에서
+
+Window->Preferences->Server->Installed Runtimes 를 보면 
+
+Apache Tomcat5.0 으로 설정되어 있고 이것을 <Edit>버튼을 누르고 들여다 보면 경로가 D:\Tomcat5.0으로 잡혀있습니다.
+
+
+
+그 외에 classpath가 어쩌고 하는 것 같아서
+
+
+
+환경변수에 CLASSPATH를 만들고 D:\Tomcat5.0\bin 를 잡아주었습니다.
+
+
+
+그래도 위의 에러가 뜹니다.
+
+
+
+만약 Tomcat을 설정하는 다른 곳이 있는 지 .. 만약 위의 에러를 바로 잡아주기 위해서는 어떻게 해야 할 지 궁금합니다.

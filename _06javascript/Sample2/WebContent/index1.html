@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p id="demo"></p>
+<button type="button" onclick="myFunction()">버튼</button>
+<button onclick="this.innerHTML=Date()">지금 몇시고</button>
+<script type="text/javascript">
+var person = {
+		firstName:"길동",
+		lastName:"홍",
+		age:24,
+		eyeColor:"blue",
+		fullName:function(){
+			return this.firstName + this.lastName;
+		}
+};
+
+var person1;
+/*
+document.getElementById('demo').innerHTML = 
+	person1 + "<br>" + typeof person1;
+
+	document.getElementById('demo').innerHTML =
+	person.firstName + " is " + person.age;
+
+document.getElementById('demo').innerHTML =
+	typeof "홍길동" + "<br>"
+	+ typeof 3.14 + "<br>"
+	+ typeof 34 + "<br>"
+	+ typeof false + "<br>"
+	+ typeof [1, 2, 3, 4] + "<br>"
+	+ typeof {name:'길동', age:24}; */
+function myFunc(a, b) {		// function != void
+	return a * b;		
+}
+/* 
+document.getElementById('demo').innerHTML = 
+	myFunc(5, 3);
+	
+document.getElementById('demo').innerHTML
+	= person.firstName + " " + person.age;
+	
+document.getElementById('demo').innerHTML
+= person["firstName"] + " " + person["lastName"]; */
+
+document.getElementById('demo').innerHTML
+= person.fullName();
+
+/*
+ * var num = new Number();
+ * 거의 사용을 안한다.. 속도의 저하
+ */
+ 
+ /*
+ 	global(전역) local(지역)
+ */
+ 
+ var gl_num = 0;
+ 
+ function myFunction() {
+	 var num = 0;
+	 
+	 gl_num++;
+	 num++;
+	 
+	 document.getElementById('demo').innerHTML
+	 	= "gl_num:" + gl_num + " num:" + num;
+ }
+ 
+
+</script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<!-- 구구단 문제 양식 -->
+<form name="f1">
+	문제입니다.
+	<input type="text" size="2" name="myformQ1"> *
+	<input type="text" size="2" name="myformQ2"> = 
+	<input type="text" size="2" name="myformA">
+	
+	<input type="button" value="OK" onclick="myClick()">
+</form>
+<a href="javascript:history.go(-1)">
+	<img alt="이미지없음" src="BACK4.gif" border="0" width="76" height="49">
+</a>
+<script type="text/javascript">
+function mySet() { // random으로 숫자1과 숫자2를 설정해주는 함수
+	document.f1.myformQ1.value = Math.floor(Math.random()*9) +1;
+	document.f1.myformQ2.value = Math.floor(Math.random()*9) +1;
+	document.f1.myformA.value = "";
+}
+
+function myClick() {
+	myQ1 = document.f1.myformQ1.value;
+	myQ2 = document.f1.myformQ2.value;
+	myA = document.f1.myformA.value;
+//	alert("myQ1 = " + myQ1 + "myQ2 = " + myQ2);
+	result = myQ1 * myQ2;
+	if(result == myA){
+		alert("정답입니다.");
+	}else{
+		alert(" 틀렸습니다.");
+	}
+	
+}
+</script>
+
+<script type="text/javascript">
+mySet();
+</script>
+</body>
+</html>

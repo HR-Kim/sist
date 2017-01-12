@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<fieldset>
+<legend><h2>회원가입 창</h2></legend>
+<div align="center">
+<form name="myForm" method="post" action="login.html">
+<table style="border: 2px solid black; padding: 10px">
+	<tr>
+		<th>ID</th>
+		<td><input type="text" name="id" id = "id" size="20" required="required">
+			<input type="button" onclick="mySubmit(1)" value="중복확인">
+			<input type="hidden" name="id">
+		</td>
+	</tr>
+	<tr>
+		<th>PW</th>
+		<td><input type="password" name="pw" size="20" required="required"></td>
+	</tr>
+	<tr>
+		<th>이름</th>
+		<td><input type="text" name="name" size="20" required="required"></td>
+	</tr>
+	<tr>
+		<th>Email</th>
+		<td><input type="email" name="email" size="20" required="required"></td>
+	</tr>
+	<tr>
+		<td><br></td>
+	</tr>
+	<tr align="center">
+		<td colspan="2"><input type="submit" onclick="init()" value="가입완료" style="width: 100px; height: 50px"></td>
+		<!-- <td colspan="2"><input type="button" onclick="mySubmit(2)" value="가입완료" style="width: 100px; height: 50px"></td> -->
+	</tr>
+</table>
+</form>
+</div>
+</fieldset>
+
+<script>
+	function mySubmit(index) {
+		var x = document.getElementById('id').value;
+		if(index==1){
+			if(x==""){
+				alert("아이디를 입력하시오!");
+			}else{
+				open_pop(x);
+			}
+		}
+		if(index==2){
+			alert("가입되었습니다.!!");
+			document.myForm.action='login.html';
+		}
+		document.myForm.submit();
+	}
+	function init(){
+		var url = 'login.html';
+		myForm.action = url; 
+	}
+	
+	function open_pop(arg1){
+	    var frmObj = document.myForm;
+	    var url = 'popup.jsp';
+	    window.open(url,'popupView','toolbar=no, width=200, height=200, directories=no, status=no,    scrollorbars=no, resizable=no');   
+	     
+	    myForm.action = url; 
+	    myForm.target = 'popupView'; //window,open()의 두번째 인수와 같아야 하며 필수다.   
+	    myForm.id.value = arg1;  
+	    myForm.submit();    
+	     
+	}
+</script> 
+</body>
+</html>

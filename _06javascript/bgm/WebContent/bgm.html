@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body onload="myBGMon()" onunload="myBGMoff()">
+
+<script type="text/javascript">
+myWinHandle = 0;
+function myBGMon(){
+   myWinHandle = window.open("bgmwin.html","bgm","width=360, height=250");
+   //리소스를 가져올때 리소스의 번호를 매기는데 핸들이 그거다?
+}
+function myBGMoff(){
+   if(myWinHandle.close == false){
+      myWinHandle.close();
+   }
+}
+
+</script>
+<h1>백그라운드 뮤직 재생!</h1>
+</body>
+</html>

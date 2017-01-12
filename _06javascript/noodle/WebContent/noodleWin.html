@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+myCount = 0;
+myTimer = 0;
+
+function myGo(){
+	var mySelect = document.myForm.myMenu.selectedIndex;
+	myCount = eval(document.myForm.myMenu.options[mySelect].value);
+	myTimer = setTimeout(function myTimerFunc(){
+			myCount = myCount - 1;
+			document.getElementById('countdown').innerHTML
+				= "완료까지" + myCount + "초 남았습니다.";
+			if(myCount == 0){
+				clearInterval(myTimer);
+				alert("완료되었습니다.");
+			}
+	}, 1000);	//함수 포인터!! 더 프로그램이 빨라지는 효과가 있다.
+	setTimeout(function() {
+		
+	}, ms)
+	alert(mySelect);
+}
+
+/* function myTimerFunc(){
+	
+} */
+</script>
+<form name="myForm">
+<div align="center">	<!-- span css -->
+
+<strong>라면 타이머</strong>
+<select name="myMenu">
+	<option value="180">원하는 시간을 선택해 주십시오</option>
+	<option value="300">5분</option>
+	<option value="195">3분 15초</option>
+	<option value="180">3분</option>
+	<option value="165">2분45초</option>
+	<option value="150">2분30초</option>
+	<option value="120">2분</option>
+	<option value="60">1분</option>
+	<option value="30">30초</option>
+</select>
+
+<input type="button" value="Go" onclick="myGo()">
+
+<span id="countdown">시간을 선택</span>	<!-- div태그와 큰차이가 없다. -->
+<input type="button" value="Close" onclick="window.close()">
+</div>
+</form>
+
+</body>
+</html>

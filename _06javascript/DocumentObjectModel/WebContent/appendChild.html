@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<p>Hello Dom</p>
+<div id="div1">
+	<p id="p1">이것은 DOM입니다.</p>
+	<p id="p2">DOM은 사용 방법이 중요합니다.</p>
+</div>
+
+<button onclick="myFunc()">클릭</button>
+
+<script type="text/javascript">
+function myFunc(){
+	var para = document.createElement("p");
+	var node = document.createTextNode("this is New");
+	para.appendChild(node);
+	
+	var element = document.getElementById("div1");
+	element.appendChild(para);
+	}
+</script>
+
+</body>
+</html>

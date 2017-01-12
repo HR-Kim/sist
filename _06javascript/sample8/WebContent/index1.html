@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form>
+패스워드는 pass입니다. 
+<input type="button" value="Home Page로" onclick="myFunc()">
+</form>
+
+<script type="text/javascript">
+document.oncontextmenu = function(){
+	alert("마우스 오른쪽 x");
+	return false;
+}
+
+function myFunc(){
+   myPassWord = prompt("패스워드 입력","");
+   /* if(myPassWord=="pass"){
+      location.href = "index.html";
+   }else{
+      alert("비밀번호틀림");
+   } */
+   // 외부로 노출 안시키고 아스키코드값으로 해주는 경우
+   if(myPassWord == String.fromCharCode(112, 97, 115, 115)){ // pass라는걸 아스키 코드값으로 표현 
+      
+      location.href = "index.html";
+   }else{
+      alert("비밀번호틀림");
+   }
+   
+}
+</script>
+
+</body>
+</html>

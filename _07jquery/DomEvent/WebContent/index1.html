@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+   <h1>Slide Down / Slide Up</h1>
+   <div class="waku" id="pic01">
+      <img src="p001.jpg">
+      <p class="kage"></p>
+      <p class="moji">태평양 상공(기내)</p>
+   </div>
+   <div class="waku" id="pic02">
+      <img src="p002.jpg">
+      <p class="kage"></p>
+      <p class="moji">석양의 해상 별장</p>
+   </div>
+   <div class="waku" id="pic03">
+      <img src="p003.jpg">
+      <p class="kage"></p>
+      <p class="moji">바다로 이어지는 나선형 계단</p>
+   </div>
+   <div class="waku" id="pic04">
+      <img src="p004.jpg">
+      <p class="kage"></p>
+      <p class="moji">해상 통로 가로등</p>
+   </div>
+ 
+<script type="text/javascript">
+$(function() {
+	$("p.kage").css("opacity", "0.4");
+	$("div.waku").mouseenter(function() {
+		var N = $(this).attr("id");
+	      $("div[id=" + N + "] > p").slideDown(500);
+	});
+	
+	$("div.waku").mouseleave(function() {
+		$("p").slideUp(250);
+	});
+})
+</script> 
+   
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+
+

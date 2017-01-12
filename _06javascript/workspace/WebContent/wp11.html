@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>2개의 주사위</h1>
+버튼을 클릭하면, 2개의 주사위가 랜덤됩니다.<br>
+<br>
+<img src="image/sai_1.gif">
+<img src="image/sai_6.gif"><br>
+<button onclick="dice()">랜덤!</button>
+
+<script type="text/javascript">
+function dice() {
+	var a = Math.random() * 6;
+	var b = Math.random() * 6;
+	
+	a = Math.ceil(a);
+	b = Math.ceil(b);
+	
+	document.images[0].src = "image/sai_"+ a + ".gif";
+	document.images[1].src = "image/sai_"+ b + ".gif";
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1 id="intro">인트로</h1>
+
+<p id="demo">안녕하세요</p>
+
+<button onclick="myFunc()">클릭</button>
+
+<script type="text/javascript">
+function myFunc(){
+	var myText = document.getElementById("intro").childNodes[1].nodeValue;
+	document.getElementById('demo').innerHTML = myText;
+}
+</script>
+
+</body>
+</html>

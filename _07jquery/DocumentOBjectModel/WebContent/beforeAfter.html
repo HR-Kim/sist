@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<img src="myImg.PNG" width="140" height="100">
+
+<button id="btn1">Insert Before</button>
+<button id="btn2">Insert After</button>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#btn1").click(function(){
+		$("img").before("<b>before로 추가</b>");
+	});
+	$("#btn2").click(function(){
+		$("img").after("<b>after로 추가</b>");
+	});
+});
+</script>
+</body>
+</html>

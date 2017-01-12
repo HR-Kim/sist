@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body onload="setInterval('nowTime()', 1000)">
+<h1>환영합니다.</h1>
+<form name="f1">
+현재 시각은 <input type="text" size="8" name="tbox">입니다.
+</form>
+
+<script type="text/javascript">
+function nowTime() {
+	var now = new Date();
+	var hour = now.getHours();
+	var minute = now.getMinutes();
+	var second = now.getSeconds();
+	
+	if(hour < 10){
+		hour = "0" + hour;
+	}
+	if(minute < 10){
+		minute = "0" + minute;
+	}
+	if(second < 10){
+		second = "0" + second;
+	}
+	document.f1.tbox.value = hour + ":" + minute + ":" + second;
+}
+</script>
+</body>
+</html>

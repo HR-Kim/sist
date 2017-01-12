@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="myCSS.css">
+<!-- 
+	Cascading Style Sheets
+	
+	CSS 내장(tag), 내부(head), 외부(파일)
+		inline	> internal	external
+	h1{ color:blue; font-size: 12px;}
+		property	property
+		property와 Attribute는 다른데 다른이유는 다음에... 
+		
+ -->
+ <style type="text/css">
+ p{
+ 	/* property */
+ 	color: red;
+ 	text-align: center;
+ }
+ .cls1{
+ 	color: #cccccc;
+ 	text-align: left;
+ }
+ #id1{
+ 	color: #dddddd;
+ 	text-align: right;
+ }
+ </style>
+ 
+</head>
+<body>
+<p> 되나요이거?</p>
+<p id="id1">아이디1입니당</p> 
+<p class="cls1">클래스1 중복 되나요 </p>
+<p style="color: yellow; text-align: right"></p>
+<h3>여기가 h3 태그 부분입니다</h3>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+th,td{
+	width: 100px;
+	border: 1px solid black;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+<table  style="border: 1px solid black;">
+	<tr>
+		<th>네이버</th>
+		<td id="1">http://www.naver.com</td>
+		<td onclick="myFunc(1)"><button>열기</button></td>
+	</tr>
+	<tr>
+		<th>다음</th>
+		<td id="2">http://www.daum.net</td>
+		<td onclick="myFunc(2)"><button>열기</button></td>
+	</tr>
+	<tr>
+		<th>줌</th>
+		<td id="3">http://www.zum.com</td>
+		<td><button onclick="myFunc(3)">열기</button></td>
+	</tr>
+</table>
+<script type="text/javascript">
+function myFunc(n){
+	var link = document.getElementById(n).innerHTML;
+	window.open(link, 'newWindow'); 
+}
+</script>
+</body>
+</html>
+
+
+

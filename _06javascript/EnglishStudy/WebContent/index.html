@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<script type="text/javascript">
+var myQArr = new Array(	// 문제 테이블
+		"비행기", "airplane",
+		"배", "ship",
+		"기차", "train",
+		"자동차", "car",
+		"자전거", "bicycle",
+		"강", "river",
+		"산", "mountain",
+		"도로", "road",
+		"집", "house" );
+		
+var myNowCnt = 0;	// 문제 테이블 카운터
+var myLastCnt = myQArr.length / 2;
+var myQAno = new Array(myLastCnt);
+
+function myQuezInit(){
+	for(i = 0;i < myLastCnt; i++){
+		myQAno[i] = i;	// 0 ~ myLastCnt - 1 
+	}
+	for(i = 0;i < 500; i++){
+		var r1 = Math.floor(Math.random() * myLastCnt);
+		var r2 = Math.floor(Math.random() * myLastCnt);
+		
+		var temp = myQAno[r1];
+		myQAno[r1] = myQAno[r2];
+		myQAno[r2] = temp;
+	}
+	
+	var str = ""
+	for(i = 0;i < myLastCnt; i++){
+		str += myQAno[i] + " ";	// 0 ~ myLastCnt - 1 
+	}
+//	alert(str);	
+}
+
+function myQuez(){
+	if(myNowCnt == 0) myQuezInit();
+	
+	var myA = prompt("\n문제:" + myQArr[myQAno[myNowCnt]*2], "");
+	
+	if(myA != null){	// 취소 버튼이 아니다
+		
+		if(myA == myQArr[myQAno[myNowCnt]*2 + 1]){
+			
+			if(myNowCnt == myLastCnt - 1){	// 마지막문제까지 다 풀었음
+				myNowCnt = 0;
+				alert("모두 풀었습니다 수고 하셨습니다");
+			}else{
+				myNowCnt++;
+				myQuez();
+			}
+			
+		}else{
+			alert("틀렸습니다");
+			myQuez();
+		}
+				
+	}else{				// 취소 버튼을 클릭
+		myNowCnt = 0;
+		alert("중단 되었습니다");
+	}
+}
+		
+</script>
+
+
+<form name="f1">
+	<input type="button" value="영어단어공부" onclick="myQuez()">
+</form>
+
+</body>
+</html>
+
+
+
+
+
+

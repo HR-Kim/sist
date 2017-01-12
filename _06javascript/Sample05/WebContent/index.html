@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- 제어문 -->
+
+<button onclick="myFunc()"></button>
+<p id="demo"></p>
+<script type="text/javascript">
+function myFunc() {
+	var hour = new Date().getHours();
+	var msg;
+	if(hour < 18){
+		msg = "좋은 하루입니다.";
+	}else{
+		msg = "좋은 밥되십시오.";
+	}
+	var text = "";
+	var cars = ["얘들이", "정말", "붙는다고??"];
+	for(i in cars){
+		text +=cars[i];
+	}
+	
+	myMes = new Array(24);
+	myMes[0] = "안녕하세요0시입니다";
+	myMes[1] = "안녕하세요1시입니다";
+	myMes[2] = "안녕하세요2시입니다";
+	myMes[3] = "안녕하세요3시입니다";
+	myMes[4] = "안녕하세요4시입니다";
+	myMes[5] = "안녕하세요5시입니다";
+	myMes[6] = "안녕하세요6시입니다";
+	myMes[7] = "안녕하세요7시입니다";
+	myMes[8] = "안녕하세요8시입니다";
+	myMes[9] = "안녕하세요9시입니다";
+	myMes[10] = "안녕하세요10시입니다";
+	myMes[11] = "안녕하세요11시입니다";
+	myMes[12] = "안녕하세요12시입니다";
+	myMes[13] = "안녕하세요13시입니다";
+	myMes[14] = "안녕하세요14시입니다";
+	myMes[15] = "안녕하세요15시입니다";
+	myMes[16] = "안녕하세요16시입니다";
+	myMes[17] = "안녕하세요17시입니다";
+	myMes[18] = "안녕하세요18시입니다";
+	myMes[19] = "안녕하세요19시입니다";
+	myMes[20] = "안녕하세요20시입니다";
+	myMes[21] = "안녕하세요21시입니다";
+	myMes[22] = "안녕하세요22시입니다";
+	myMes[23] = "안녕하세요23시입니다";
+	
+	//document.write(myMes[(new Date()).getHours()]);
+	
+	//document.getElementById('demo').innerHTML = text;
+	
+	var myTb1 = new Array("일", "월", "화", "수", "목", "금", "토");
+	var myDate = new Date();
+	
+	var myYear = myDate.getFullYear();
+	var myMonth = myDate.getMonth() + 1;
+	var myDatwo = myDate.getDate(); //일
+	var myDay = myDate.getDay(); //요일
+	var myH = myDate.getHours();
+	var myM = myDate.getMinutes();
+	var myS = myDate.getSeconds();
+	
+	var myMess1 = myYear + "년 " + myMonth + "월 " + myDatwo +"일";
+	var myMess2 = myTb1[myDay] + "요일";
+	var myMess3 = myH + "시 " + myM + "분 " + myS + "초";
+	var myMess = myMess1 + " " + myMess2 + " " + myMess3;
+	
+	document.write("<br>" + myMess);
+}
+</script>
+</body>
+</html>

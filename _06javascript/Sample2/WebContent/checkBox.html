@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form name="f1">
+<input type="checkbox" name="ch1" onclick="myFunc(0)">아이템1<br>
+<input type="checkbox" name="ch2" onclick="myFunc(1)">아이템2<br>
+</form>
+
+
+<script type="text/javascript">
+function myFunc(n) {
+	if(document.f1.elements[n].checked == true){
+		alert((n+1)+ "번째 checkBox가 체크돼ㅣ었습니다.");
+	}
+}
+var formName = document.f1;
+alert(formName.f1.);
+</script>
+</body>
+</html>

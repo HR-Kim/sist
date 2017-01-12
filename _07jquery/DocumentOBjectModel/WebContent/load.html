@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<p>비동기 통신(ajax)</p>
+
+<div id="news">로드중입니다</div>
+
+<button>클릭</button>
+
+<script type="text/javascript">
+$("button").click(function() {
+	$("#news").load("news.txt");
+});
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

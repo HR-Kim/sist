@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<body>
+
+<div id="myDIV">
+	<p>첫번째 p element</p><p>두번째 p element</p>
+</div>
+
+<button onclick="myFunc()">클릭</button>
+
+<p id="demo"></p>
+
+<script type="text/javascript">
+function myFunc(){
+	var c = document.getElementById("myDIV").childNodes.length;
+	document.getElementById("demo").innerHTML = c;
+	
+	document.getElementById('myDIV').childNodes[3].innerHTML = "HELLO";
+	//분명 p가 2개인데 length가 5로 나온다.
+	/*
+		<div id="myDIV"> 0
+			<p>1 첫번째 p element</p>2
+			<p>3두번째 p element</p>4
+		</div>5
+		
+		<div id="myDIV">0
+		<p>1첫번째 p element</p> <p>2두번째 p element</p>
+	</div>3
+	*/
+}
+</script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+

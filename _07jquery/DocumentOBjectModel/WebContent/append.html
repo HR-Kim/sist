@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<p>첫번째 p태그</p>
+<p>두번째p태그</p>
+
+<ol>
+	<li>홍차</li>
+	<li>커피</li>
+	<li>우유</li>
+</ol>
+
+<button id="btn1">Append Text</button>
+
+<button id="btn2">Append list item</button>
+
+<script type="text/javascript">
+
+$(function() {
+	$("#btn1").click(function(){
+		$("p").append("<p>세번째 p태그</p>");
+	});
+	$("#btn2").click(function(){
+		$("ol").append("<li>주스</li>");
+	});
+});
+	
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
