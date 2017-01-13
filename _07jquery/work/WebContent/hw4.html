@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<img id="img1" alt="이미지없음" src="./image/img01.jpg" title="설명1" style="margin: 1px">
+<img id="img2" alt="이미지없음" src="./image/img02.jpg" title="설명2" style="margin: 1px">
+<img id="img3" alt="이미지없음" src="./image/img03.jpg" title="설명3" style="margin: 1px">
+<img id="img4" alt="이미지없음" src="./image/img04.jpg" title="설명4" style="margin: 1px">
+
+<script type="text/javascript">
+$(function() {
+	$("img").click(function() {
+		var msg = $(this).attr("title");
+		alert(msg);
+	});
+});
+</script>
+</body>
+</html>

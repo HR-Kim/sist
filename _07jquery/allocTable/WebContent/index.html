@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script src="./js/jquery-3.1.1.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+</head>
+<body>
+
+<button id="allItemBtn">옵션추가</button>
+<br><br>
+<table id="example" border="1px">
+<tr>
+	<th>옵션명</th>
+	<th>항목명</th>
+	<th>필수항목</th>
+	<th>가격</th>
+	<th>재고</th>
+	<th>옵션추가</th>
+</tr>
+<tr class="item1">
+	<td><input type="text"><button class="addBtn">항목추가</button></td>
+	<td><input type="text"></td>
+	<td><input type="checkbox"></td>
+	<td><input type="text"></td>
+	<td><input type="text"></td>
+	<td><button class="delBtn">삭제</button></td>
+</tr>
+<tr class="item2">
+	<td><input type="text"><button class="addBtn">항목추가</button></td>
+	<td><input type="text"></td>
+	<td><input type="checkbox"></td>
+	<td><input type="text"></td>
+	<td><input type="text"></td>
+	<td><button class="delBtn">삭제</button></td>
+</tr>
+<tr class="item3">
+	<td><input type="text"><button class="addBtn">항목추가</button></td>
+	<td><input type="text"></td>
+	<td><input type="checkbox"></td>
+	<td><input type="text"></td>
+	<td><input type="text"></td>
+	<td><button class="delBtn">삭제</button></td>
+</tr>
+<tr class="item4">
+	<td><input type="text"><button class="addBtn">항목추가</button></td>
+	<td><input type="text"></td>
+	<td><input type="checkbox"></td>
+	<td><input type="text"></td>
+	<td><input type="text"></td>
+	<td><button class="delBtn">삭제</button></td>
+</tr>
+</table>
+<script type="text/javascript">
+$(function() {
+	$("#allItemBtn").click(function() {
+		//item의 최대번호 구하기
+		var lastItemNo = $("#example tr:last").attr("class").replace("item", "");	//last : 마지막 번호가 넘어온다
+		
+		var newItem = $("#example tr:eq(1)").clone();
+		newItem.removeClass();
+		newItem.find("td:eq(0)").attr("rowspan", "1");
+		newItem.addClass("item" + (parseInt(lastItemNo)+1));
+		
+		$("#example").append(newItem);
+	});
+	
+	//항목 추가 버튼 클릭
+	$(".addBtn").click(function() {
+		var clickedRow = $(this).parent().parent();
+		var cls = clickedRow.attr("class");
+		
+		var newrow = clickedRow.clone();
+		newrow.find("td:eq(0)").remove();
+		newrow.insertAfter($("#example ." + cls + ":last"));
+		
+		resizeRowspan(cls);
+	});
+	
+	$(".delBtn").click(function() {
+		var clickedRow = $(this).parent().parent();
+		var cls = clickedRow.attr("class");
+		
+		if(clickedRow.find("td:eq(0)").attr("rowspan")){
+			if(clickedRow.next().hasClass(cls)){
+				clickedRow.prepend(clickedRow.find("td:eq(0)"));
+			}
+		}
+		clickedRow.remove();
+		
+		resizeRowspan(cls);
+	});
+	//cls rowspan을 조정하는 클래스
+	function resizeRowspan(cls){
+		var rowspan = $("." + cls).length;
+		$("." + cls + ":first td:eq(0)").attr("rowspan", rowspan);
+	}
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

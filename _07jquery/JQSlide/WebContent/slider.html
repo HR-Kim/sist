@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./js/jquery-3.1.1.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+</head>
+<body>
+
+<h1>JQuery UI</h1>
+<h2>Slider</h2>
+<p>Slider의 키를 좌우로 이동시키면 이미지의 투명도가 변경됩니다</p>
+
+<img alt="" src="p1.jpg">
+<img alt="" src="p2.jpg">
+<img alt="" src="p3.jpg">
+
+<p>현재의 투명도<strong id="opa">100</strong>%</p>
+
+<div id="slider1" style="width: 250px;">
+</div>
+
+<script type="text/javascript">
+$(function() {
+	$("#slider1").slider({
+		animate:true,
+		range:"min",
+		value:100,
+		slide:function(event, ui){
+			$("img").css("opacity", ui.value/100);
+			$("#opa").text(ui.value);
+		}
+	});
+});
+</script>
+
+</body>
+</html>

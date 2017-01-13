@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="style.css" type="text/css" media="print, projection, screen" >
+<script src="./js/jquery-3.1.1.min.js"></script>
+
+</head>
+<body>
+<table id="example">
+	<tr>
+		<th>이름</th>
+		<th>나이</th>
+		<th>주소</th>
+	</tr>
+	<tbody>
+	</tbody>
+</table>
+이름:<input id="name" type="text"><br>
+나이:<input id="age" type="text"><br>
+주소:<input id="address" type="text"><br>
+<button id="addbtn">추가</button>
+
+<script type="text/javascript">
+$(function() {
+	$("#addbtn").click(function() {
+		$("#example > tbody:last").append("<tr><td>" + $("#name").val() + "</td>"+ 
+				"<td>" + $("#age").val() + "</td>" +
+				"<td>" + $("#address").val() + "</td></tr>");
+	});
+});
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

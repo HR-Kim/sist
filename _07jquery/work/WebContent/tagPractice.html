@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./js/jquery-3.1.1.min.js"></script>
+<style type="text/css">
+.aaa{
+	color: #F00;
+}
+.ccc{
+	padding:10px;
+	border:#000 2px solid;
+	background-color: red;
+}
+.q14{
+	text0decoration:underline;
+	color:#FFF;
+}
+.q14_a{
+	text0decoration:underline;
+	color:#00F;
+}
+#q17{
+	background:#F00;
+	width: 100px;
+	height: 100px;
+}
+</style>
+</head>
+<body>
+<p id="q01">Hello JQuery</p>
+<p id="q02">Hello JQuery</p>
+<p id="q03"></p>
+<p id="q05">하이</p>
+<ul id="q06">
+	<li>리스트1</li>
+	<li>리스트2</li>
+	<li>리스트3</li>
+</ul>
+<ul id="q07">
+	<li>리스트1</li>
+	<li>리스트2</li>
+	<li>리스트3</li>
+</ul>
+<p id="q08">정말로!</p>
+<p id="q09">나는 성공한다. 내이름은</p>
+<ul id="q10">
+	<li>리스트1</li>
+	<li>리스트2</li>
+	<li>리스트3</li>
+</ul>
+<p id="q11">최선을 다해서</p>
+<div class="ccc">
+<p id="q12">최선을 다해서</p>
+</div>
+<p class="q13">가가가</p>
+<p>나나나</p>
+<p class="q13">다다다</p>
+<p>라라라</p>
+<p class="q13">마마마</p>
+<p class="q14">Q14</p>
+
+<p class="q15"><a href="#">aaa</a></p>
+<p><a href="#">bbb</a></p>
+<p class="q15"><a href="#">ccc</a></p>
+<p><a href="#">ddd</a></p>
+<p class="q15"><a href="#">eee</a></p>
+
+<p class="q16"><a href="http://www.naver.com">AAA</a></p>
+<p><a href="#">BBB</a></p>
+<p class="q16"><a href="http://www.naver.com">CCC</a></p>
+<p><a href="http://www.naver.com">DDD</a></p>
+<p class="q16"><a href="http://www.naver.com">EEE</a></p>
+
+<form>
+	<input type="text" value="입력하지마십시오">
+</form>
+
+<p id="q17">Q17</p>
+
+<p class="button">버튼</p>
+<ul id="q18">
+	<li>리스트1</li>
+	<li>리스트2</li>
+	<li>리스트3</li>
+</ul>
+<script type="text/javascript">
+$(function() {
+	$("#q01").css('color', 'red');
+	$("#q01").css({'color':'red',
+					'background':'yellow'});
+	$("#q03").text("JQuery");
+	$("#q05").html("<a href='#'>안녕하세요</a>");
+	$("#q06").addClass("aaa");
+	$("#q07 li").remove();
+	
+	$("#q08").prepend("나는 성공한다");
+	$("#q09").append("배한주다");
+	$("#q10").prepend("<li>튜니티</li>");
+	$("#q11").wrap("<div class='ccc'></div>");
+	$("#q12").unwrap('div.ccc');
+	
+	$("p.q13").replaceWith('<p>xxx</p>');
+	$(".q14").attr("class", "q14_a");
+	$(".q15 a").removeAttr('href');
+	
+	$(".q16 a").attr('target', '_blank');
+//	$(".q16 a").attr('target', '_self');	//default값
+
+	$("form input").val("입력해주십시오");
+	$("#q17").offset({
+		top:150,
+		left:300
+	});
+	
+	$("p.button").click(function(){
+		$("#q18").empty();
+	});
+});
+</script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./js/jquery-3.1.1.min.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	$("#p1").hover(
+		function func() {
+			$(this).attr("src","image/photo_b.jpg");
+		},
+		function func() {
+			$(this).attr("src","image/photo_a.jpg");
+		}
+	);	
+});
+
+</script>
+
+</head>
+<body>
+
+<img alt="이미지 없음" src="image/photo_a.jpg" id = "p1">
+
+</body>
+</html>

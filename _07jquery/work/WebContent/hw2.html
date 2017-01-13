@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./js/jquery-3.1.1.min.js"></script>
+<style type="text/css">
+.Box{
+	 width:260px; height: 105px;
+	 margin: 2px;
+	 
+}
+
+.event{
+	 width: 120px;
+	  height: 105px;
+	  float: left;
+	  margin: 2px;
+	  background: none;
+}
+
+</style>
+</head>
+<body>
+<h2>Life on the water</h2>
+<button id="add">프레임의 추가</button>&nbsp&nbsp
+<button id="remove">프레임의 삭제</button>&nbsp&nbsp
+<button id="toggle">프레임의 추가/삭제</button>
+
+<br>
+<div class="Box">
+<div class="event">
+<img alt="이미지 없음" src="./image/photo1.jpg" style=" margin:10px; width: 100px; height: 50px">
+</div>
+<div class="event">
+<img alt="이미지 없음" src="./image/photo2.jpg" style=" margin:10px; width: 100px; height: 50px">
+</div>
+</div>
+<div class="Box">
+<div class="event">
+<img alt="이미지 없음" src="./image/photo3.jpg" style=" margin:10px; width: 100px; height: 50px">
+</div>
+<div class="event">
+<img alt="이미지 없음" src="./image/photo4.jpg" style=" margin:10px; width: 100px; height: 50px">
+</div>
+
+<script type="text/javascript">
+$(function() {
+	var frameSet = false;
+	$("#add").click(function(){
+		$(".event").css("background", "lightgreen");
+	});
+	$("#remove").click(function(){
+		$(".event").css("background", "none");
+	});
+	$("#toggle").click(function(){
+		if(frameSet){
+			$(".event").css("background", "none");
+			frameSet = false;
+		}else{
+			$(".event").css("background", "lightgreen");
+			frameSet = true;
+		}
+	});
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+

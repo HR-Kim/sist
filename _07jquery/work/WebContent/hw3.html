@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<h2>room image</h2>
+<img alt="이미지없음" src="./image/pic5.jpg" width= "180px" height= "80px">
+
+<script type="text/javascript">
+	$("img").hover(function() {
+		$("img").attr("width","320px");
+		$("img").attr("height","240px");
+			
+	},function(){
+		$("img").attr("width","180px");
+		$("img").attr("height","80px");
+	});
+</script>
+</body>
+</html>
