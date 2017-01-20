@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<p id="demo"></p>
+
+<script type="text/javascript">
+var parser, xmldoc;
+var text = 
+	"<bookstore><book>" +
+		"<title>홍길동전</title>" +
+		"<author>허균</author>" +
+		"<year>1992</year>" +
+		"</book>" +
+		"</bookstore>";
+
+parser = new DOMParser();
+xmldoc = parser.parseFromString(text, "text/xml");
+
+document.getElementById("demo").innerHTML
+= xmldoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

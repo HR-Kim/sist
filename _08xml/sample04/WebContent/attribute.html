@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p id="demo"></p>
+<script type="text/javascript">
+var xhttp = new XMLHttpRequest();	//xml, json, text
+
+xhttp.onreadystatechange = function() {
+	if(this.readyState == 4 && this.status == 200){	//4는 연결 성공!, 200은 오류가 없음
+		myFunc(this);
+	}
+}
+xhttp.open("GET","clients.xml",true);	//접속방식, 파일명, 정상적으로 실행을 할 것인가
+xhttp.send();
+
+function myFunc(xml) {
+	var x, txt, xmldoc;
+	xmldoc = xml.responseXML;
+	
+	x = xmldoc.getElementsByTagName("고객")[0].attributes;
+	
+	txt = x.getNamedItem("직업").nodeValue + "<br>" + x.length;
+	
+	document.getElementById("demo").innerHTML = txt;
+}
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

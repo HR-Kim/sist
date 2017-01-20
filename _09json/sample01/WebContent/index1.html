@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p id="demo"></p>
+
+<script type="text/javascript">
+var employees = [		//arr[3][2]
+	{
+		"firstName":"길동",
+		"lastName":"홍"
+	},
+	{
+		"firstName":"지매",
+		"lastName":"일"
+	},
+	{
+		"firstName":"꺽정",
+		"lastName":"임"
+	}
+];
+
+var tag = "";
+employees[0].firstName = "철수";
+for(i=0; i<employees.length; i++){
+	tag += employees[i].firstName + " " + employees[i].lastName +"<br>";	
+}
+
+document.getElementById("demo").innerHTML = tag;
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

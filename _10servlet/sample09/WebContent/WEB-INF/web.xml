@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+  version="3.1">
+  
+  <servlet>
+     <servlet-name>dispatchtest</servlet-name>
+     <servlet-class>sample09.DispatchTest</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+     <servlet-name>dispatchtest</servlet-name>
+     <url-pattern>/dispatchtest</url-pattern>		<!--url패턴을 이름과 맞추어주어야한다.  -->
+  </servlet-mapping>
+  
+  <servlet>
+     <servlet-name>forwardman</servlet-name>
+     <servlet-class>sample09.ForwardMan</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+     <servlet-name>forwardman</servlet-name>
+     <url-pattern>/forwardman</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+     <servlet-name>forwardlady</servlet-name>
+     <servlet-class>sample09.ForwardLady</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+     <servlet-name>forwardlady</servlet-name>
+     <url-pattern>/forwardlady</url-pattern>
+  </servlet-mapping>
+  
+  </web-app>

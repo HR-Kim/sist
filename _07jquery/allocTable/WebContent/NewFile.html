@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<h1>동적 Table</h1>
+
+<table border="1" id="list_table">
+	<colgroup>	
+		<col style="width: 50px">
+		<col style="width: 200px">
+		<col style="width: 300px">
+		<col style="width: 200px">
+	</colgroup>
+	<thead>
+		<tr>
+			<th>번호</th>
+			<th>이름</th>
+			<th>생년월일</th>
+			<th>삭제</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>01</td>
+			<td>홍길동</td>
+			<td>1982/01/02</td>
+			<td><a href="#" class="delete-link">삭제</a></td>
+		</tr>
+		<tr>
+			<td>02</td>
+			<td>배한주</td>
+			<td>1993/02/18</td>
+			<td><a href="#" class="delete-link">삭제</a></td>
+		</tr>
+		<tr>
+			<td>03</td>
+			<td>일지매</td>
+			<td>1984/06/22</td>
+			<td><a href="#" class="delete-link">삭제</a></td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="4">여기가 푸터
+		</tr>
+	</tfoot>
+</table>
+<br><br>
+
+<table border="1" id="append_table" class="table">
+	<colgroup>	
+		<col style="width: 50px">
+		<col style="width: 200px">
+		<col style="width: 300px">
+		<col style="width: 200px">
+	</colgroup>
+	<thead>
+		<tr>
+			<th><label for="add_no">No</label></th>
+			<th>이름</th>
+			<th>생년월일</th>
+			<th>삭제</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><input type="text" id="add_no" class="form_control"></td>
+			<td><input type="text" id="add_name" class="form_control"></td>
+			<td><input type="text" id="add_birth" class="form_control"></td>
+			<td><button id="append_row" class="form_control">추가</button></td>
+		</tr>
+	</tbody>
+</table>
+
+<script type="text/javascript">
+//추가하는 함수
+/* $(function() {
+	$("#append_row").click	
+}) */ 
+
+/* var str = "";
+str += '<tr>';
+str += '<td>' + $('#add_no').val() + '</td>';
+str = <'/tr'>; */
+
+$("#append_row").on('click', function() {
+	$("#list_table").append(
+		$('<tr>').append(
+			$('<td>').append($('#add_no').val()),
+			$('<td>').append($('#add_name').val()),
+			$('<td>').append($('#add_birth').val()),
+			$('<td>').append(
+				$('<a>').prop('href', '#').addClass('delete-link').append('삭제')		
+			)
+		)		//세미콜론 안찍어도 된다.
+	);
+});
+
+//삭제하는 함수
+
+$("#list_table").on('click', '.delete-link', function() {
+	//$(this).parent().parent().remove();
+	$(this).closest('tr').remove();
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

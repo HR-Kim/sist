@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="div1"></div>
+
+<script type="text/javascript">
+var myArr=[
+	{
+		"display":"naver",
+		"url":"http://www.naver.com",
+	},
+	{
+		"display":"daum",
+		"url":"http://www.daum.net",
+	},
+	{
+		"display":"zum",
+		"url":"http://www.zum.com",
+	}
+];
+
+myFunc(myArr);
+
+function myFunc(arr) {
+	var out = "";
+	var i;
+	
+	for(i=0;i<arr.length; i++){
+		out += "<a href='" + arr[i].url + "'>" +
+			arr[i].display + "</a><br>";
+ 	}
+	
+	document.getElementById("div1").innerHTML = out;
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

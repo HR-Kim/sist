@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<button type="button" onclick="loadXMLDoc()">내용변경</button>
+
+<p id="demo"></p>
+
+<script type="text/javascript">
+function loadXMLDoc(){
+   var xhttp = new XMLHttpRequest(); //파싱을 하기위한 준비 XML,Json,text
+   
+   xhttp.onreadystatechange = function(){
+      if(this.readyState==4 && this.status==200){ //xml을 정상적으로 읽어오면 4가들어옴? 200이라는건 ok? 정상적인 상태라는 뜻 
+          myFunc(this);
+      }
+   }
+   xhttp.open("GET","clients.xml",true); // 접속방식, 파일명, 
+   xhttp.send();
+   function myFunc(xml) {
+      var x, i, xmldoc, txt;
+      xmldoc = xml.responseXML;
+      txt = "";
+      x = xmldoc.documentElement.childNodes;
+      
+      for(i=0; i<x.length; ++i){
+         if(x[i].nodeType == 3){
+            txt += x[i].nodeName + "<br>";
+         }
+      }
+      document.getElementById("demo").innerHTML = txt;
+      
+     /*  nodeType == 1 ---> element
+      <element></element>
+      
+      nodeType == 2 ---> attribute
+      <element attribute = 'value'></element>
+      
+      nodeType == 3 ---> text영역
+      <element>텍스트영역</element> */
+   }
+};
+</script>
+
+</body>
+</html>

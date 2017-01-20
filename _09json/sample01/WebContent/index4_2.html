@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p id="demo"></p>
+
+<script type="text/javascript">
+var xmlhttp = new XMLHttpRequest();
+var url = "blog.json";
+
+xmlhttp.onreadystatechange = function() {
+	if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+		myFunc(xmlhttp.responseText);
+	}
+}
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+
+function myFunc(response) {
+	var movie = JSON.parse(response);
+	
+	
+	document.getElementById("demo").innerHTML = movie.channel.item[2].title; 
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

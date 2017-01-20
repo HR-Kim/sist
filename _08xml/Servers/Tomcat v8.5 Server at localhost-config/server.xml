@@ -149,7 +149,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="work" path="/work" reloadable="true" source="org.eclipse.jst.jee.server:work"/><Context docBase="JQSlide" path="/JQSlide" reloadable="true" source="org.eclipse.jst.jee.server:JQSlide"/><Context docBase="datePicker" path="/datePicker" reloadable="true" source="org.eclipse.jst.jee.server:datePicker"/><Context docBase="allocTable" path="/allocTable" reloadable="true" source="org.eclipse.jst.jee.server:allocTable"/><Context docBase="myTable" path="/myTable" reloadable="true" source="org.eclipse.jst.jee.server:myTable"/><Context docBase="workTable" path="/workTable" reloadable="true" source="org.eclipse.jst.jee.server:workTable"/><Context docBase="postFind" path="/postFind" reloadable="true" source="org.eclipse.jst.jee.server:postFind"/></Host>
+      <Context docBase="sample01" path="/sample01" reloadable="true" source="org.eclipse.jst.jee.server:sample01"/><Context docBase="sample02" path="/sample02" reloadable="true" source="org.eclipse.jst.jee.server:sample02"/><Context docBase="sample03" path="/sample03" reloadable="true" source="org.eclipse.jst.jee.server:sample03"/><Context docBase="sample04" path="/sample04" reloadable="true" source="org.eclipse.jst.jee.server:sample04"/><Context docBase="xmlParser" path="/xmlParser" reloadable="true" source="org.eclipse.jst.jee.server:xmlParser"/></Host>
     </Engine>
   </Service>
 </Server>

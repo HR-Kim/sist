@@ -1,0 +1,17 @@
+[
+	{
+		"firstname":"길동",
+		"lastname":"홍",
+		"age":"24"
+	},
+	{
+		"firstname":"지매",
+		"lastname":"일",
+		"age":"27"
+	},
+	{
+		"firstname":"꺽정",
+		"lastname":"임",
+		"age":"32"
+	}
+]

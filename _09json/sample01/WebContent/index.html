@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>JSON Object</h1>
+
+<p>
+이름:<span id="jname"></span><br>
+나이:<span id="jage"></span><br>
+주소:<span id="jaddress"></span><br>
+전화번호:<span id="jphone"></span><br>
+</p>
+<script type="text/javascript">
+var JSONObject={
+	"이름":"홍길동",
+	"주소":"서울시",
+	"나이":"24",
+	"전화번호":"10-4041-7667"
+};
+
+document.getElementById("jname").innerHTML = JSONObject.이름;
+document.getElementById("jage").innerHTML = JSONObject.나이;
+document.getElementById("jphone").innerHTML = JSONObject.전화번호;
+document.getElementById("jaddress").innerHTML = JSONObject.주소;
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

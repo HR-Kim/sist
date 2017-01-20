@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<all_Movies> <!-- root tag -->
+	<movie> <!-- node tag -->
+		<no>01</no>
+		<title>신세계</title>
+		<point>90</point>
+		<review>매우 좋음</review>
+	</movie>
+	<movie>
+		<no>02</no>
+		<title>범죄와의 전쟁</title>
+		<point>75</point><review>보통</review>
+		
+	</movie>
+</all_Movies>

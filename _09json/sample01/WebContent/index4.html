@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p id="demo"></p>
+
+<div id="div1"></div>
+
+<script type="text/javascript">
+var xmlhttp = new XMLHttpRequest();
+var url = "data.json";
+
+xmlhttp.onreadystatechange=function(){	//3  순서로 실행된다.
+	if(xmlhttp.readyState ==4 && xmlhttp.status ==200){
+		alert("ready");
+		myFunc(xmlhttp.responseText);
+	}
+		
+}
+alert("open");
+xmlhttp.open("GET", url, true);	//1
+alert("send");
+xmlhttp.send();		//2
+
+function myFunc(response) {
+	//response는 문자열 상태 파싱을 해야한다!
+	var employee = JSON.parse(response);
+	alert("myFunc");
+	/* document.getElementById("demo").innerHTML
+		= employee[0].firstname + " " + employee[0].lastname; */
+	var out = "<table border='1'>";
+	
+	for(i=0; i<employee.length; i++){
+		out +=
+			"<tr>"
+			+ "<td>" + employee[i].firstname + "</td>"
+			+ "<td>" + employee[i].lastname + "</td>"
+			+ "<td>" + employee[i].age + "</td>"
+			+ "</tr>";
+	}
+	out += "</table>"
+	document.getElementById("div1").innerHTML = out;
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

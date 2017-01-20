@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<button type="button" onclick="loadXMLDoc()">
+	내용 변경
+</button>
+<p id="demo"></p>
+
+<script type="text/javascript">
+function loadXMLDoc() {
+	var xhttp = new XMLHttpRequest();	//xml, json, text
+	
+	xhttp.onreadystatechange = function() {
+		if(this.readyState == 4 && this.status == 200){	//4는 연결 성공!, 200은 오류가 없음
+			document.getElementById("demo").innerHTML
+				= this.resposeText;
+		}
+	}
+	xhttp.open("GET", "test.txt", true);	//접속방식, 파일명, 정상적으로 실행을 할 것인가
+	xhttp.send();
+	
+	/* readyState
+	0 : open() 수행전
+	1 : 로딩중
+	2 : 로딩 완료
+	3 : 서버 처리중
+	4 : 서버 처리끝
+	
+	stauts
+	200 : 성공
+	403 : 접근거부
+	404 : 파일, 페이지가 없음 */
+}
+</script>
+</body>
+</html>

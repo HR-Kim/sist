@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p id="demo"></p>
+
+<script type="text/javascript">
+var text = '{"name":"길동","address":"서울시","age":"24"}';	//일단 문자열로 받기위해서 작은 따옴표로 감싸준다.
+
+var obj = JSON.parse(text);		//문자열 -> 객체(text)
+
+document.getElementById("demo").innerHTML
+	= obj.name + " " + obj.age + " " + obj.address;
+//오타 확인 시 alert로 한줄한줄 확인하는 것이 가장 빠르다!
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
