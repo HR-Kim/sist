@@ -97,7 +97,7 @@ public class CustUserManager implements ICustUserManager {
 	}
 	
 	@Override
-	public int addCustUser(String id, String name, String address) {
+	public int addCustUser(CustUserDto uDto) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -110,9 +110,10 @@ public class CustUserManager implements ICustUserManager {
 			System.out.println("2/6 ADD");
 			stmt = conn.prepareStatement(sql);
 			System.out.println("3/6 ADD");
-			stmt.setString(1, id.trim());
-			stmt.setString(2, name.trim());
-			stmt.setString(3, address.trim());
+			stmt.setString(1, uDto.getId().trim());
+			stmt.setString(2, uDto.getName().trim());
+			stmt.setString(3, uDto.getAddress().trim());
+			
 			System.out.println("4/6 ADD");
 			count = stmt.executeUpdate();
 			System.out.println("5/6 ADD");

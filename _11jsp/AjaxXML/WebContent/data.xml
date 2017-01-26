@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<userlist>
+	<user>
+		<number>1</number>
+		<username>홍길동</username>
+	</user>
+	<user>
+		<number>2</number>
+		<username>일지매</username>
+	</user>
+	<user>
+		<number>3</number>
+		<username>임꺽정</username>
+	</user>
+</userlist>

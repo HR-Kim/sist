@@ -149,7 +149,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="sample01" path="/sample01" reloadable="true" source="org.eclipse.jst.jee.server:sample01"/><Context docBase="sample02" path="/sample02" reloadable="true" source="org.eclipse.jst.jee.server:sample02"/><Context docBase="exercise" path="/exercise" reloadable="true" source="org.eclipse.jst.jee.server:exercise"/><Context docBase="JDBCTest" path="/JDBCTest" reloadable="true" source="org.eclipse.jst.jee.server:JDBCTest"/><Context docBase="JSPModel1" path="/JSPModel1" reloadable="true" source="org.eclipse.jst.jee.server:JSPModel1"/><Context docBase="JDBCCopy" path="/JDBCCopy" reloadable="true" source="org.eclipse.jst.jee.server:JDBCCopy"/><Context docBase="JSPModel2" path="/JSPModel2" reloadable="true" source="org.eclipse.jst.jee.server:JSPModel2"/></Host>
+      <Context docBase="JSPSample" path="/JSPSample" reloadable="true" source="org.eclipse.jst.jee.server:JSPSample"/><Context docBase="JSPSampleCopy" path="/JSPSampleCopy" reloadable="true" source="org.eclipse.jst.jee.server:JSPSampleCopy"/></Host>
     </Engine>
   </Service>
 </Server>

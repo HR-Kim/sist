@@ -10,7 +10,7 @@ import sist.com.dto.CustUserDto;
 
 public interface ICustUserManager{
 	public List<CustUserDto> getCustUserList();
-	public int addCustUser(String id, String name, String address);
+	public int addCustUser(CustUserDto uDto);
 	public CustUserDto getCustUser(String id);
 	public int deleteCustUser(String id);
 	public int updateCustUser(String id, String name, String address);

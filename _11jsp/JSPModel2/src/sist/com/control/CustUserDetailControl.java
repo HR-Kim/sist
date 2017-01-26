@@ -43,10 +43,6 @@ public class CustUserDetailControl extends HttpServlet {
 			req.setAttribute("cust", custdto);
 
 			dispatch("custuserdetail.jsp", req, resp);
-		}else if(command != null && command.equals("delete")){
-			CustUserService service = CustUserService.getInstance();
-			
-			
 		}
 	}
 	

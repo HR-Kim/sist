@@ -1,6 +1,7 @@
 package sist.com.control;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,10 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sist.com.dto.CustUserDto;
 import sist.com.model.CustUserService;
 
 public class CustUserAddControl extends HttpServlet {
-	boolean isNull(String str){
+	private boolean isNull(String str){
 		return str == null || str.trim().equals("");
 	}
 	
@@ -41,15 +43,23 @@ public class CustUserAddControl extends HttpServlet {
 			
 			if(isNull(id) || isNull(name) || isNull(address)){
 				System.out.println("모든정보를 입력해야 합니다.");
+			}else{
+				CustUserDto uDto = new CustUserDto(id, name, address);
+				int count = service.addCustUser(uDto);
+				if(count == 0){
+					System.out.println("추가하지 못했습니다.");
+				}
 			}
 			
-			int count = service.addCustUser(id, name, address);
-			if(count == 0){
-				System.out.println("추가하지 못했습니다.");
-			}
-			dispatch("./custListCtr?command=list", req, resp);
+			List<CustUserDto> custs = service.getCustUserList();
+			
+			req.setAttribute("custs", custs);
+			
+			dispatch("./custuserlist.jsp", req, resp);
 		}
 	}
+	
+	
 	
 	public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher dispatch = req.getRequestDispatcher(urls);

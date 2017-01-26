@@ -1,0 +1,21 @@
+{
+	"item":[
+		{
+			"itemCode":91,
+			"itemName":"라면",
+			"itemPrice":2500
+		},
+		{
+			"itemCode":94,
+			"itemName":"김밥",
+			"itemPrice":2000
+		},
+		{
+			"itemCode":95,
+			"itemName":"우동",
+			"itemPrice":3500
+		}
+		
+	]
+	
+}

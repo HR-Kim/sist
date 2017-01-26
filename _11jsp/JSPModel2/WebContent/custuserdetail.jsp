@@ -45,7 +45,7 @@ request.setCharacterEncoding("UTF-8");
 	<tr bgcolor="#f6f6f6">
 		<td>고객 정보 변경</td>
 		<td>
-			<form action="custusercontrol.jsp" method="post">
+			<form action="./custUpdateCtr" method="post">
 				<input type="hidden" name="command" value="update">
 				<input type="hidden" name="id" value="<%=cust.getId()%>">
 				<input type="submit" value="고객정보변경">
@@ -58,7 +58,7 @@ request.setCharacterEncoding("UTF-8");
 	<tr bgcolor="#f6f6f6">
 		<td>삭제</td>
 		<td>
-			<form action="custusercontrol.jsp">
+			<form action="./custDeleteCtr">
 				<input type="hidden" name="command" value="delete">
 				<input type="hidden" name="id" value="<%=cust.getId()%>">
 				<input type="submit" value="고객정보삭제">

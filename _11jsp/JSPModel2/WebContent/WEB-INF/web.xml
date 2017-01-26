@@ -13,5 +13,46 @@
 	<servlet-mapping>
 		<servlet-name>CustListControl</servlet-name>
 		<url-pattern>/custListCtr</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+  		<servlet-name>CustAddControl</servlet-name>
+  		<servlet-class>sist.com.control.CustUserAddControl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CustAddControl</servlet-name>
+		<url-pattern>/custAddCtr</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+  		<servlet-name>CustDetailControl</servlet-name>
+  		<servlet-class>sist.com.control.CustUserDetailControl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CustDetailControl</servlet-name>
+		<url-pattern>/custDetailCtr</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+  		<servlet-name>CustUpdateControl</servlet-name>
+  		<servlet-class>sist.com.control.CustUserUpdateControl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CustUpdateControl</servlet-name>
+		<url-pattern>/custUpdateCtr</url-pattern>
 	</servlet-mapping>  
+	
+	<servlet>
+  		<servlet-name>CustDeleteControl</servlet-name>
+  		<servlet-class>sist.com.control.CustUserDeleteControl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CustDeleteControl</servlet-name>
+		<url-pattern>/custDeleteCtr</url-pattern>
+	</servlet-mapping>     
 </web-app>

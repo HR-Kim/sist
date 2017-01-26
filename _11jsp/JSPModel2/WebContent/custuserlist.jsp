@@ -26,7 +26,7 @@ function deleteChecks(e) {
 </body>
 
 <div align="center">
-<form action="./custListCtr" method="post">
+<form action="./custDeleteCtr" method="post">
 	<input type="hidden" name="command" value="muldel">
 	
 	<table style="width: 700;"cellpadding="0" cellspacing="0">
@@ -66,7 +66,7 @@ function deleteChecks(e) {
 				<%=cust.getId() %>
 			</td>
 			<td>
-				<a href="./custListCtr?command=detail&id=<%=cust.getId()%>">
+				<a href="./custDetailCtr?command=detail&id=<%=cust.getId()%>">
 					<%=cust.getName() %>
 				</a>
 			</td>

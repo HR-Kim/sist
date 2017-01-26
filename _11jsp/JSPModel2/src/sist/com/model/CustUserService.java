@@ -25,13 +25,25 @@ public class CustUserService {
 		return manager.getCustUserList();
 	}
 	
-	public int addCustUser(String id, String name, String address){
+	public int addCustUser(CustUserDto uDto){
 		System.out.println("----------------7");
-		return manager.addCustUser(id, name, address);
+		return manager.addCustUser(uDto);
 	}
 	
 	public CustUserDto getCustUser(String id) {
 		return manager.getCustUser(id);
+	}
+	
+	public int deleteCustUser(String id){
+		return manager.deleteCustUser(id);
+	}
+	
+	public int updateCustUser(String id, String name, String address){
+		return manager.updateCustUser(id, name, address);
+	}
+	
+	public boolean deleteCustUser(String[] ids){
+		return manager.deleteCustUser(ids);
 	}
 }
 
