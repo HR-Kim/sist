@@ -3,11 +3,13 @@ import java.util.Scanner;
 public class Main {
 
 	private int top;
-	private int[] stackArray;
+	private static int[] stackArray;
+	private static int[] ansArray;
 	
 	public Main() {
 		this.top = -1;
-		stackArray = new int[10000];
+		stackArray = new int[100000];
+		ansArray = new int[100000];
 	}
 	
 	public static void main(String[] args) {
@@ -15,24 +17,100 @@ public class Main {
 		Main m = new Main();
 		int orderNum = sc.nextInt();
 		
-		String order = "";
 		for(int i=0; i<orderNum; ++i){
-			order = sc.next();
-			if(order.equals("push")){
-				int num = sc.nextInt();
-				m.push(num);
-			}else if(order.equals("pop")){
-				m.pop();
-			}else if(order.equals("size")){
-				m.size();
-			}else if(order.equals("empty")){
-				m.empty();
-			}else if(order.equals("top")){
-				m.top();
-			}
+			//System.out.print(i+"번째 배열 : ");
+			ansArray[i] = sc.nextInt();
+			/*if(!(ansArray[i] > 0 && ansArray[i]<=orderNum)){
+				--i;
+			}else{
+				for(int j=0; j<i; ++j){
+					
+					if(ansArray[i] == ansArray[j]){
+						--i;
+						break;
+					}
+				}
+			}*/
 		}
+		
+		boolean isOk = m.isOk(orderNum);
+		
+		//System.out.println("되나?" + isOk);
+		
+		if(isOk){
+			m.printout(orderNum);
+		}else{
+			System.out.println("NO");
+		}
+		
 		sc.close();
 		
+	}
+	
+	public void printout(int num){
+		boolean[] ascArr = new boolean[num];
+		
+		for(int i=0; i<ascArr.length; ++i){
+			ascArr[i] = true;
+		}
+		
+		for(int i=0; i<num; ++i){	
+			if(top()==ansArray[i]){
+				//push(ansArray[i]);
+				pop();
+			}else if(top() < ansArray[i]){
+				for(int j=top(); j<ansArray[i]; j++){
+					if(j == -1){
+						j++;
+					}
+					
+					if(ascArr[j]){
+						push(j+1);
+						ascArr[j] = false;
+					}	
+				}
+				pop();
+			}else{
+				System.out.println("오류");
+			}
+			
+		}
+	}
+	
+	public boolean isOk(int num){
+		int[] ascArr = new int[num];  
+		
+		int temp=1;
+		for(int i=0; i<ascArr.length; ++i){
+			ascArr[i] = temp;
+			temp++;
+		}
+		
+		int w=0;
+		int gap = 0;
+		ascArr[ansArray[0]-1] = 0;
+		w++;
+		while(w < num){
+			gap = ansArray[w] - ansArray[w-1];
+			if(gap < - 1){
+				for(int i = ansArray[w]+1; i<ansArray[w-1]; i++){
+					if(ascArr[i-1]==0){
+						gap++;
+					}
+				}
+				if(gap == -1){
+					ascArr[ansArray[w]-1] = 0;
+					w++;
+				}else{
+					return false;
+				}
+			}else{
+				ascArr[ansArray[w]-1] = 0;
+				w++;
+			}
+		}
+		
+		return true;
 	}
 	
 	public int empty(){
@@ -48,15 +126,16 @@ public class Main {
 	public void push(int item){
         
         stackArray[++top] = item;
+        System.out.println("+");
     }
 	
 	public int top(){
 	    
 		if(top == -1){
-			System.out.println(-1);
+			//System.out.println(-1);
 			return -1;
 		}else{
-			System.out.println(stackArray[top]);
+			//System.out.println(stackArray[top]);
 			return stackArray[top];
 		}
 	        
@@ -76,12 +155,11 @@ public class Main {
 		}else{
 			int item = stackArray[top];
 			top--;
-			System.out.println(item);
+			System.out.println("-");
 			return item;
 		}
         
-        
-        
+       
     }
 
 

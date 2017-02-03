@@ -59,7 +59,9 @@ input{
 	<tr>
 		<td>내용</td>
 		<td>
-		<textarea rows="10" cols="50" readonly="readonly"><%=bbs.getContent() %></textarea>
+		<textarea rows="10" cols="50" 
+		readonly="readonly"><%=bbs.getContent() %>
+		</textarea>
 		</td>
 	</tr>
 </table>

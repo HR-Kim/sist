@@ -68,6 +68,10 @@ member = (Member)ologin;
 
 <h3>환영합니다<%=member.getName() %>님 반갑습니다. </h3>
 
+<a href="calendar.jsp">일정보기</a>
+
+<a href='pdslist.jsp'>자료실</a>
+
 <a href='logout.jsp'>로그 아웃</a>
 
 <hr/>
