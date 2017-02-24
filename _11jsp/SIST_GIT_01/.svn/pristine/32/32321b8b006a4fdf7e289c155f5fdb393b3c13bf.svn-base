@@ -1,0 +1,54 @@
+<%@page import="com.Beans.Ya_MotelBean"%>
+<%@ page pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%
+request.setCharacterEncoding("UTF-8");
+%>
+<%!//
+//%>
+<%//
+Ya_MotelBean dto = (Ya_MotelBean)request.getAttribute("dto");
+
+//%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<script>
+</script>
+<style>
+</style>
+</head>
+<body>
+<br><br>
+<h1>요금및시간</h1>
+<br>
+<p>숙박 이용요금</p>
+
+<br><br>
+<table border="1" style="width: 100%;">
+	<tr>
+		<th height="150">구분</th>
+		<th height="150">요금</th>
+		<th height="150">입실시간</th>
+		<th height="150">퇴실시간</th>
+	</tr>
+	
+	<tr>
+		<td height="100">일반실</td>
+		<td height="100"><%=dto.getNormal_pri() %></td>
+		<td rowspan="2" height="100"><%=dto.getCheck_in() %></td>
+		<td rowspan="2" height="100"><%=dto.getCheck_out() %></td>
+	</tr>
+	
+	<tr>
+		<td height="100">특실</td>
+		<td height="100"><%=dto.getPremium_pri() %></td>
+		
+	</tr>
+	
+</table>
+
+</body>
+</html>

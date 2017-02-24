@@ -1,0 +1,79 @@
+<%@page import="com.Beans.Ya_ZzimBean"%>
+<%@page import="com.Dao.ZzimDao"%>
+<%@page import="com.Dao.ReserveDao"%>
+<%@page import="com.Beans.Ya_ReserveBean"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.Dao.PointDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+request.setCharacterEncoding("UTF-8");
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%
+	String command = request.getParameter("command");
+	String value = request.getParameter("value");
+	  
+	if(command.equals("guestzzimlist")){
+		String email = request.getParameter("email");
+		int pageSize = 6;
+		System.out.println(value);
+		
+		if(value.equals("init")){
+			int pageNum = 1;
+			ZzimDao zzimDao = ZzimDao.getInstance();
+			ArrayList<Ya_ZzimBean> list = zzimDao.do_getzzimlist(pageNum, pageSize, "", email);
+			System.out.println("사이즈를 알아보자! : " + list.size());
+			System.out.println("사이즈를 알아보자! : " + email);
+			request.setAttribute("zzimlist", list);
+		}else if(value.equals("after")){
+			int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+			ZzimDao zzimDao = ZzimDao.getInstance();
+			ArrayList<Ya_ZzimBean> list = new ArrayList<Ya_ZzimBean>();
+			list = zzimDao.do_getzzimlist(pageNum, pageSize, "", email);
+			request.setAttribute("zzimlist", list);			
+		}
+		pageContext.forward("mypage_Main.jsp?contentsDiv=guestzzimlist");
+	
+	}else if(command.equals("guestpointlist")){
+		
+		String email = request.getParameter("email");
+		int pageSize = 5;
+		
+		if(value.equals("init")){
+			int pageNum = 1;
+			PointDao pdao = PointDao.getInstance();
+			ArrayList<Ya_ReserveBean> bean_list = new ArrayList<Ya_ReserveBean>();
+			bean_list = pdao.do_getpointlist(pageNum, pageSize, email);
+			request.setAttribute("bean_list", bean_list);
+		}else if(value.equals("after")){
+			int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+			PointDao pdao = PointDao.getInstance();
+			ArrayList<Ya_ReserveBean> bean_list = new ArrayList<Ya_ReserveBean>();
+			bean_list = pdao.do_getpointlist(pageNum, pageSize, email);
+			request.setAttribute("bean_list", bean_list);
+		}
+		pageContext.forward("mypage_Main.jsp?contentsDiv=guestpointlist");
+	}else if(command.equals("guestreservelist")){
+		
+		pageContext.forward("mypage_Main.jsp?contentsDiv=guestreservelist");
+	}else if(command.equals("guestmemupdate")){
+		pageContext.forward("mypage_Main.jsp?contentsDiv=guestmemupdate");
+	}else if(command.equals("hostmotelupdate")){
+		pageContext.forward("mypage_Main.jsp?contentsDiv=hostmotelupdate");
+	}else if(command.equals("hostreservelist")){
+		pageContext.forward("mypage_Main.jsp?contentsDiv=hostreservelist");
+	}else if(command.equals("hostreviewlist")){
+		pageContext.forward("mypage_Main.jsp?contentsDiv=hostreviewlist");
+	}
+%>
+
+</body>
+</html>

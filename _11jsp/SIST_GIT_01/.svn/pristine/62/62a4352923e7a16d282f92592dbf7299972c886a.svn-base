@@ -1,0 +1,45 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%
+request.setCharacterEncoding("UTF-8");
+%>
+<%!//
+//%>
+<%//
+
+//%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<script>
+</script>
+<style>
+</style>
+</head>
+<body>
+<h1>예약</h1>
+<hr>
+<p>날짜 : <input type="text"></p>
+<p>예약자이름 : <input type="text"></p>
+<p>메일 주소 : <input type="text"></p>
+<hr>
+<p>포인트 할인 : <input type="text"></p>
+<div>   ※사용할 포인트를 입력해주세요 
+<br>
+		사용가능한 포인트 : xxxx포인트
+</div>
+<hr>
+<p> 총 주문 금액 : <input type="text"></p>
+<p> 총 할인 금액 : <input type="text"></p>
+<br>
+<p> 총 결제 금액 : <input type="text"></p>
+<hr>
+<p> <h3>카드결제</h3></p>
+
+
+
+
+</body>
+</html>

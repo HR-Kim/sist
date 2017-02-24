@@ -1,0 +1,31 @@
+package com.Dao;
+
+import com.Beans.Ya_MemberBean;
+import com.Beans.Ya_MotelBean;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		/*MemberDao dao = MemberDao.getInstance();
+		Ya_MemberBean dto =  dao.do_login("dudwo@gmail", "123");
+		System.out.println(dto.getMotel_num());
+		System.out.println(dto.getAuth());
+		System.out.println(dto.getEmail());*/
+		
+		MotelDao mdao = MotelDao.getInstance();
+		/*Ya_MotelBean mdto = (Ya_MotelBean)mdao.do_detail(dto.getMotel_num());
+		for(int i=0; i<mdto.getImgs().size();i++){
+		System.out.println(mdto.getImgs().get(i).getImg_name());
+		}*/
+		
+		Ya_MotelBean dd1 = new Ya_MotelBean(2, "faithbae4041@gmail", "신촌힌배텔", "0000", "경기도 섹시", 15,
+				11, 10000, 25000, 1, "17:00", "21:00");
+		
+		//boolean b = mdao.do_update(dd);
+		boolean b = mdao.do_update(dd1);
+		System.out.println(b + ">>");
+	}
+
+}

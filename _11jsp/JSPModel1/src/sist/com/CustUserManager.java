@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustUserManager {
-	private Connection conn;
-
 	public CustUserManager() {
 		init();
 		

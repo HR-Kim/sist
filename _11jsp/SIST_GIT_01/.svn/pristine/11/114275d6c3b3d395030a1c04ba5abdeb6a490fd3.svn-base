@@ -1,0 +1,207 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%
+request.setCharacterEncoding("UTF-8");
+%>
+<%!//
+//%>
+<%//
+//%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- prevent IE6 flickering -->
+<script type="text/javascript">
+    try {
+        document.execCommand('BackgroundImageCache', false, true);
+    } catch (e) {
+    }
+</script>
+
+<title>Insert title here</title>
+<style type="text/css">
+	.header{
+		position : fixed;
+		height : 100px;
+		background: #fc676e;
+	}
+	.foot{
+		height : 200px;
+		background: #3f3e3e;
+	}
+	.blank{
+		height: 100px;
+	}	.location{
+		padding-top : 50px;
+		height: 300px;
+	}
+	.popular{
+		height: 300px;
+	}
+	table,tr,td{
+		text-align: center;
+		/* border: 1px solid black */
+	}
+	img:hover{
+		opacity: 0.5;
+	}
+	
+	.tabl{
+		width: 60%;
+		height: 100px;
+		margin: auto;
+		text-align: center;
+	}
+	
+	.tabl01{
+		width: 80%;
+		height: 100px;
+		margin: auto;
+		
+	}
+	
+</style>
+</head>
+<body>
+<div class="header">
+	<form>
+    	<table >
+    	<col width="222"/><col width="222"/><col width="222"/>
+    	<col width="222"/><col width="222"/><col width="222"/>
+    	<col width="222"/><col width="222"/><col width="222"/>
+    	<tr>
+    		<td></td>
+    		<td>
+    			<img src="../img/logo1.png" width="100" height="100">
+    		</td>
+    		<td colspan="4">
+    		<div class="input-group input-group-lg">
+      		<input type="text" class="form-control" placeholder="숙소/역이름으로 검색하세요" size="80">
+      		<div class="input-group-btn">
+        		<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+     		</div>
+    		</div>
+    		</td>
+    		<td colspan="2">
+    		<a href="" >로그인  </a>
+    		<a href="../join/ya_whojoin.jsp" >회원가입  </a>
+    		<a href="" >고객센터  </a>
+    		</td>
+    		<td></td>
+    	</tr>
+    	</table>
+  	</form>
+	</div>
+<!-- 빈곳   -->	
+	<div class="blank">
+	<table>
+		<col width="222"/><col width="222"/><col width="222"/>
+    	<col width="222"/><col width="222"/><col width="222"/>
+    	<col width="222"/><col width="222"/><col width="222"/>
+    	<tr>
+    		<td></td>
+    		<td colspan="7">________</td>
+    		<td></td>
+    	</tr>
+	</table>
+	</div>
+<!-- 검색내용 -->	
+<br>
+	<table class="tabl" >
+		
+    	<tr>
+    		
+    		<td height="100px" align="center">
+    		<font face="맑은 고딕" size="15">창건총각</font>
+    		</td>
+    		
+    	</tr>
+    	<tr>
+    		<td height="30" style="text-align: right">
+    		<select style="width: 150px; height: 30px;">
+				<option>가격 순</option>
+				<option>별점 높은 순</option>
+				<option>후기 많은 순</option>
+			</select>
+    		</td>
+    	</tr>
+	</table>
+<br>
+<br>
+	<table class="tabl01">
+		<%for(int i=0; i<10; i++){ %>
+    	<tr>
+    		<td height="230" width="60"></td>
+    		<td height="230" width="380" style="background-color: lightgreen">사진</td>
+    		<td height="230" width="60"></td>
+    		<td height="230" width="380" style="background-color: green">사진</td>
+    		<td height="230" width="60"></td>
+    		<td height="230" width="380" style="background-color: green">사진</td>
+    		<td height="230" width="60"></td>
+    		<td height="230" width="380" style="background-color: green">사진</td>
+    		<td height="230" width="60"></td>
+    	</tr>
+    	
+    	<tr>
+    		<td height="80" width="60"></td>
+    		<td height="80" width="380" style="background-color: yellow">
+    			<p>모텔 이름 : 쌍용</p>
+    			<p>주소 : 신촌역 근방 </p>
+    		</td>
+    		<td height="80" width="60"></td>
+    		<td height="80" width="380" style="background-color: yellow">
+    			<p>모텔 이름 : 쌍용</p>
+    			<p>주소 : 신촌역 근방 </p>
+    		</td>
+    		<td height="80" width="60"></td>
+    		<td height="80" width="380" style="background-color: yellow">
+    			<p>모텔 이름 : 쌍용</p>
+    			<p>주소 : 신촌역 근방 </p>
+    		</td>
+    		<td height="80" width="60"></td>
+    		<td height="80" width="380" style="background-color: yellow">
+    			<p>모텔 이름 : 쌍용</p>
+    			<p>주소 : 신촌역 근방 </p>
+    		</td>
+    		<td height="80" width="60"></td>
+    	</tr>
+    	
+    	<tr>
+    		<td height="50" colspan="9"></td>
+    	</tr>
+    	<%} %>
+    
+	</table>
+	
+	<br>
+	
+	<div class="foot" style="padding-top: 10px" align="center">
+		
+		<p style="color: #d9d9db"> 
+		서울특별시 마포구 백범로 18 미화빌딩 3층 F강의장<br>
+		developed by<br> 
+		조윤행. 김영재. 배한주. 황인배<br>
+		<a href="instagram.com/haengtion.24/">instagram.com/haengtion.24/</a>
+		 </p>
+		
+		
+		<div style="padding-top: 10px">
+			<img src="../img/team.png" width="55px" height="55px">
+			<img src="../img/document.png" width="55px" height="55px">
+			<img src="../img/process.png" width="55px" height="55px">
+		</div>
+		<div>
+		 <a href="introduce.jsp">팀소개 </a>
+		 <a href="useAppointment.jsp">이용약관 </a>
+		 <a href="making.jsp">제작과정</a>
+		 <p style="color: #d9d9db">COPYRIGHT SIST_Fclass_2nd Project FirstTeam</p>
+		 </div>
+		 
+	</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+SELECT TT1.*
+  FROM(
+SELECT ROWNUM RNUM,T1.*,T2.*
+  FROM(
+      SELECT * 
+        FROM MINI_BOARD
+        WHERE MI_VIEW_YN ='Y'
+        ORDER BY MI_DATE DESC
+      )T1
+      NATURAL JOIN
+      (
+        SELECT COUNT(*) TOT_CNT 
+        FROM MINI_BOARD
+        WHERE MI_VIEW_YN ='Y'
+      )T2
+)TT1
+WHERE RNUM BETWEEN (:PAGE_SIZE * (:PAGE_NUM-1)+1) AND (( :PAGE_SIZE * (:PAGE_NUM-1))+:PAGE_SIZE )
+
+
+
+

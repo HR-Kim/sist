@@ -1,0 +1,328 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.Beans.Ya_ImgBean"%>
+<%@page import="java.util.List"%>
+<%@page import="com.Dao.MotelDao"%>
+<%@ page pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%
+request.setCharacterEncoding("UTF-8");
+%>
+<%!// 
+
+//%>
+	
+<%//
+
+String motelNum = request.getParameter("motelNum");
+System.out.println("모텔넘버 디테일포토 " + motelNum);
+
+String str = request.getParameter("str");
+
+
+List<Ya_ImgBean> list = (List<Ya_ImgBean>)request.getAttribute("list");
+
+int noCount =0;
+int preCount = 0;
+
+if(list==null){
+	pageContext.forward("photoControl.jsp?motelNum="+motelNum+"&str="+str);
+	return;
+}else{
+	System.out.println("리스트 사이즈                        " + list.size());
+	for(int i=0;i<list.size();i++){
+		
+		System.out.println("파일이름 "+ list.get(i).getImg_name());
+		System.out.println("파일어스         "+ list.get(i).getImg_auth());
+	}
+	
+	
+	if(str.equals("일반실")){
+			
+		for(int i=0;i<list.size();i++){ 
+			if(list.get(i).getImg_auth()==1){
+				
+				noCount++;
+			}
+		}
+	}else if(str.equals("특실")){
+		
+		for(int i=0;i<list.size();i++){ 
+			if(list.get(i).getImg_auth()==2){
+				
+				preCount++;
+			}
+			if(list.get(i).getImg_auth()==1){
+				
+				noCount++;
+			}
+		}
+	}
+
+//%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     <style>
+      h1{
+      font-family : verdana;
+      font-size : 50px;
+      padding-left : 250px;
+      }
+      p{
+      font-size : 15px;
+      }
+      #main{
+      height : 760px;
+      weight : 1200px;
+      background-color : rgb(227,227,226);
+      }      
+      .menu{
+      font-size : 20px;
+      padding-left : 130px;
+      }
+      .menu:hover{
+      color : gray;
+      }
+      a{
+      text-decoration : none;
+      color : black;
+      }
+      #logo{
+      padding-left : 110px;
+      }
+      #me{
+      padding-left : 360px;
+      padding-top : 50px;
+      }
+      #tex{
+      padding-left : 360px;
+      padding-top : 0px;
+      }
+      #mainpic{
+      opacity : 0.6;
+      }
+      
+      
+     
+      .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      top: 50%;
+      width: auto;
+      margin-top: -22px;
+      padding: 16px;
+      color: black;
+      font-size: 20px;
+      transition: 0.4s ease;
+      border-radius: 0 3px 3px 0;
+      }
+      .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+      }
+      .prev:hover,.next:hover {
+      background-color: rgba(0,0,0,0.8);
+      }
+     
+      </style>
+   
+   </head>
+ 
+   <body>
+      
+      <script type="text/javascript">
+      $(document).ready(function(){
+      $("#next").click(function(){
+    	var str = "<%=str%>";
+    	  if(str=='일반실'){
+    	  
+    	  var noCount = <%=noCount%>;  
+    	 	
+    	 if(noCount==1){
+    		 var noimg1 = "<%=list.get(0).getImg_name()%>";
+    	 }else if(noCount==2){
+    		 var noimg1 = "<%=list.get(0).getImg_name()%>";
+        	 var noimg2 = "<%=list.get(1).getImg_name()%>";
+    	 }else if(noCount==3){
+    		 var noimg1 = "<%=list.get(0).getImg_name()%>";
+        	 var noimg2 = "<%=list.get(1).getImg_name()%>";
+        	 var noimg3 = "<%=list.get(2).getImg_name()%>";
+        	  
+    	 } 
+    	 
+    	 if(noCount==1){
+    		 alert("사진이 한장입니다.");
+    	
+    	 }else if(noCount==2){
+    		 if($("#first").attr('src')==noimg1){
+        		 $("#first").attr('src',noimg2);
+        	 }else if($("#first").attr('src')==noimg2){
+        		 $("#first").attr('src',noimg1);
+        	 }
+    	 
+    	 }else if(noCount==3){
+    		 if($("#first").attr('src')==noimg1){
+        		 $("#first").attr('src',noimg2);
+        	 }else if($("#first").attr('src')==noimg2){
+        		 $("#first").attr('src',noimg3);
+        	 }else if($("#first").attr('src')==noimg3){
+        		 $("#first").attr('src',noimg1);
+        	 }
+        	  
+    	 } 
+    	 
+    	
+    	  }// if 
+    	  else{
+    		  var preCount = <%=preCount%>;   //특실
+    		  var noCount = <%=noCount%>;  
+    		  
+    	    	  if(preCount==1){
+    	    		 var preimg1 = "<%=list.get(noCount).getImg_name()%>";
+    	    	 }else if(preCount==2){
+    	    		 var preimg1 = "<%=list.get(noCount).getImg_name()%>";
+    	        	 var preimg2 = "<%=list.get(noCount+1).getImg_name()%>";
+    	    	 }else if(preCount==3){
+    	    		 var preimg1 = "<%=list.get(noCount).getImg_name()%>";
+    	        	 var preimg2 = "<%=list.get(noCount+1).getImg_name()%>";
+    	        	 var preimg3 = "<%=list.get(noCount+2).getImg_name()%>";
+    	        	  
+    	    	 } 
+    		  
+    	    	  if(preCount==1){
+    	    		  alert("사진이 한장입니다.");
+     	    	
+    	    	  }else if(preCount==2){
+     	    		 if($("#first").attr('src')==preimg1){
+        	    		 $("#first").attr('src',preimg2);
+        	    	 }else if($("#first").attr('src')==preimg2){
+        	    		 $("#first").attr('src',preimg1);
+        	    	 }
+     	    	 
+     	    	 
+     	    	 }else if(preCount==3){
+     	    		 if($("#first").attr('src')==preimg1){
+        	    		 $("#first").attr('src',preimg2);
+        	    	 }else if($("#first").attr('src')==preimg2){
+        	    		 $("#first").attr('src',preimg3);
+        	    	 }else if($("#first").attr('src')==preimg3){
+        	    		 $("#first").attr('src',preimg1);
+        	    	 }
+     	        	  
+     	    	 } 
+    	    	    	    	 
+    	    	
+    		
+    	  }
+    	
+      });
+      
+      $("#prev").click(function(){
+    	  var str = "<%=str%>";
+    	  if(str=='일반실'){
+    	  
+    	  var noCount = <%=noCount%>;  
+    	 
+    	  if(noCount==1){
+    		 var noimg1 = "<%=list.get(0).getImg_name()%>";
+    	 }else if(noCount==2){
+    		 var noimg1 = "<%=list.get(0).getImg_name()%>";
+        	 var noimg2 = "<%=list.get(1).getImg_name()%>";
+    	 }else if(noCount==3){
+    		 var noimg1 = "<%=list.get(0).getImg_name()%>";
+        	 var noimg2 = "<%=list.get(1).getImg_name()%>";
+        	 var noimg3 = "<%=list.get(2).getImg_name()%>";
+        	  
+    	 } 
+    	  
+    	  if(noCount==1){
+    		  alert("사진이 한장입니다.");
+     	 }else if(noCount==2){
+     		 if($("#first").attr('src')==noimg1){
+         		 $("#first").attr('src',noimg2);
+         	 }else if($("#first").attr('src')==noimg2){
+         		 $("#first").attr('src',noimg1);
+         	 }
+     	 
+     	 }else if(noCount==3){
+     		 if($("#first").attr('src')==noimg1){
+         		 $("#first").attr('src',noimg3);
+         	 }else if($("#first").attr('src')==noimg3){
+         		 $("#first").attr('src',noimg2);
+         	 }else if($("#first").attr('src')==noimg2){
+         		 $("#first").attr('src',noimg1);
+         	 }
+         	  
+     	 } 
+     	 
+     	
+    	  }else{ //특실 
+    		  var preCount = <%=preCount%>;   //특실
+    		  var noCount = <%=noCount%>;  
+    		  
+    		  if(preCount==1){
+ 	    		 var preimg1 = "<%=list.get(noCount).getImg_name()%>";
+ 	    	 }else if(preCount==2){
+ 	    		 var preimg1 = "<%=list.get(noCount).getImg_name()%>";
+ 	        	 var preimg2 = "<%=list.get(noCount+1).getImg_name()%>";
+ 	    	 }else if(preCount==3){
+ 	    		 var preimg1 = "<%=list.get(noCount).getImg_name()%>";
+ 	        	 var preimg2 = "<%=list.get(noCount+1).getImg_name()%>";
+ 	        	 var preimg3 = "<%=list.get(noCount+2).getImg_name()%>";
+ 	        	  
+ 	    	 } 
+    		  
+    		  if(preCount==1){
+        		  alert("사진이 한장입니다.");
+  	    	 }else if(preCount==2){
+  	    		 if($("#first").attr('src')==preimg1){
+  	 	    		 $("#first").attr('src',preimg2);
+  	 	    	 }else if($("#first").attr('src')==preimg2){
+  	 	    		 $("#first").attr('src',preimg1);
+  	 	    	 }
+  	    	 }else if(preCount==3){
+  	    		 if($("#first").attr('src')==preimg1){
+  	 	    		 $("#first").attr('src',preimg3);
+  	 	    	 }else if($("#first").attr('src')==preimg2){
+  	 	    		 $("#first").attr('src',preimg1);
+  	 	    	 }else if($("#first").attr('src')==preimg3){
+  	 	    		 $("#first").attr('src',preimg2);
+  	 	    	 }
+  	        	  
+  	    	 } 
+ 	    	    	    	 
+ 	    	
+    		  
+    	  }
+     	
+       });
+      });
+      
+      </script>
+      
+      <div class="photobox">
+         <div>
+     <a class="prev" id="prev" >&#10094;</a>
+         <%if(str.equals("일반실")){ %>
+         <img id ="first" src="<%=list.get(0).getImg_name() %>" width="90%" height="700" style="margin-top: 7%; margin-left: 6%">
+         <%}else{%>
+         <img id ="first" src="<%=list.get(noCount).getImg_name() %>" width="90%" height="700" style="margin-top: 7%; margin-left: 6%">
+         <%} %>
+
+      
+     
+      <a class="next" id="next" >&#10095;</a> 
+    </div>
+   
+    
+    <%
+    }
+    %>
+
+</body>
+</html>

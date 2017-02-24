@@ -1,0 +1,65 @@
+<%
+
+%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@page import="com.khy.mini.MiniDao"%>
+<%@page import="com.khy.mini.MiniBean"%> 
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.ArrayList"%>
+
+<%
+  
+ 	MiniDao miniDao = new MiniDao();
+	//빈즈에서 가지고 올 게시물 데이터를 보관하고 있는 ArrayList 를 처리하기 위한 변수
+	ArrayList<HashMap> datas = miniDao.selectDBList();
+	// ArrayList 를 좀더 쉽게처리하기 위한 iterator 생성.
+	Iterator iter = datas.iterator();
+%>
+
+<HTML>
+<HEAD><TITLE>방명록 </TITLE>
+</HEAD>
+<BODY>
+<center>
+<H2> mini_book</H2>
+<HR>
+<a href="mini_form.jsp">글 쓰기</a><P>
+
+<%
+	// 빈즈에서 가져온 ArrayList 에서 HashMap 을 가져와 반복해서 출력함.
+	while(iter.hasNext()) {
+			// ArrayList 에서 HashMap 을 가져옴. Object 로 저장되어 있기 때문에 형변환 필요
+			HashMap data = (HashMap)iter.next();
+%>
+			<form  name=<%=data.get("mi_id") %> action=mini_edit.jsp method=post>
+				<input type=hidden name="mi_id" value="<%=data.get("mi_id") %>" >
+			<table cellpadding=5 cellspacing=0 border="1" width=400>
+			  <tr>
+				<td bgcolor="#99CCFF" height="23" >작 성 자</td>
+				<td><%= data.get("mi_name") %></td>
+				<td bgcolor="#99CCFF" height="23" >작 성 일</td>
+				<td><%= data.get("mi_date") %></td>
+			  </tr>
+			  <tr>
+				<td  bgcolor="#99CCFF" height="23">email</td>
+				<td ><%= data.get("mi_email") %></td>
+                <td bgcolor="#99CCFF" height="23" >비밀번호</TD>
+                <TD><input type=password name=mi_passwd size=6>&nbsp;&nbsp;<input type=submit value="수정/취소" ></td>
+			  </tr>
+			  <tr>
+				<td  bgcolor="#99CCFF" height="23" colspan="4">내용</td>
+			  </tr>			  
+			  <tr>
+				<td  colspan=4><%= data.get("mi_contents") %></td>
+			  </tr>
+
+			</table>
+			</form>
+<P>
+<%
+} // end while
+%>
+</BODY>
+</HTML>

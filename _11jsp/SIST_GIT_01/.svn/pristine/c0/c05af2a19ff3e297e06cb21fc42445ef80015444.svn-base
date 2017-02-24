@@ -1,0 +1,146 @@
+<%@page import="com.Beans.Ya_ReviewBean"%>
+<%@page import="java.util.List"%>
+<%@page import="com.Dao.MotelDao"%>
+<%@page import="com.Beans.Ya_MotelBean"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.Dao.SearchPageDao"%>
+<%@ page pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%
+request.setCharacterEncoding("UTF-8");
+%>
+<%!//
+//%>
+<%//
+//%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<script>
+</script>
+<style>
+</style>
+</head>
+<body>
+<%
+	String command = request.getParameter("command");
+
+	if(command.equals("detailAf")){
+		String type = request.getParameter("type");
+		String motelNum = request.getParameter("motel_num");
+		int motel_num = Integer.parseInt(motelNum);
+	
+		MotelDao dao = MotelDao.getInstance();
+	
+		Ya_MotelBean dto = (Ya_MotelBean)dao.do_detail(motel_num);
+
+		request.setAttribute("dto", dao.do_detail(motel_num));
+	
+		if(type.equals("room")) pageContext.forward("searchDetail.jsp?contentsDiv=room");
+		else if(type.equals("pay")) pageContext.forward("searchDetail.jsp?contentsDiv=pay");
+		else if(type.equals("review")){
+			String pageNum = (request.getParameter("pageNum")==null || request.getParameter("pageNum")=="")?"1":request.getParameter("pageNum");
+			int page_Num = Integer.parseInt(pageNum);
+			
+			List<Ya_ReviewBean> list =  dao.do_detail_review(page_Num,4 ,motel_num);
+			if(list.size()==0){
+				pageContext.forward("searchDetail.jsp?contentsDiv=review");
+			
+				 }else{
+			request.setAttribute("list", list);
+			
+			pageContext.forward("searchDetail.jsp?contentsDiv=review");
+				 }
+		}
+	
+	}else if(command.equals("detail")){
+		String motelNum = request.getParameter("motel_num");
+		int motel_num = Integer.parseInt(motelNum);
+		
+		MotelDao dao = MotelDao.getInstance();
+		
+		Ya_MotelBean dto = (Ya_MotelBean)dao.do_detail(motel_num);
+	
+		request.setAttribute("dto", dao.do_detail(motel_num));
+				
+		pageContext.forward("searchDetail.jsp?contentsDiv=room");
+		
+		
+	}else if(command.equals("word")){
+		String searchWord = request.getParameter("searchWord");
+		String type =(request.getParameter("type")==null || request.getParameter("type")=="")?"BASIC":request.getParameter("type");
+		String pageNum = (request.getParameter("pageNum")==null || request.getParameter("pageNum")=="")?"1":request.getParameter("pageNum");
+		int page_Num = Integer.parseInt(pageNum);
+		session.setAttribute("word",searchWord);
+		session.setAttribute("type",type);
+
+		SearchPageDao dao = SearchPageDao.getInstance();
+		
+		 if(type.equals("STAR")){
+			
+			 ArrayList<Object> list = dao.do_search(page_Num, 12, "STAR", searchWord);
+	
+			 if(list.size()==0){
+			pageContext.forward("searchPage.jsp");
+		
+			 }else{
+			request.setAttribute("list", list);
+			pageContext.forward("searchPage.jsp");
+	
+			 }
+		
+		
+		}else if(type.equals("PAY")){
+			
+		ArrayList<Object> list = dao.do_search(page_Num, 12, "PAY", searchWord);
+		 
+		if(list.size()==0){
+				pageContext.forward("searchPage.jsp");
+			
+				 }else{
+		request.setAttribute("list", list);
+		
+		pageContext.forward("searchPage.jsp");
+				 }	
+		}else if(type.equals("REVIEW")){
+			
+		ArrayList<Object> list = dao.do_search(page_Num, 12, "REVIEW", searchWord);
+		
+		 if(list.size()==0){
+				pageContext.forward("searchPage.jsp");
+			
+				 }else{
+		request.setAttribute("list", list);
+			
+		pageContext.forward("searchPage.jsp");	
+				 }
+		}else if(type.equals("BASIC")){
+			ArrayList<Object> list = dao.do_search(page_Num, 12, "BASIC", searchWord);
+			
+			 if(list.size()==0){
+					pageContext.forward("searchPage.jsp");
+				
+					 }else{
+			request.setAttribute("list", list);
+				
+			pageContext.forward("searchPage.jsp");	
+					 }
+		}else if(type.equals("address")){
+			ArrayList<Object> list = dao.do_address_search(page_Num, 12, "BASIC", searchWord);
+			
+			 if(list.size()==0){
+					pageContext.forward("searchPage.jsp");
+				
+					 }else{
+			request.setAttribute("list", list);
+				
+			pageContext.forward("searchPage.jsp");	
+					 }
+		}
+			
+	}
+%>
+</body>
+</html>

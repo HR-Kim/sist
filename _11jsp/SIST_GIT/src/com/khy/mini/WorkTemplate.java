@@ -1,0 +1,68 @@
+/**
+ * 
+ */
+package com.khy.mini;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+/**
+ * @author sist
+ *
+ */
+public class WorkTemplate implements WorkArea {
+
+	/* (non-Javadoc)
+	 * @see com.khy.mini.WorkArea#do_search(int, int, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public ArrayList<HashMap> do_search(int pageNum, int pageSize, String search_div, String search_word) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.khy.mini.WorkArea#do_insert(java.lang.Object)
+	 */
+	@Override
+	public boolean do_insert(Object bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+
+	/* (non-Javadoc)
+	 * @see com.khy.mini.WorkArea#do_update(java.lang.Object)
+	 */
+	@Override
+	public boolean do_update(Object bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.khy.mini.WorkArea#do_delete(java.lang.Object)
+	 */
+	@Override
+	public boolean do_delete(Object bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.khy.mini.WorkArea#do_upsert(java.lang.Object)
+	 */
+	@Override
+	public boolean do_upsert(Object bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	 
+	@Override
+	public ArrayList<HashMap> do_detail(Object bean) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+}

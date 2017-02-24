@@ -1,0 +1,71 @@
+<%@page import="com.Beans.Ya_QnaBean"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.Dao.QnaDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	request.setCharacterEncoding("utf-8");
+	String command = request.getParameter("command");
+	
+	QnaDao dao = QnaDao.getInstance();
+	System.out.println("command : " + command);
+	if(command.equals("memberlist")){
+		String email = request.getParameter("email");
+		
+		String pageNumStr = (request.getParameter("pageNum")==null||request.getParameter("pageNum")=="")?"1":request.getParameter("pageNum");
+		System.out.println("컨트롤러 페이지넘버"+pageNumStr);
+		
+		String search_div = (request.getParameter("search_div")==null||request.getParameter("search_div")=="")?"":request.getParameter("search_div");
+		String search_word =(request.getParameter("search_word")==null||request.getParameter("search_word")=="")?"":request.getParameter("search_word");
+		
+		
+		int pageNum = Integer.parseInt(pageNumStr);
+		String pageSize = "1";	//페이지 사이즈 변경!!
+		int page_Size = Integer.parseInt(pageSize);
+		
+		System.out.println(search_div);
+		System.out.println(search_word);
+		System.out.println(pageNum);
+		
+		ArrayList<Object> list = dao.do_search(email, pageNum, page_Size, search_div, search_word);
+		
+		request.setAttribute("command", "memberlist");
+		request.setAttribute("list", list);
+		request.setAttribute("pageNum", pageNumStr);
+		request.setAttribute("pageSize", pageSize);
+		
+		pageContext.forward("ya_memberQnaList.jsp");
+		
+	}else if(command.equals("register")){
+		String email = request.getParameter("email");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
+		Ya_QnaBean bean = new Ya_QnaBean();
+		bean.setEmail(email);
+		bean.setTitle(title);
+		bean.setContent(content);
+		
+		System.out.println("------------------------------email : " + email);
+		if(dao.do_insert(bean)){
+			pageContext.forward("qnaControl.jsp?command=memberlist");
+		}else{
+			
+			System.out.println("문의실패");
+		}
+	}else if(command.equals("detail")){
+		String seqStr = request.getParameter("seq");
+		int seq = Integer.parseInt(seqStr);
+		
+		Ya_QnaBean bean = new Ya_QnaBean();
+		
+		bean = (Ya_QnaBean)dao.do_detail(seq);
+		
+		request.setAttribute("detail", bean);
+		
+		pageContext.forward("ya_qnaDetail.jsp");
+	}
+	
+	
+%>

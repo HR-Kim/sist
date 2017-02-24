@@ -1,0 +1,139 @@
+<%@page import="com.Beans.Ya_ReviewBean"%>
+<%@page import="com.Beans.Ya_MemberBean"%>
+<%@page import="com.Beans.Ya_ZzimBean"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	ArrayList<Ya_ReviewBean> list = (ArrayList<Ya_ReviewBean>)request.getAttribute("reviewlist");
+	Ya_MemberBean memberBean =(Ya_MemberBean)session.getAttribute("member");
+%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	table,tr,td {
+	border: 1px solid black;
+}
+</style>
+<script type="text/javascript">
+	function view() {
+		document.getElementById("reply").style.display = "block";
+		document.getElementById("arrow").style.display = "block";
+		document.getElementById("inputBtn").style.display = "block";
+	}
+</script>
+</head>
+<body>
+<%
+	if(list!=null && !(list.size()==0)){
+%>
+	<center>
+		<table>
+			<col width="150px" />
+			<col width="150px" />
+			<col width="150px" />
+			<col width="150px" />
+			<col width="150px" />
+			<col width="150px" />
+			<tr>
+				<td colspan="3"><h3><%=memberBean.getNickname()%>님 의 모텔에 대한 리뷰</h3></td>
+				<td colspan="2"></td>
+				<td><h3><%=list.get(0).getTot_cnt()%>개</h3></td>
+			</tr>
+			<tr>
+				<td>작성자</td>
+				<td colspan="2"><%=list.get(0).getNickname() %></td>
+				<td>작성일</td>
+				<td><%=list.get(0).getUpload_dt() %></td>
+				<td><button type="button" onclick="view()">댓글달기</button></td>
+			</tr>				
+			<tr>
+				<td>시설점수</td>
+				<td>
+					<%
+						for(int j = 0; j < list.get(0).getFacility(); ++j){
+					%>
+					<img alt="" src="../img/star.png" height="10px" width="10px">
+					<%
+						}
+					%>
+				</td>
+				<td>서비스점수</td>
+				<td>
+					<%
+						for(int j = 0; j < list.get(0).getService(); ++j){
+					%>
+					<img alt="" src="../img/star.png" height="10px" width="10px">
+					<%
+						}
+					%>
+				</td>
+				<td>청결점수</td>
+				<td>
+					<%
+						for(int j = 0; j < list.get(0).getClean(); ++j){
+					%>
+					<img alt="" src="../img/star.png" height="10px" width="10px">
+					<%
+						}
+					%>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="6">
+					<textarea readonly="readonly" cols="120"><%=list.get(0).getContent() %></textarea>
+				</td>
+			</tr>
+			<form action="mypage_Control.jsp" method="post">
+			<input type="hidden" name="command" value="reviewAnswer">
+			<input type="hidden" name="seq" value="<%=list.get(0).getSeq() %>">
+			<input type="hidden" name="motel_num" value="<%=list.get(0).getMotel_num() %>">
+			<input type="hidden" name="motel_num" value="<%=memberBean.getNickname() %>">
+			<tr>
+				<td><img alt="" src="../img/arrow.png" style="display: none;" id="arrow"></td>
+				<td colspan="4">
+					<input type="textarea" id="reply" name="reply" style="display: none; width: 300px; height: 100px"/>
+				</td>
+				<td>
+					<input type="submit" style="display: none;" id="inputBtn" value="입력">
+				</td>
+			</tr>
+			</form>
+		</table>
+		<%
+			int count = (int)Math.ceil(list.get(0).getTot_cnt() / 1);
+				for (int i = 0; i < count; ++i) {
+		%>
+		<a
+			href="mypage_Control.jsp?command=hostreviewlist&email=<%=memberBean.getEmail()%>&value=after&pageNum=<%= i+1%>"><%=i+1 %></a>
+		<%
+			}	
+		%>
+	</center>
+<%
+	}else{
+%>
+
+<center>
+		<table>
+			<col width="150px" /><col width="150px" /><col width="150px" />
+			<col width="150px" /><col width="150px" /><col width="150px" />
+			<tr>
+				<td colspan="2"><h3><%=memberBean.getNickname()%>님 의 모텔에 대한 리뷰</h3></td>
+				<td colspan="3"></td>
+				<td><h3>0개</h3></td>
+			</tr>
+			<tr>
+				<td colspan="6"><h4>리뷰가없습니다... 분발하세요</h4></td>
+			</tr>
+		</table>
+	</center>
+	
+	<%
+}
+	%>
+</body>
+</html>

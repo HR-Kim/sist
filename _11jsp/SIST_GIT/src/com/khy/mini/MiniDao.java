@@ -1,0 +1,607 @@
+/**
+ * 
+ */
+package com.khy.mini;
+
+import java.sql.Clob;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
+import java.util.HashMap;
+
+/**
+ * @author sist
+ *
+ */
+public class MiniDao {
+	Connection conn = null;
+    PreparedStatement  pstmt = null;
+    
+    String jdbc_driver = "oracle.jdbc.driver.OracleDriver";
+    String jdbc_url    = "jdbc:oracle:thin:@211.238.142.152:1521:orcl";    
+    
+    /**  
+     * Db연결
+     * @return void
+     */ 
+    public void connect(){
+		try{
+		   		Class.forName(jdbc_driver);
+		   		conn = DriverManager.getConnection(jdbc_url,"hr","hr");
+		   		System.out.println("conn="+conn.toString());  
+			}catch(Exception e){
+		    	System.out.println(e);
+		    }
+    }
+     
+    /**
+     * Db연결 종료
+     */
+    public void disConnect(){
+    	try{
+    		if(pstmt !=null) pstmt.close();
+    	}catch(Exception e){
+	    	System.out.println(e);
+	    }finally{
+	    	try{
+	    		if(conn!=null)conn.close();
+	    	}catch(Exception ex){
+	    		System.out.println(ex);
+	    	}
+	    }
+    }
+    
+    /**
+     * 등록
+     * @return boolean
+     */
+    public boolean mergeDB(MiniBean bean)
+    {
+    	this.connect();
+    	int retInt = 0;
+    	try{
+    		StringBuilder sql = new StringBuilder();
+    		sql.append("MERGE INTO mini_board T1                       \n");
+    		sql.append("USING ( SELECT ?        as mi_id               \n");
+    		sql.append("               ,?       as mi_name             \n");
+    		sql.append("               ,sysdate as mi_date             \n");
+    		sql.append("               ,?       as mi_email            \n");
+    		sql.append("               ,?       as mi_passwd           \n");
+    		sql.append("               ,?       as mi_contents         \n");
+    		sql.append("               ,'Y'     as mi_view_yn          \n");
+    		sql.append("        FROM dual                              \n");
+    		sql.append("       ) T2                                    \n");
+    		sql.append("ON ( T1.mi_id = T2.mi_id)                      \n");
+    		sql.append("WHEN MATCHED THEN                              \n");
+    		sql.append("  UPDATE SET T1.mi_name    = T2.mi_name,       \n");
+    		sql.append("            T1.mi_date     = T2.mi_date,       \n");
+    		sql.append("            T1.mi_email    = T2.mi_email,      \n");
+    		sql.append("            T1.mi_passwd   = T2.mi_passwd,     \n");
+    		sql.append("            T1.mi_contents = T2.mi_contents,   \n");
+    		sql.append("            T1.mi_view_yn  = T2.mi_view_yn     \n");
+    		sql.append("WHEN NOT MATCHED THEN                          \n");
+    		sql.append("INSERT (mi_id, mi_name, mi_date,mi_email,mi_passwd,mi_contents) \n");
+    		sql.append("VALUES (mini_board_seq.nextval, T2.mi_name, T2.mi_date,T2.mi_email,T2.mi_passwd,T2.mi_contents)\n");    		
+    		
+    		
+    		pstmt = conn.prepareStatement(sql.toString());
+    		System.out.println("1 pstmt"+pstmt.toString());  
+    		System.out.println("2 sql="+sql.toString());
+    		pstmt.setString(1, bean.getMi_id());
+    		pstmt.setString(2, bean.getMini_name());
+    		pstmt.setString(3, bean.getMini_email());
+    		pstmt.setString(4, bean.getMini_passwd());
+    		pstmt.setString(5, bean.getMini_contents());
+    		
+    		System.out.println("3 toString="+bean.toString());  
+    		retInt = pstmt.executeUpdate();
+    		
+    		System.out.println("retInt="+retInt);  
+    		System.out.println("mi_name="+bean.getMini_name());  
+    		System.out.println("mi_email="+bean.getMini_email());  
+    		System.out.println("mi_passwd="+bean.getMini_passwd());  
+    		System.out.println("mib_contents="+bean.getMini_contents());      		
+    		
+    	}catch(Exception e){
+    		return false;
+    	}finally{
+    		this.disConnect();
+    	}
+    	
+    	return true; 
+    }    
+    
+    /**
+     * Base64ClobDB 등록
+     * @return boolean
+     */
+    public boolean insertBase64ClobDB(MiniBean bean)
+    {
+    	this.connect();
+    	int retInt = 0;
+    	//
+    	try{
+    		StringBuilder sql = new StringBuilder();
+    		sql.append("INSERT INTO MINI_BOARD (mi_id                \n");
+    		sql.append("                      ,mi_name               \n");
+    		sql.append("                      ,mi_email              \n");
+    		sql.append("                      ,mi_passwd             \n");
+    		sql.append("                      ,mi_contents           \n");
+    		sql.append("                      ,mi_date               \n");
+    		sql.append("                      ,mi_view_yn)           \n");    		
+    		sql.append("                VALUES(mini_board_seq.nextval \n");
+    		sql.append("                      ,?                     \n");
+    		sql.append("                      ,?                     \n");
+    		sql.append("                      ,?                     \n");
+    		sql.append("                      ,?                     \n");
+    		sql.append("                      ,sysdate               \n");
+    		sql.append("                      ,'Y'                   \n");
+    		sql.append("                      )                      \n");
+    		pstmt = conn.prepareStatement(sql.toString());
+    		System.out.println("1 pstmt"+pstmt.toString());  
+    		System.out.println("2 sql="+sql.toString());  
+    		pstmt.setString(1, bean.getMini_name());
+    		pstmt.setString(2, bean.getMini_email());
+    		pstmt.setString(3, bean.getMini_passwd());
+    		
+    		//Base64 Encode
+    		Encoder encoder    = Base64.getEncoder();
+    		byte[] targetBytes = bean.getMini_contents().getBytes();
+    		System.out.println("encodedBytes byte"+targetBytes); 
+    
+    		String encodedString = encoder.encodeToString(targetBytes);
+    		System.out.println("encodedString:"+encodedString);
+    				
+    		Clob clobCon = conn.createClob();
+    		clobCon.setString(1, encodedString);
+    		
+    		pstmt.setClob(4, clobCon);
+    		System.out.println("3 toString="+bean.toString());  
+    		retInt = pstmt.executeUpdate();    		
+    		System.out.println("retInt="+retInt);  
+    		System.out.println("mi_name="+bean.getMini_name());  
+    		System.out.println("mi_email="+bean.getMini_email());  
+    		System.out.println("mi_passwd="+bean.getMini_passwd());  
+    		System.out.println("mib_contents="+bean.getMini_contents());      		
+    		
+    	}catch(Exception e){
+    		return false;
+    	}finally{
+    		this.disConnect();
+    	}
+    	
+    	return true; 
+    }    
+    
+    /**
+     * 등록
+     * @return boolean
+     */
+    public boolean insertClobDB(MiniBean bean)
+    {
+    	this.connect();
+    	int retInt = 0;
+    	//
+    	try{
+    		StringBuilder sql = new StringBuilder();
+    		sql.append("INSERT INTO MINI_BOARD (mi_id                \n");
+    		sql.append("                      ,mi_name               \n");
+    		sql.append("                      ,mi_email              \n");
+    		sql.append("                      ,mi_passwd             \n");
+    		sql.append("                      ,mi_contents           \n");
+    		sql.append("                      ,mi_date               \n");
+    		sql.append("                      ,mi_view_yn)           \n");    		
+    		sql.append("                VALUES(mini_board_seq.nextval \n");
+    		sql.append("                      ,?                     \n");
+    		sql.append("                      ,?                     \n");
+    		sql.append("                      ,?                     \n");
+    		sql.append("                      ,?                     \n");
+    		sql.append("                      ,sysdate               \n");
+    		sql.append("                      ,'Y'                   \n");
+    		sql.append("                      )                      \n");
+    		pstmt = conn.prepareStatement(sql.toString());
+    		System.out.println("1 pstmt"+pstmt.toString());  
+    		System.out.println("2 sql="+sql.toString());  
+    		pstmt.setString(1, bean.getMini_name());
+    		pstmt.setString(2, bean.getMini_email());
+    		pstmt.setString(3, bean.getMini_passwd());
+    		
+    		Clob clobCon = conn.createClob();
+    		
+    		clobCon.setString(1, bean.getMini_contents());
+    		
+    		pstmt.setClob(4, clobCon);
+    		System.out.println("3 toString="+bean.toString());  
+    		retInt = pstmt.executeUpdate();    		
+    		System.out.println("retInt="+retInt);  
+    		System.out.println("mi_name="+bean.getMini_name());  
+    		System.out.println("mi_email="+bean.getMini_email());  
+    		System.out.println("mi_passwd="+bean.getMini_passwd());  
+    		System.out.println("mib_contents="+bean.getMini_contents());      		
+    		
+    	}catch(Exception e){
+    		return false;
+    	}finally{
+    		this.disConnect();
+    	}
+    	
+    	return true; 
+    }
+    
+    /**
+     * 등록
+     * @return boolean
+     */
+    public boolean insertDB(MiniBean bean)
+    {
+    	this.connect();
+    	int retInt = 0;
+    	//
+    	try{
+    		StringBuilder sql = new StringBuilder();
+    		sql.append("INSERT INTO MINI_BOARD (mi_id                \n");
+    		sql.append("                      ,mi_name               \n");
+    		sql.append("                      ,mi_email              \n");
+    		sql.append("                      ,mi_passwd             \n");
+    		sql.append("                      ,mi_contents           \n");
+    		sql.append("                      ,mi_date               \n");
+    		sql.append("                      ,mi_view_yn)           \n");    		
+    		sql.append("                VALUES(mini_board_seq.nextval \n");
+    		sql.append("                      ,?                     \n");
+    		sql.append("                      ,?                     \n");
+    		sql.append("                      ,?                     \n");
+    		sql.append("                      ,?                     \n");
+    		sql.append("                      ,sysdate               \n");
+    		sql.append("                      ,'Y'                   \n");
+    		sql.append("                      )                      \n");
+    		pstmt = conn.prepareStatement(sql.toString());
+    		System.out.println("1 pstmt"+pstmt.toString());  
+    		System.out.println("2 sql="+sql.toString());  
+    		pstmt.setString(1, bean.getMini_name());
+    		pstmt.setString(2, bean.getMini_email());
+    		pstmt.setString(3, bean.getMini_passwd());
+    		pstmt.setString(4, bean.getMini_contents());
+    		System.out.println("3 toString="+bean.toString());  
+    		retInt = pstmt.executeUpdate();    		
+    		System.out.println("retInt="+retInt);  
+    		System.out.println("mi_name="+bean.getMini_name());  
+    		System.out.println("mi_email="+bean.getMini_email());  
+    		System.out.println("mi_passwd="+bean.getMini_passwd());  
+    		System.out.println("mib_contents="+bean.getMini_contents());      		
+    		
+    	}catch(Exception e){
+    		return false;
+    	}finally{
+    		this.disConnect();
+    	}
+    	
+    	return true; 
+    }
+    
+
+    /**
+     * paing처리 된 List
+     * @param pageNum
+     * @param pageSize
+     * @param search_div
+     * @param search_word
+     * @return ArrayList<HashMap>
+     */
+	public ArrayList<HashMap> selectPageList(int pageNum,int pageSize
+			,String search_div,String search_word) {
+		connect();
+		HashMap<String, String> data = null;
+		ArrayList data_list = new ArrayList();
+		StringBuilder sqlParam = new StringBuilder();
+		//제목 검색
+		if(search_div.equals("TITLE")){
+			sqlParam.append("And mi_contents like '%"+search_word + "%' \n");
+		}else if(search_div.equals("NAME")){
+			sqlParam.append("And mi_name like '%"+search_word + "%' \n");
+		}
+		try{
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT TT1.*                                                                                      \n");
+			sql.append("  FROM(                                                                                           \n");
+			sql.append("SELECT ROWNUM RNUM,T1.*,T2.*                                                                      \n");
+			sql.append("  FROM(                                                                                           \n");
+			sql.append("      SELECT *                                                                                    \n");
+			sql.append("        FROM MINI_BOARD                                                                           \n");
+			sql.append("        WHERE MI_VIEW_YN ='Y'                                                                     \n");
+			//search
+			sql.append(sqlParam.toString());
+			//search end
+			sql.append("        ORDER BY MI_DATE DESC                                                                     \n");
+			sql.append("      )T1                                                                                         \n");
+			sql.append("      NATURAL JOIN                                                                                \n");
+			sql.append("      (                                                                                           \n");
+			sql.append("        SELECT COUNT(*) TOT_CNT                                                                   \n");
+			sql.append("        FROM MINI_BOARD                                                                           \n");
+			sql.append("        WHERE MI_VIEW_YN ='Y'                                                                     \n");
+			//search
+			sql.append(sqlParam.toString());
+			//search end			
+			sql.append("      )T2                                                                                         \n");
+			sql.append(")TT1                                                                                              \n");
+			//sql.append("WHERE RNUM BETWEEN (:PAGE_SIZE * (:PAGE_NUM-1)+1) AND (( :PAGE_SIZE * (:PAGE_NUM-1))+:PAGE_SIZE ) \n");
+			sql.append("WHERE RNUM BETWEEN (? * (?-1)+1) AND (( ? * (?-1))+? ) \n");
+			System.out.println("0 sql"+sql.toString());   
+			pstmt = conn.prepareStatement(sql.toString());
+    		System.out.println("1 pstmt"+pstmt.toString());  
+    		
+    		pstmt.setInt(1, pageSize);
+    		pstmt.setInt(2, pageNum);
+    		pstmt.setInt(3, pageSize);
+    		pstmt.setInt(4, pageNum);
+    		pstmt.setInt(5, pageSize);
+    		
+    		ResultSet rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				data = new HashMap();
+				data.put("RNUM",rs.getString("RNUM"));
+				data.put("mi_id",rs.getString("mi_id"));
+				data.put("mi_name", rs.getString("mi_name"));
+				data.put("mi_email", rs.getString("mi_email"));
+				data.put("mi_passwd", rs.getString("mi_passwd"));
+				data.put("mi_contents", rs.getString("mi_contents"));
+				data.put("mi_date", rs.getString("mi_date"));
+				data.put("TOT_CNT",rs.getString("TOT_CNT"));
+				data_list.add(data);
+			}
+			
+	}
+	catch(Exception e) {
+		System.out.println("selectDBList() : "+e);
+	}
+	finally {
+		this.disConnect();
+	}
+	return data_list;
+    }    
+	
+	// 방명록 리스트를 보여주기 위해 ArrayList 형태로 데이터를 가져오는 메서드
+	public ArrayList<HashMap> selectDBList() {
+		connect();
+		HashMap<String, String> data = null;
+		ArrayList data_list = new ArrayList();
+
+		try{
+			StringBuilder sql = new StringBuilder();
+    		sql.append("SELECT mi_id	       \n");
+    		sql.append("      ,mi_name	       \n");                    
+    		sql.append("      ,mi_email	       \n");
+    		sql.append("      ,mi_passwd	   \n");
+    		sql.append("      ,mi_passwd       \n");
+    		sql.append("      ,mi_contents	   \n");
+    		sql.append("      ,mi_date	       \n");
+    		sql.append("  FROM  MINI_BOARD     \n");
+    		sql.append("  WHERE mi_view_yn ='Y' \n");
+    		sql.append(" ORDER BY mi_date DESC  \n");
+    		
+    		pstmt = conn.prepareStatement(sql.toString());
+    		System.out.println("sql="+sql.toString());
+			ResultSet rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				data = new HashMap();
+				data.put("mi_id",rs.getString("mi_id"));
+				data.put("mi_name", rs.getString("mi_name"));
+				data.put("mi_email", rs.getString("mi_email"));
+				data.put("mi_passwd", rs.getString("mi_passwd"));
+				data.put("mi_contents", rs.getString("mi_contents"));
+				//Base64
+				//Decoder decoder = java.util.Base64.getDecoder();
+				//String content  = rs.getString("mi_contents");
+				//System.out.println("1="+content);
+				//byte[] decodedBytes = decoder.decode(content.getBytes());
+				//System.out.println("2="+new String(decodedBytes));
+				//data.put("mi_contents", new String(decodedBytes));
+				
+				data.put("mi_date", rs.getString("mi_date"));
+				data_list.add(data);
+			}
+		}
+		catch(Exception e) {
+			System.out.println("selectDBList() : "+e);
+		}
+		finally {
+			this.disConnect();
+		}
+		return data_list;
+	}    
+    
+	/**
+	 * 수정시 비번 체크
+	 * @param mi_id
+	 * @param mi_passwd
+	 * @return
+	 */
+	public HashMap<String,String> checkPasswd(String mi_id,String mi_passwd) {
+		connect();
+		HashMap<String, String> data = null;
+		try{
+			StringBuilder sql = new StringBuilder();
+    		sql.append("SELECT mi_id	       \n");
+    		sql.append("      ,mi_name	       \n");                    
+    		sql.append("      ,mi_email	       \n");
+    		sql.append("      ,mi_passwd	   \n");
+    		sql.append("      ,mi_passwd       \n");
+    		sql.append("      ,mi_contents	   \n");
+    		sql.append("      ,mi_date	       \n");
+    		sql.append("  FROM  MINI_BOARD     \n");
+    		sql.append("  WHERE mi_id =? \n");
+    		
+    		pstmt = conn.prepareStatement(sql.toString());
+    		System.out.println("sql="+sql.toString());
+			pstmt.setString(1,mi_id);
+			
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				data = new HashMap();
+				data.put("mi_id",rs.getString("mi_id"));
+				data.put("mi_name", rs.getString("mi_name"));
+				data.put("mi_email", rs.getString("mi_email"));
+				data.put("mi_passwd", rs.getString("mi_passwd"));
+				data.put("mi_contents", rs.getString("mi_contents"));
+				data.put("mi_date", rs.getString("mi_date"));
+			}
+		}
+		catch(Exception e) {
+			System.out.println("updateDB() : "+e);
+		}
+		finally {
+			this.disConnect();
+		}
+		return data;
+	}
+	
+    /**
+     * 수정
+     * @return boolean
+     */
+    public boolean updateClobDB(MiniBean bean)
+    {
+    	this.connect();
+    	int retInt = 0;
+    	boolean flag = false;
+    	try{
+    		StringBuilder sql = new StringBuilder(); 
+    		sql.append(" UPDATE MINI_BOARD             \n");
+    		sql.append("    SET mi_email    = ?        \n");
+    		sql.append("       ,mi_passwd   = ?        \n");
+    		sql.append("       ,mi_contents = ?        \n");
+    		sql.append("       ,mi_date     = SYSDATE  \n");
+    		sql.append("       ,mi_name     = ?  \n");
+    		sql.append("  WHERE mi_id = ?              \n");
+    		
+    		pstmt = conn.prepareStatement(sql.toString());
+    		System.out.println("sql="+sql.toString());  
+    		//pstmt.setString(1, gb_email);
+    		//pstmt.setString(2, gb_passwd);
+    		//pstmt.setString(3, gb_contents);
+    		//pstmt.setInt(4, gb_id);
+    		System.out.println("2 sql="+sql.toString());  
+    		
+    		pstmt.setString(1, bean.getMini_email());
+    		pstmt.setString(2, bean.getMini_passwd());
+    		
+    		Clob clobCon = conn.createClob();
+    		clobCon.setString(1, bean.getMini_contents());
+    		pstmt.setClob(3, clobCon);
+    		
+    		pstmt.setString(4, bean.getMini_name());
+    		pstmt.setString(5, bean.getMi_id());
+    		
+    		retInt = pstmt.executeUpdate();
+    		
+    	}catch(Exception e){
+    		return false;
+    	}finally{
+    		this.disConnect();
+    	}
+    	if(retInt>0)flag=true;
+    	return flag;
+    	
+    }
+    
+	
+    /**
+     * 수정
+     * @return boolean
+     */
+    public boolean updateDB(MiniBean bean)
+    {
+    	this.connect();
+    	int retInt = 0;
+    	boolean flag = false;
+    	try{
+    		StringBuilder sql = new StringBuilder(); 
+    		sql.append(" UPDATE MINI_BOARD             \n");
+    		sql.append("    SET mi_email    = ?        \n");
+    		sql.append("       ,mi_passwd   = ?        \n");
+    		sql.append("       ,mi_contents = ?        \n");
+    		sql.append("       ,mi_date     = SYSDATE  \n");
+    		sql.append("       ,mi_name     = ?  \n");
+    		sql.append("  WHERE mi_id = ?              \n");
+    		
+    		pstmt = conn.prepareStatement(sql.toString());
+    		System.out.println("sql="+sql.toString());  
+    		//pstmt.setString(1, gb_email);
+    		//pstmt.setString(2, gb_passwd);
+    		//pstmt.setString(3, gb_contents);
+    		//pstmt.setInt(4, gb_id);
+    		System.out.println("2 sql="+sql.toString());  
+    		
+    		pstmt.setString(1, bean.getMini_email());
+    		pstmt.setString(2, bean.getMini_passwd());
+    		pstmt.setString(3, bean.getMini_contents());
+    		pstmt.setString(4, bean.getMini_name());
+    		pstmt.setString(5, bean.getMi_id());
+    		
+    		retInt = pstmt.executeUpdate();
+    		
+    	}catch(Exception e){
+    		return false;
+    	}finally{
+    		this.disConnect();
+    	}
+    	if(retInt>0)flag=true;
+    	return flag;
+    	
+    }	
+    
+    /**
+     * 삭제
+     * @param mi_id
+     * @return
+     */
+    public boolean deleteDB(String mi_id)
+    {
+    	this.connect();
+    	int retInt = 0;
+    	boolean flag = false;
+    	try{
+    		StringBuilder sql = new StringBuilder();
+    		sql.append(" UPDATE MINI_BOARD \n");
+    		sql.append("    SET mi_view_yn = ? \n");
+    		sql.append("  WHERE mi_id      = ? \n");
+    		
+    		pstmt = conn.prepareStatement(sql.toString());
+    		System.out.println("sql="+sql.toString());      		
+    		pstmt.setString(1, "N");
+    		pstmt.setString(2,  mi_id);
+    		
+    		retInt = pstmt.executeUpdate();
+    		System.out.println("mi_id="+mi_id);  
+    		
+    	}catch(Exception e){
+    		return false;
+    	}finally{
+    		this.disConnect();
+    	}
+    	if(retInt>0)flag=true;
+    	return flag;    		
+    }    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,342 @@
+
+<%@page import="com.Beans.Ya_MotelBean"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%
+request.setCharacterEncoding("UTF-8");
+%>
+<%!//
+//%>
+<%//
+int imgCount = 0;
+int contentCount = 0;
+
+int count= 0;
+
+ArrayList<Ya_MotelBean> list = (ArrayList<Ya_MotelBean>)request.getAttribute("list");
+System.out.println(list.get(0).getTOT_CNT());
+//%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- prevent IE6 flickering -->
+<script type="text/javascript">
+    try {
+        document.execCommand('BackgroundImageCache', false, true);
+    } catch (e) {
+    }
+    
+    $(document).ready(function()
+    		{
+    		    $('#selectbox').change(function(){
+    		        location.href='searchControll.jsp?command=word&';
+    		    });
+    		});
+
+
+    		
+
+
+</script>
+
+<title>Insert title here</title>
+<style type="text/css">
+	.header{
+		position : fixed;
+		height : 100px;
+		background: #fc676e;
+	}
+	.foot{
+		height : 200px;
+		background: #3f3e3e;
+	}
+	.blank{
+		height: 100px;
+	}	.location{
+		padding-top : 50px;
+		height: 300px;
+	}
+	.popular{
+		height: 300px;
+	}
+	table,tr,td{
+		text-align: center;
+		/* border: 1px solid black */
+	}
+	img:hover{
+		opacity: 0.5;
+	}
+	
+	.tabl{
+		width: 60%;
+		height: 100px;
+		margin: auto;
+		text-align: center;
+	}
+	
+	.tabl01{
+		width: 80%;
+		height: 100px;
+		margin: auto;
+		
+	}
+	
+</style>
+</head>
+<body>
+<div class="header">
+	<form action="searchControll.jsp">
+	<input type="hidden" value="word" name="command">
+    	<table >
+    	<col width="222"/><col width="222"/><col width="222"/>
+    	<col width="222"/><col width="222"/><col width="222"/>
+    	<col width="222"/><col width="222"/><col width="222"/>
+    	<tr>
+    		<td></td>
+    		<td>
+    			<img src="../img/logo1.png" width="100" height="100">
+    		</td>
+    		<td colspan="4">
+    		<div class="input-group input-group-lg">
+      		<input type="text" class="form-control" placeholder="숙소/역이름으로 검색하세요" size="80" name="searchWord" 	>
+      		<div class="input-group-btn">
+        		<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+     		</div>
+    		</div>
+    		</td>
+    		<td colspan="2">
+    		<a href="" >로그인  </a>
+    		<a href="../join/ya_whojoin.jsp" >회원가입  </a>
+    		<a href="" >고객센터  </a>
+    		</td>
+    		<td></td>
+    	</tr>
+    	</table>
+  	</form>
+	</div>
+<!-- 빈곳   -->	
+	<div class="blank">
+	<table>
+		<col width="222"/><col width="222"/><col width="222"/>
+    	<col width="222"/><col width="222"/><col width="222"/>
+    	<col width="222"/><col width="222"/><col width="222"/>
+    	<tr>
+    		<td></td>
+    		<td colspan="7">________</td>
+    		<td></td>
+    	</tr>
+	</table>
+	</div>
+<!-- 검색내용 -->	
+<br>
+	<table class="tabl" >
+		
+    	<tr>
+    		
+    		<td height="100px" align="center">
+    		<font face="맑은 고딕" size="15">창건총각</font>
+    		</td>
+    		
+    	</tr>
+    	<tr>
+    		<td height="30" style="text-align: right">
+    		<select style="width: 150px; height: 30px;" name="choi" id="selectbox">
+    			<option>조건 정열</option>
+				<option value="pay" >가격 순</option>
+				<option value="star">별점 높은 순</option>
+				<option value="review">후기 많은 순</option>
+			</select>
+    		</td>
+    	</tr>
+	</table>
+<br>
+<br>
+	
+	<input type="hidden" name="command" value="detail">
+	<table class="tabl01" >
+		
+		<%
+		int listSize = list.size()%4 > 0 ? (list.size()/4)+1 : (list.size()/4);
+		System.out.println("리스트 사이즈 " + listSize);
+		
+		
+		for(int i=0; i<listSize; i++){ 
+			count++;
+			System.out.println("count"+count);
+		%>
+		<tr>
+		<%
+		
+		for(int j=0; j<4; j++){ 
+		
+			
+    			if(count==listSize && list.size()%4 != 0){ 
+    				if( j < list.size()%4){
+    					System.out.println("imgCount"+imgCount);
+    	%>	
+    				<td height="230" width="60"></td>
+        		<td height="230" width="380" style="background-color: lightgreen">
+        		<a href="searchControll.jsp?command=detail&motel_num=<%=list.get(imgCount).getMotel_num() %>">
+        		<img alt="" src="../img/seoul.jpg" width="350" height="230">
+        		</a></td>
+        		<td height="230" width="60"></td> 
+        <%			
+    				}else{
+        %>
+    				
+    				<td height="230" width="60"></td>
+            		<td height="230" width="380" >
+            		</td>
+            		<td height="230" width="60"></td> 
+        <%		
+    			}
+    		}else{
+    			System.out.println("imgCount++"+imgCount);
+    	%>			
+    			<td height="230" width="60"></td>
+        		<td height="230" width="380" style="background-color: lightgreen">
+        		<a href="searchControll.jsp?command=detail&motel_num=<%=list.get(imgCount).getMotel_num() %>">
+        		<img alt="" src="../img/seoul.jpg" width="350" height="230">
+        		</a></td>
+        		<td height="230" width="60"></td> 			
+    	<%		
+    			imgCount++;
+    		}
+    	} 
+    	%>	
+    	</tr>
+    	<tr>
+    	<%
+    	for(int k=0; k<4; k++){  
+    		System.out.println("count K "+count);
+    			if(count==listSize && list.size()%4 != 0){ 
+    				if( k < list.size()%4){
+    					System.out.println("contentCount"+contentCount);
+    				
+    	%>
+    			<td height="80" width="60"></td>
+    			<td height="80" width="380" >
+    			<p>모텔 이름 : <%=list.get(contentCount).getName() %></p>
+    			<p>주소 : <%=list.get(contentCount).getAddress() %> </p>
+    			</td>
+    			<td height="80" width="60"></td>	
+        <%
+    				}else{
+        %>
+    				
+    			<td height="80" width="60"></td>
+    			<td height="80" width="380" >
+    			</td>
+    			<td height="80" width="60"></td>
+        <%		
+    			}
+    		}else{
+    	%>
+    			<td height="80" width="60"></td>
+    			<td height="80" width="380" >
+    			<p>모텔 이름 : <%=list.get(contentCount).getName() %></p>
+    			<p>주소 : <%=list.get(contentCount).getAddress() %> </p>
+    			</td>
+    			<td height="80" width="60"></td>			
+    	<%	
+    	System.out.println("contentCount++"+contentCount);
+    	contentCount++;
+    		}
+    	} 
+    	%>	
+    	
+    	</tr>
+    	
+    	<tr>
+    		<td height="50" colspan="9"></td>
+    	
+    	</tr>
+    	<%
+    	
+		} 
+    	%>
+    	<%-- <tr>
+    	<td colspan="9" align="right">
+    	<%
+    	int pageCount = list.get(0).getTOT_CNT()%12 > 0 ? (list.get(0).getTOT_CNT()/12)+1 : (list.get(0).getTOT_CNT()/12); 
+    	for(int i=0; i<pageCount;i++){
+    	%>
+    	<%=i+1 %>
+    	<%} %>
+    	</td>
+    	</tr> --%>
+    	
+	</table>
+	
+	<table style="width: 50%; margin: auto;">
+		<col width="222"/><col width="222"/><col width="222"/>
+    	<col width="222"/><col width="222"/><col width="222"/>
+    	<col width="222"/><col width="222"/><col width="222"/>
+    <tr>
+    	<td colspan="9" align="center">
+    	
+    	<%
+    	String str = " ";
+    	int pageCount = list.get(0).getTOT_CNT()%12 > 0 ? (list.get(0).getTOT_CNT()/12)+1 : (list.get(0).getTOT_CNT()/12); 
+    	for(int i=0; i<pageCount;i++){
+    	%>
+    	
+    	<%
+    	if(session.getAttribute("word")!=null){ 
+    		String searchWord = (String)session.getAttribute("word");
+    	%>
+    	 <a href="javascript:;" onclick= "location.href='searchControll.jsp?command=word&pageNum=<%=i+1 %>&searchWord=<%=searchWord %>'" >
+    	<%	
+    	}else{
+    	%>
+    	 <a href="javascript:;" onclick="location.href='searchControll.jsp?command=word&pageNum=<%=i+1 %>'" >
+    	<%
+    	}
+    	%>
+    	<font size="5">
+    	<%=i+1 %><%=str %>
+    	<%} %>
+    	</font>
+    	</a>
+    	</td>
+    </tr>
+	
+	
+	</table>
+	
+	
+	
+	
+	<br>
+	
+	<div class="foot" style="padding-top: 10px" align="center">
+		
+		<p style="color: #d9d9db"> 
+		서울특별시 마포구 백범로 18 미화빌딩 3층 F강의장<br>
+		developed by<br> 
+		조윤행. 김영재. 배한주. 황인배<br>
+		<a href="instagram.com/haengtion.24/">instagram.com/haengtion.24/</a>
+		 </p>
+		
+		
+		<div style="padding-top: 10px">
+			<img src="../img/team.png" width="55px" height="55px">
+			<img src="../img/document.png" width="55px" height="55px">
+			<img src="../img/process.png" width="55px" height="55px">
+		</div>
+		<div>
+		 <a href="introduce.jsp">팀소개 </a>
+		 <a href="useAppointment.jsp">이용약관 </a>
+		 <a href="making.jsp">제작과정</a>
+		 <p style="color: #d9d9db">COPYRIGHT SIST_Fclass_2nd Project FirstTeam</p>
+		 </div>
+		 
+	</div>
+</body>
+</html>

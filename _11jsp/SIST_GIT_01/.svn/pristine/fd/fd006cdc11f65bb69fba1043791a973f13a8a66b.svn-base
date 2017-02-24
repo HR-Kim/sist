@@ -1,0 +1,442 @@
+package com.Dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.Beans.Ya_ImgBean;
+import com.Beans.Ya_MotelBean;
+import com.Beans.Ya_ReviewBean;
+
+public class MotelDao implements WorkArea {
+	private boolean isS = true;
+	private static MotelDao motelDao;
+	
+	private MotelDao() {
+		try{
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			log("1/6 Success");
+		}catch(ClassNotFoundException e){
+			log("1/6 Fail", e);
+		}
+	}
+	
+	public static MotelDao getInstance(){
+		if(motelDao == null){
+			motelDao = new MotelDao();
+		}
+		return motelDao;
+	}
+	
+	public Connection getConnection() throws SQLException{
+		Connection conn = null;
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String user = "hr";
+		String password = "hr";
+		
+		
+		conn = DriverManager.getConnection(url, user, password);
+		return conn;
+	}
+	
+	public void close(Connection conn, Statement stmt, ResultSet rs){
+		if(rs != null){
+			try{
+				rs.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			
+		}
+		if(stmt != null){
+			try{
+				stmt.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			
+		}
+		if(conn != null){
+			try{
+				conn.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			
+		}
+	}
+	
+	public void close(Connection conn, Statement stmt){
+		if(stmt != null){
+			try{
+				stmt.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			
+		}
+		if(conn != null){
+			try{
+				conn.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			
+		}
+	}
+	
+	public void log(String msg){
+		if(isS){
+			System.out.println(getClass() + ": " + msg);
+		}
+	}
+	
+	public void log(String msg, Exception e){
+		if(isS){
+			System.out.println(e + " : " + getClass() + " : " + msg);
+		}
+	}
+	
+	@Override
+	public ArrayList<Object> do_search(int pageNum, int pageSize, String search_div, String search_word) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean do_insert(Object bean) {
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		Ya_MotelBean castBean = (Ya_MotelBean)bean;
+		
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append("INSERT                    \n");
+		sql.append("INTO YA_MOTEL VALUES      \n");
+		sql.append("  (                       \n");
+		sql.append("    SEQ_YA_MOTEL.NEXTVAL, \n");
+		sql.append("    ?,                    \n");
+		sql.append("    ?,                    \n");
+		sql.append("    ?,                    \n");
+		sql.append("    ?,                    \n");
+		sql.append("    ?,                    \n");
+		sql.append("    ?,                    \n");
+		sql.append("    ?,                    \n");
+		sql.append("    ?,                    \n");
+		sql.append("    ?,                    \n");
+		sql.append("    ?,                    \n");
+		sql.append("    ?                     \n");
+		sql.append("  )                       \n");
+		
+		int count = 0;
+		try{
+			conn = getConnection();
+			
+			psmt = conn.prepareStatement(sql.toString());
+			
+			psmt.setString(1, castBean.getEmail());
+			psmt.setString(2, castBean.getName());
+			psmt.setString(3, castBean.getPhone());
+			psmt.setString(4, castBean.getAddress());
+			psmt.setInt(5, castBean.getNormal_cnt());
+			psmt.setInt(6, castBean.getPremium_cnt());
+			psmt.setInt(7, castBean.getNormal_pri());
+			psmt.setInt(8, castBean.getPremium_pri());
+			psmt.setInt(9, castBean.getIs_ok());
+			psmt.setString(10, castBean.getCheck_in());
+			psmt.setString(11, castBean.getCheck_out());
+			
+			count = psmt.executeUpdate();
+		}catch(SQLException e){
+			log("회원가입 오류!", e);
+		}finally {
+			this.close(conn, psmt);
+		}
+		
+		return count>0 ? true : false;
+	}
+
+	@Override
+	public boolean do_update(Object bean) {
+		Connection conn = null;
+	    PreparedStatement psmt = null;
+	    ResultSet rs = null;
+		
+	    Ya_MotelBean dto = (Ya_MotelBean)bean;
+	   
+	    int count = 0;
+	    
+	    String sql = " UPDATE YA_MOTEL SET  "
+	            + " NAME= ?, PHONE= ?, ADDRESS= ?, NORMAL_CNT= ?, PREMIUM_CNT= ?, "
+	            + " NORMAL_PRI= ?, PREMIUM_PRI= ?, CHECK_IN= ?, CHECK_OUT= ? "
+	            + " WHERE EMAIL= ? ";
+	    
+	    try{
+	    	conn = getConnection();
+	    	
+			/*StringBuilder sql = new StringBuilder();
+			sql.append(" UPDATE YA_MOTEL SET                                                             \n");
+			sql.append(" NAME= ?, PHONE= ?, ADDRESS= ?, NORMAL_CNT= ?, PREMIUM_CNT= ?,      \n");
+			sql.append(" NORMAL_PRI= ?, PREMIUM_PRI= ?, CHECK_IN= ?, CHECK_OUT= ?      \n");
+			sql.append(" WHERE EMAIL= ?                                                                  \n");
+			
+			System.out.println("0 sql"+sql.toString()); 
+			psmt = conn.prepareStatement(sql.toString());
+			System.out.println("1 pstmt"+psmt.toString());*/
+	    	psmt = conn.prepareStatement(sql);
+	    	System.out.println("1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+			psmt.setString(1, dto.getName().trim());
+			psmt.setString(2, dto.getPhone().trim());
+			psmt.setString(3, dto.getAddress().trim());
+			psmt.setInt(4, dto.getNormal_cnt());
+			psmt.setInt(5, dto.getPremium_cnt());
+			psmt.setInt(6, dto.getNormal_pri());
+			psmt.setInt(7, dto.getPremium_pri());
+			psmt.setString(8, dto.getCheck_in().trim());
+			psmt.setString(9, dto.getCheck_out().trim());
+			psmt.setString(10, dto.getEmail().trim());
+			
+			System.out.println("2XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+			count = psmt.executeUpdate();
+			
+			System.out.println("3XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+	      
+	      }catch(SQLException e){
+	         log("Fail search",e);
+	         e.printStackTrace();
+	      }finally{
+	         close(conn, psmt, rs);
+	      }
+		
+		
+		return count>0?true:false;
+	}
+
+	@Override
+	public boolean do_delete(Object bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean do_upsert(Object bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+
+	public Object do_detail(int seq) {
+		Connection conn = null;
+	    PreparedStatement psmt = null;
+	    ResultSet rs = null;
+	    
+	    Ya_MotelBean dto = null;
+	    Ya_ImgBean imgBean =null;
+	    ArrayList<Ya_ImgBean> img_list = new ArrayList<Ya_ImgBean>();
+	    
+	    
+	    try{
+	    	conn = getConnection();
+	    	log("1/6 Success detail");
+			StringBuilder sql = new StringBuilder();
+			sql.append(" select a.*, b.IMG_NAME, b.IMG_AUTH                                                              \n");
+			sql.append("FROM YA_MOTEL a inner join ya_img b                                                              \n");
+			sql.append(" on a.MOTEL_NUM=b.MOTEL_NUM                                                                      \n");
+			sql.append(" where a.motel_num = ?                                        \n");
+			log("2/6 Success detail");
+			System.out.println("0 sql"+sql.toString()); 
+			psmt = conn.prepareStatement(sql.toString());
+			System.out.println("1 pstmt"+psmt.toString());
+	                 
+			psmt.setInt(1, seq);
+			
+	        rs = psmt.executeQuery();
+	        log("4/6 Success search");
+	       	         
+	        while(rs.next()){
+	        	
+	        	dto = new Ya_MotelBean(rs.getInt("MOTEL_NUM"), 
+						rs.getString("EMAIL"),
+						rs.getString("NAME"), 
+						rs.getString("PHONE"), 
+						rs.getString("ADDRESS"), 
+						rs.getInt("NORMAL_CNT"), 
+						rs.getInt("PREMIUM_CNT"), 
+						rs.getInt("NORMAL_PRI"), 
+						rs.getInt("PREMIUM_PRI"), 
+						rs.getInt("IS_OK"), 
+						rs.getString("CHECK_IN"),
+						rs.getString("CHECK_OUT"));
+	        		             	
+	             imgBean = new Ya_ImgBean();
+		         imgBean.setImg_name(rs.getString("IMG_NAME"));
+		         imgBean.setImg_auth(rs.getInt("IMG_AUTH"));
+		         img_list.add(imgBean);
+		            
+	             
+	         }
+	        
+	        
+	        dto.setImgs(img_list);
+	        
+	      }catch(SQLException e){
+	         log("Fail search",e);
+	      }finally{
+	         close(conn, psmt, rs);
+	      }
+		
+		
+		
+		
+		
+		return dto;
+
+	}
+	public Object do_detail_time(int seq) {
+		Connection conn = null;
+	    PreparedStatement psmt = null;
+	    ResultSet rs = null;
+	    
+	    Ya_MotelBean dto = new Ya_MotelBean();
+	       
+	    try{
+	    	conn = getConnection();
+	    	log("1/6 Success detail");
+			StringBuilder sql = new StringBuilder();
+			sql.append(" SELECT NORMAL_PRI, PREMIUM_PRI, CHECK_IN, CHECK_OUT                                                             \n");
+			sql.append(" FROM YA_MOTEL                                                           \n");
+			sql.append(" WHERE MOTEL_NUM = ?                                                                   \n");
+			log("2/6 Success detail");
+			System.out.println("0 sql"+sql.toString()); 
+			psmt = conn.prepareStatement(sql.toString());
+			System.out.println("1 pstmt"+psmt.toString());
+	                 
+			psmt.setInt(1, seq);
+			
+	        rs = psmt.executeQuery();
+	        log("4/6 Success search");
+	       	         
+	        while(rs.next()){
+	        	
+	        	dto.setNormal_pri(rs.getShort("NORMAL_PRI"));
+	        	dto.setPremium_pri(rs.getInt("PREMIUM_PRI"));
+	        	dto.setCheck_in(rs.getString("CHECK_IN"));
+	        	dto.setCheck_out(rs.getString("CHECK_OUT"));
+	        
+	         }
+	        
+	      }catch(SQLException e){
+	         log("Fail search",e);
+	      }finally{
+	         close(conn, psmt, rs);
+	      }
+		
+		return dto;
+	}
+
+	public Object do_detail_review(int seq) {
+		Connection conn = null;
+	    PreparedStatement psmt = null;
+	    ResultSet rs = null;
+	    
+	    Ya_ReviewBean dto = null;
+	       
+	    try{
+	    	conn = getConnection();
+	    	log("1/6 Success detail");
+			StringBuilder sql = new StringBuilder();
+			sql.append(" SELECT * FROM YA_REVIEW                                                         \n");
+			sql.append(" WHERE del=0 and MOTEL_NUM = ?                                                                  \n");
+			sql.append(" ORDER BY SEQ DESC                                                                  \n");
+			log("2/6 Success detail");
+			System.out.println("0 sql"+sql.toString()); 
+			psmt = conn.prepareStatement(sql.toString());
+			System.out.println("1 pstmt"+psmt.toString());
+	                 
+			psmt.setInt(1, seq);
+			
+	        rs = psmt.executeQuery();
+	        log("4/6 Success search");
+	       	         
+	        while(rs.next()){
+	        	
+	        	dto = new Ya_ReviewBean(rs.getInt(1),
+	        							rs.getInt(2),
+	        							rs.getString(3),
+	        							rs.getString(4),
+	        							rs.getInt(5),
+	        							rs.getInt(6),
+	        							rs.getInt(7),
+	        							rs.getString(8),
+	        							rs.getInt(9),
+	        							rs.getInt(10),
+	        							rs.getInt(11),
+	        							rs.getInt(12)
+	        			
+	        			);
+	        	
+	        	
+	         }
+	        
+	      }catch(SQLException e){
+	         log("Fail search",e);
+	      }finally{
+	         close(conn, psmt, rs);
+	      }
+		
+		return dto;
+	}
+
+	public List<Ya_ImgBean> do_detail_photo(int motel_num) {
+		Connection conn = null;
+	    PreparedStatement psmt = null;
+	    ResultSet rs = null;
+	    
+	    List<Ya_ImgBean> list = new ArrayList<>();
+	       
+	    try{
+	    	conn = getConnection();
+	    	log("1/6 Success detail");
+			StringBuilder sql = new StringBuilder();
+			sql.append(" select * from YA_IMG                                                         \n");
+			sql.append(" where MOTEL_NUM = ? and IMG_AUTH !=0                                                                  \n");
+			log("2/6 Success detail");
+			System.out.println("0 sql"+sql.toString()); 
+			psmt = conn.prepareStatement(sql.toString());
+			System.out.println("1 pstmt"+psmt.toString());
+	                 
+			psmt.setInt(1, motel_num);
+			
+	        rs = psmt.executeQuery();
+	        log("4/6 Success search");
+	       	         
+	        while(rs.next()){
+	        	
+	        	Ya_ImgBean dto = new Ya_ImgBean(rs.getInt(1),
+	        							rs.getInt(2),
+	        							rs.getString(3),
+	        							rs.getInt(4)
+	        			);
+	        	list.add(dto);
+	        	
+	        	
+	         }
+	        
+	      }catch(SQLException e){
+	         log("Fail search",e);
+	      }finally{
+	         close(conn, psmt, rs);
+	      }
+		
+		return list;
+	}
+	
+	
+	
+}

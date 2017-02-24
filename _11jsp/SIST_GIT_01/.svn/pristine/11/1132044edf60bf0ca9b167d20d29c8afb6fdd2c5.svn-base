@@ -1,0 +1,56 @@
+<%@page import="com.Beans.Ya_MotelBean"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.Dao.SearchPageDao"%>
+<%@ page pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%
+request.setCharacterEncoding("UTF-8");
+%>
+<%!//
+//%>
+<%//
+//%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<script>
+</script>
+<style>
+</style>
+</head>
+<body>
+<%
+	String command = request.getParameter("command");
+
+	if(command.equals("detailAf")){
+	String type = request.getParameter("type");
+		if(type.equals("room")) pageContext.forward("searchDetail.jsp?contentsDiv=room");
+		else if(type.equals("pay")) pageContext.forward("searchDetail.jsp?contentsDiv=pay");
+		else if(type.equals("review"))pageContext.forward("searchDetail.jsp?contentsDiv=review");
+	
+	}else if(command.equals("detail")){
+		pageContext.forward("searchDetail.jsp");
+	}else if(command.equals("word")){
+		String searchWord = request.getParameter("searchWord");
+
+		System.out.println("서치워드"+ searchWord);
+		
+		
+		String pageNum = (request.getParameter("pageNum")==null || request.getParameter("pageNum")=="")?"1":request.getParameter("pageNum");
+		int page_Num = Integer.parseInt(pageNum);
+		
+		session.setAttribute("word",searchWord);
+		
+		
+		SearchPageDao dao = SearchPageDao.getInstance();
+		ArrayList<Object> list = dao.do_search(page_Num, 12, "BASIC", searchWord);
+		request.setAttribute("list", list);
+		pageContext.forward("searchPage.jsp");
+				
+		
+	}
+%>
+</body>
+</html>

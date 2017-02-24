@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <link href='css/common.css' rel='stylesheet' type='text/css'>
+        <title>
+            :::SL:::
+        </title>
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8">		
+				
+				
+				<script language="JavaScript">
+					<!--
+
+					//-->
+
+					</script>
+    </head>
+	
+	
+    <body>
+        <table width="804" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="20">&nbsp;
+                </td>
+                <td>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td height="35" background="images/info/title_bg.gif">
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td height="35"  class="subtitle08">
+                                                        공지사항<span class="subtitle_b"></span> 
+                                                    </td>
+                                                    <td class="path">
+                                                        HOME &gt; 유용한정보 &gt; <strong>
+                                                            공지사항</strong> 
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td height="10">
+                                                    </td>
+                                                </tr>
+										    </table> 
+											<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+													<td>&nbsp;</td>
+													<td width="60">
+                                                        <select name="select2" class="textfield">
+                                                            <option selected>
+                                                                제목
+                                                            </option>
+                                                            <option>
+                                                                작성자
+                                                            </option>
+                                                            <option>
+                                                                내용
+                                                            </option>
+                                                        </select>
+                                                    </td>
+													<td width="5">&nbsp;</td>
+													<td width="30">
+                                                        <input name="textfield327222233" type="text" class="textfield" style="width:200px; line-height:14px;"></td>
+                                                      <td  width="72">
+                          														<table border="0" align="right" cellpadding="0" cellspacing="0">
+                          															<tr>
+                          																<td>
+                          																	<table style="cursor:hand;" onClick="MM_openBrWindow('sub_0304_01_승인관리_위임관리_팝업2.html','','resizable=yes,width=836,height=400')" border="0" cellspacing="0" cellpadding="0">
+                          																		<tr>
+                          																			<td width="5"><img src="images/com/btnA_l.gif"></td>
+                          																			<td width="52"  background="images/com/btnA_bg.gif" class="btnA">검색 
+                          																			</td>
+                          																			<td width="5"><img src="images/com/btnA_r.gif"></td>
+                          																		</tr>
+                          																	</table>
+                          																</td>
+                          															</tr>
+                          														</table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td height="10">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <table width="100%" border="0" cellspacing="1" cellpadding="0" class="table02">
+                                                <tr>
+                                                    <td width="4%" class="t02">
+                                                        번호 
+                                                    </td>
+                                                    <td width="5%" class="t02">
+                                                        파일 
+                                                    </td>
+                                                    <td  class="t02">
+                                                        제목 
+                                                    </td>
+                                                    <td width="12%" class="t02">
+                                                        작성자 
+                                                    </td>
+                                                    <td width="12%" class="t02">
+                                                        작성일
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td height="14" class="t02_w">
+                                                        1
+                                                    </td>
+                                                    <td class="t02_w">&nbsp;
+                                                    </td>
+                                                    <td class="t02_w_l">
+                                                        유의 사항 
+                                                    </td>
+                                                    <td class="t02_w">
+                                                        홍길동 
+                                                    </td>
+                                                    <td class="t02_w">
+                                                        2008-07-18 
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td height="10">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td height="10">
+                                                                </td>
+                                                            </tr>
+                                                        </table> 
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td class="list_num">
+                                                                    <a href="#">
+                                                                        <img src="images/com/btn_prevend.gif" width="17" height="15" border="0" align="absmiddle">
+                                                                    </a> &nbsp; 
+                                                                    <a href="#">
+                                                                        <img src="images/com/btn_prev.gif" width="14" height="15" border="0" align="absmiddle">
+                                                                    </a> &nbsp; 
+                                                                    <a href="#">
+                                                                        1</a> 
+                                                                    &nbsp; <a href="#">
+                                                                        2</a> 
+                                                                    &nbsp; <a href="#">
+                                                                        3</a> 
+                                                                    &nbsp; <a href="#">
+                                                                        4</a> 
+                                                                    &nbsp; <a href="#">
+                                                                        5</a> 
+                                                                    &nbsp; <a href="#">
+                                                                        6</a> 
+                                                                    &nbsp; <a href="#">
+                                                                        7</a> 
+                                                                    &nbsp; <a href="#">
+                                                                        8</a> 
+                                                                    &nbsp; <a href="#">
+                                                                        9</a> 
+                                                                    &nbsp; <a href="#">
+                                                                        10</a> 
+                                                                    &nbsp; <a href="#">
+                                                                        <img src="images/com/btn_next.gif" height="15" border="0" align="absmiddle">
+                                                                    </a> &nbsp; 
+                                                                    <a href="#">
+                                                                        <img src="images/com/btn_nextend.gif" width="17" height="15" border="0" align="absmiddle">
+                                                                    </a> &nbsp; 
+                                                                </td>
+                                                            </tr>
+                                                        </table> 
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td height="10">
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td>&nbsp;
+                                                                </td>
+                                                                <td>
+                                                                    <table border="0" align="right" cellpadding="0" cellspacing="0">
+                                                                        <tr>
+                                                                            <td>
+																			<table style="cursor:hand;" onClick="location.href='sub_0801_02_유용한정보_공지사항상세.html'"  border="0" cellspacing="0" cellpadding="0">
+																				<tr>
+																					<td width="5"><img src="images/com/btnA_l.gif"></td>
+																					<td width="52"  background="images/com/btnA_bg.gif" class="btnA">등록 
+																					</td>
+																					<td width="5"><img src="images/com/btnA_r.gif"></td>
+																				</tr>
+																			</table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td height="16">
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                     </td>
+                                                </tr>
+                                            </table>
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td height="10">
+                                                    </td>
+                                                </tr>
+                                            </table> 
+										</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

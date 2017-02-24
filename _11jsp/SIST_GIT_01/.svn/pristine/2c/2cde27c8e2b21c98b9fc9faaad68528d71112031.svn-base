@@ -1,0 +1,178 @@
+<%@page import="java.io.File"%>
+<%@page import="java.util.Enumeration"%>
+<%@page import="com.Beans.Ya_ImgBean"%>
+<%@page import="com.Beans.Ya_MotelBean"%>
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
+<%@page import="com.Dao.ImgDao"%>
+<%@page import="com.Dao.MotelDao"%>
+<%@page import="com.Beans.Ya_MemberBean"%>
+<%@page import="com.Dao.MemberDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%	
+		String command = request.getParameter("command");
+		System.out.println(command);
+		
+				
+		if(command.equals("login")){
+			pageContext.forward("ya_login.jsp");
+		}else if(command.equals("logout")){
+			pageContext.forward("ya_loginAfter.jsp?type=logout");
+		}else if(command.equals("guestjoin")){
+			MemberDao memberDao = MemberDao.getInstance();
+			
+			String email = request.getParameter("email");
+			String password = request.getParameter("password");
+			String nickname = request.getParameter("nickname");
+			System.out.println(email + "," + nickname + "," + password);
+			
+			Ya_MemberBean memberBean = new Ya_MemberBean(email, password, nickname, 0, 0, 1,
+					-1);			
+			
+			if(memberDao.do_insert(memberBean)){
+				System.out.println("성공");
+	%>
+			<script type="text/javascript">
+			alert("가입성공!");
+			</script>
+	<%
+			pageContext.forward("../main/ya_main.jsp");
+			}else{
+				System.out.println("실패");
+	%>
+				<script type="text/javascript">
+				alert("가입실패!");
+				</script>
+	<%
+			pageContext.forward("../main/ya_main.jsp");
+			}
+		
+		}else if(command.equals("hostjoin")){
+			request.setCharacterEncoding("utf-8");
+			String realFolder = "";
+			String filename1 = "";
+			String uploadfile = "";
+			int maxSize = 1024*1024*5;
+			String encType = "utf-8";
+			String contextRoot = application.getContextPath();
+			System.out.println("contextRoot : " + contextRoot);
+			String dir = application.getRealPath("/img");
+			String savefile = dir;
+			ServletContext scontext = getServletContext();
+			
+			MemberDao memberDao = MemberDao.getInstance();
+			MotelDao motelDao = MotelDao.getInstance();
+			ImgDao imgDao = ImgDao.getInstance();
+			
+			Ya_MemberBean memberBean = new Ya_MemberBean();
+			Ya_MotelBean motelBean = new Ya_MotelBean();
+			Ya_ImgBean imgBean = new Ya_ImgBean();
+			try{ 
+				MultipartRequest multi = new MultipartRequest(request, savefile, maxSize, encType, new DefaultFileRenamePolicy());
+				/* Enumeration<?> files = multi.getFileNames();
+				String file1 = (String)files.nextElement();
+				filename1 = multi.getFilesystemName(file1);
+				
+				String FullPath = realFolder + "\\" + filename1; */
+				uploadfile = multi.getFilesystemName("mainimg");
+				System.out.println(uploadfile);
+				File file = new File(savefile + uploadfile);
+				System.out.println("uploadfile : " + uploadfile + "savefile" + savefile);
+				//회원생성 --> 승인여부는 아직 0!
+				String email = multi.getParameter("email");
+				String password = multi.getParameter("password");
+				String nickname = multi.getParameter("nickname");
+				System.out.println(email + "," + nickname + "," + password);
+				memberBean.setEmail(email);
+				memberBean.setPassword(password);
+				memberBean.setNickname(nickname);
+				memberBean.setAuth(1);
+				memberBean.setPoint(0);
+				memberBean.setIs_ok(0);
+				
+				//모텔생성 --> 승인여부는 아직 0!
+				String name = multi.getParameter("motel");
+				String address = multi.getParameter("address");
+				String phone = multi.getParameter("phone");
+				String checkin = multi.getParameter("checkIn");
+				String checkout = multi.getParameter("checkOut");
+				String normalPrice = multi.getParameter("normalPrice");
+				String premiumPrice = multi.getParameter("premiumPrice");
+				String normalCnt = multi.getParameter("normalCnt");
+				String premiumCnt = multi.getParameter("premiumCnt");
+				
+				motelBean.setMotel_num(0);
+				motelBean.setEmail(email);
+				motelBean.setName(name);
+				motelBean.setAddress(address);
+				motelBean.setPhone(phone);
+				motelBean.setNormal_cnt(Integer.parseInt(normalCnt));
+				motelBean.setPremium_cnt(Integer.parseInt(premiumCnt));
+				motelBean.setNormal_pri(Integer.parseInt(normalPrice));
+				motelBean.setPremium_pri(Integer.parseInt(premiumPrice));
+				motelBean.setIs_ok(0);
+				motelBean.setCheck_in(checkin);
+				motelBean.setCheck_out(checkout);
+				
+				imgBean.setSeq(0);
+				imgBean.setMotel_num(0);
+				imgBean.setImg_name(contextRoot + "/img/" + uploadfile);
+				imgBean.setImg_auth(0);
+
+			}catch(Exception e){
+				e.printStackTrace();
+			}			
+			//사진 박기
+			
+			
+			 if(memberDao.do_insert(memberBean)){
+					System.out.println("맴버추가성공");
+					if(motelDao.do_insert(motelBean)){
+						System.out.println("모텔추가성공");
+						if(imgDao.do_insert(imgBean)){		
+	%>
+					<script type="text/javascript">
+					alert("가입성공!");
+					</script>
+	<%
+					pageContext.forward("../main/ya_main.jsp");
+					}else{
+						System.out.println("실패");
+	%>
+						<script type="text/javascript">
+						alert("가입실패!");
+						</script>
+	<%
+						pageContext.forward("../main/ya_main.jsp");
+					}
+				}else{
+					System.out.println("실패");
+	%>
+					<script type="text/javascript">
+					alert("가입실패!");
+					</script>
+	<%
+					pageContext.forward("../main/ya_main.jsp");
+				}
+			}else{
+				System.out.println("실패");
+	%>
+				<script type="text/javascript">
+				alert("가입실패!");
+				</script>
+	<%
+			pageContext.forward("../main/ya_main.jsp");
+			}
+		} 
+	%> 
+	
+</body>
+</html>

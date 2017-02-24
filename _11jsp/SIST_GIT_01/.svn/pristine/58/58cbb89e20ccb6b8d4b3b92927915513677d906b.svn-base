@@ -1,0 +1,33 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%
+request.setCharacterEncoding("UTF-8");
+%>
+<%!//
+//%>
+<%//
+//%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<script>
+</script>
+<style>
+</style>
+</head>
+<body>
+<%
+	String command = request.getParameter("command");
+
+	if(command.equals("room")){
+		pageContext.forward("searchDetail.jsp?contentsDiv=room");
+	}else if(command.equals("pay")){
+		pageContext.forward("searchDetail.jsp?contentsDiv=pay");
+	}else if(command.equals("review")){
+		pageContext.forward("searchDetail.jsp?contentsDiv=review");
+	}
+%>
+</body>
+</html>

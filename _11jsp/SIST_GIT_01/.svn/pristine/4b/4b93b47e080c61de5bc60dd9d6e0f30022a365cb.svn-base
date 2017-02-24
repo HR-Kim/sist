@@ -1,0 +1,51 @@
+<%@page import="com.Beans.Ya_MemberBean"%>
+<%@page import="com.Dao.MemberDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%	
+		String command = request.getParameter("command");
+		System.out.println(command);
+		if(command.equals("login")){
+			pageContext.forward("ya_login.jsp");
+		}else if(command.equals("logout")){
+			pageContext.forward("ya_loginAfter.jsp?type=logout");
+		}else if(command.equals("guestjoin")){
+			MemberDao memberDao = MemberDao.getInstance();
+			
+			String email = request.getParameter("email");
+			String password = request.getParameter("password");
+			String nickname = request.getParameter("nickname");
+			System.out.println(email + "," + nickname + "," + password);
+			
+			Ya_MemberBean memberBean = new Ya_MemberBean(email, password, nickname, 0, 0, 1,
+					-1);			
+			
+			if(memberDao.do_insert(memberBean)){
+				System.out.println("성공");
+	%>
+			<script type="text/javascript">
+			alert("가입성공!");
+			</script>
+	<%
+			pageContext.forward("../main/ya_main.jsp");
+			}else{
+				System.out.println("실패");
+	%>
+				<script type="text/javascript">
+				alert("가입실패!");
+				</script>
+	<%
+			pageContext.forward("../main/ya_main.jsp");
+			}
+		}
+	%>
+	
+</body>
+</html>

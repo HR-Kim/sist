@@ -1,0 +1,37 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%
+request.setCharacterEncoding("UTF-8");
+%>
+<%!//
+//%>
+<%//
+//%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<script>
+</script>
+<style>
+</style>
+</head>
+<body>
+<h1>요금및시간</h1>
+
+<table>
+	<tr>
+		<td>시간</td>
+		<td>s</td>
+	</tr>
+	
+	<tr>
+		<td>요금</td>
+		<td>e</td>
+	</tr>
+	
+</table>
+
+</body>
+</html>

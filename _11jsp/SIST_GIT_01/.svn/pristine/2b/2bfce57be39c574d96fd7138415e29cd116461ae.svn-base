@@ -1,0 +1,51 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	int roomCnt = Integer.parseInt(request.getParameter("roomCnt"));
+	String div = request.getParameter("div");
+%>
+
+<%if(div.equals("normal")){ %>
+	<%if(roomCnt > 0){ %>
+	<table>
+	<col width="400"><col width="600">
+	<tr>
+		<td>일반실사진</td>
+	</tr>
+	<%for(int i=0; i< roomCnt; ++i){%>
+	<tr>
+		<td></td>
+		<td>
+			<div class="input-group">
+		      <span class="input-group-addon"><i class="glyphicon glyphicon-camera"></i></span>
+		      <input id="mainImg" type="text" class="form-control" name="mainImg" placeholder="일반실 사진<%=i+1 %>" style="width: 300px; height: 37px">
+		      <span class="input-group-addon" style="background-color: #9eaabc"><input type="button" class="form-control" name="mainImgRegi" value="사진 등록" style="background-color: #9eaabc; border: 0; outline: 0; height: 25px;"></span>
+			</div>
+	    </td>
+	</tr>
+	<%} %>
+	</table>
+	<%} %>	
+<%}else if(div.equals("premium")){%>
+	<%if(roomCnt > 0){ %>
+	<table>
+	<col width="400"><col width="600">
+	<tr>
+		<td>특실</td>
+	</tr>
+	<%for(int i=0; i< roomCnt; ++i){%>
+	<tr>
+		<td></td>
+		<td>
+			<div class="input-group">
+		      <span class="input-group-addon"><i class="glyphicon glyphicon-camera"></i></span>
+		      <input id="mainImg" type="text" class="form-control" name="mainImg" placeholder="특실 사진<%=i+1 %>" style="width: 300px; height: 37px">
+		      <span class="input-group-addon" style="background-color: #9eaabc"><input type="button" class="form-control" name="mainImgRegi" value="사진 등록" style="background-color: #9eaabc; border: 0; outline: 0; height: 25px;"></span>
+			</div>
+	    </td>
+	</tr>
+	<%}%>
+	</table>
+	<%} %>
+<%}%>

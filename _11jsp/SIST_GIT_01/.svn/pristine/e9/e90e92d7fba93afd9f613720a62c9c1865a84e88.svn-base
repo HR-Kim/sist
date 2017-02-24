@@ -1,0 +1,145 @@
+package com.Dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import com.Beans.Ya_ReserveBean;
+import com.Beans.Ya_ReviewBean;
+
+public class ReviewDao implements WorkArea {
+
+	private boolean isS = true;
+	private static ReviewDao reviewdao;
+	public void log(String msg){
+		if(isS){
+			System.out.println(getClass() + ":" + msg);
+		}
+	}
+	public void log(String msg, Exception e){
+		if(isS){
+			System.out.println(e + " : " +getClass() + " : " + msg);
+		}
+	}
+	private ReviewDao(){
+		try{
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			log("1/6 Success");
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			log("1/6 Fail", e);
+		}
+	}
+	public static ReviewDao getInstance(){
+		if(reviewdao == null){
+			reviewdao = new ReviewDao();
+		}
+		return reviewdao;
+	}
+	public Connection getConnection() throws SQLException{
+		Connection conn = null;
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		conn = DriverManager.getConnection(url,"hr","hr");
+		return conn;
+	}
+	public void close(Connection conn, Statement psmt, ResultSet rs){
+		if(conn!=null){
+			try{
+				conn.close();
+			}catch (SQLException e){}
+		}
+		if(psmt!=null){
+			try{
+				psmt.close();
+			}catch (SQLException e){}
+		}
+		if(rs!=null){
+			try{
+				rs.close();
+			}catch (SQLException e){}
+		}
+	}
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	@Override
+	public ArrayList<Object> do_search(int pageNum, int pageSize, String search_div, String search_word) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean do_insert(Object bean) {
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		String name = "인배";
+		int facility = 8;
+		int service = 8;
+		int clean = 8;
+		String content = "좋아요";
+		int i = 1;
+		
+		int count = 0;
+		
+		try {
+			conn = getConnection();
+			log("2/6 Success do_insert");
+			StringBuilder sql = new StringBuilder();
+			
+			sql.append(" INSERT INTO YA_REVIEW                                     \n");
+			sql.append(" VALUES (16,?,?,sysdate,?,?,?,?,      					   \n");	//SEQ.NEXTVAL
+			sql.append(" (SELECT NVL(MAX(REFERENCE),0)+1 FROM YA_REVIEW)           \n");
+			sql.append(" ,0,0,0)	                                               \n");
+			
+			System.out.println("0 sql" + sql.toString());
+			psmt = conn.prepareStatement(sql.toString());
+			System.out.println("1 psmt" + psmt.toString());
+			log("3/6 Success do_insert");
+
+			psmt.setInt(1, i);
+			psmt.setString(2, name);
+			psmt.setInt(3, facility);
+			psmt.setInt(4, service);
+			psmt.setInt(5, clean);
+			psmt.setString(6, content);
+
+			count = psmt.executeUpdate();
+			log("4/6 Success do_insert");
+		} catch (SQLException e) {
+			log("Fail do_insert", e);
+		} finally {
+			System.out.println("success");
+			close(conn, psmt, rs);
+			log("5/6 Success do_insert");
+		}		
+		return count>0?true:false;
+	}
+
+	@Override
+	public boolean do_update(Object bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean do_delete(Object bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean do_upsert(Object bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Object do_detail(int seq) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

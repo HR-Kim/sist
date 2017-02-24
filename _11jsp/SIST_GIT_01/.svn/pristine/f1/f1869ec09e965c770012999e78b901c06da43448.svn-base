@@ -1,0 +1,69 @@
+<%@page import="com.Beans.Ya_MemberBean"%>
+<%@ page pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%
+request.setCharacterEncoding("UTF-8");
+%>
+<%!//
+//%>
+<%//
+String date = request.getParameter("date");
+String roomType = request.getParameter("check");
+//%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+function usepoint(){
+	$('#totPay').attr("value", $("#onPa").val() - $("#totPay".val() );
+}
+
+</script>
+<style>
+</style>
+</head>
+<body>
+<h1>예약</h1>
+<hr>
+<p>날짜 : <input type="text" value=<%=date %> readonly="readonly"></p>
+<p>예약자이름 : <input type="text"></p>
+<p>메일 주소 : <input type="text"
+<% if(session.getAttribute("member")!=null){ 
+	Ya_MemberBean memberBean = (Ya_MemberBean)session.getAttribute("member"); 
+		 %>
+ value = <%=memberBean.getEmail() %> readonly="readonly"
+<%
+}
+%>
+></p>
+<hr>
+<p>포인트 할인 : <input type="text" value="0" onkeyup="document.getElementById('usePoint').value= this.value;" ><button onclick="usepoint()" >포인트 사용하기</button></p>
+<div>   ※사용할 포인트를 입력해주세요 
+<br>
+		사용가능한 포인트 : <% if(session.getAttribute("member")!=null){ 
+	Ya_MemberBean memberBean = (Ya_MemberBean)session.getAttribute("member"); %> 
+	<%=memberBean.getPoint() %>포인트
+	<%
+	}
+     %>
+</div>
+<hr>
+<p> 총 주문 금액 : <input type="text" id= "onPa" value="<%=roomType%>"></p>
+<p> 총 할인 금액 : <input type="text" id="usePoint"></p>
+<p> 총 결제 금액 : <input type="text" id="totPay" value="<%=roomType%>"></p>
+<br>
+<hr>
+<p> <h3>카드결제</h3></p>
+
+<input type="text" onkeyup="document.getElementById('url').value='http://www.abc.com/code='+this.value;" /><br /> 
+<textarea id="url" cols="40" readonly="readonly">http://www.abc.com/code=</textarea>
+
+
+
+</body>
+</html>

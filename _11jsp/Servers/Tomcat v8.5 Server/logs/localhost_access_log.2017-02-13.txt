@@ -1,0 +1,3 @@
+127.0.0.1 - - [13/Feb/2017:16:42:43 +0900] "GET / HTTP/1.1" 404 986
+0:0:0:0:0:0:0:1 - - [13/Feb/2017:16:42:46 +0900] "GET /SIST_GIT_YA01/WEB-INF/classes/com/Dao/MotelDao.java HTTP/1.1" 404 984
+0:0:0:0:0:0:0:1 - - [13/Feb/2017:16:42:46 +0900] "GET /favicon.ico HTTP/1.1" 404 1008

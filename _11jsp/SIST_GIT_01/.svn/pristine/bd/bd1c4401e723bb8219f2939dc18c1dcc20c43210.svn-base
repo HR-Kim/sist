@@ -1,0 +1,105 @@
+<%@page import="com.Beans.Ya_MemberBean"%>
+<%@page import="com.Beans.Ya_ZzimBean"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	ArrayList<Ya_ZzimBean> list = (ArrayList<Ya_ZzimBean>)request.getAttribute("zzimlist");
+	Ya_MemberBean memberBean =(Ya_MemberBean)session.getAttribute("member");
+%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	table,tr,td {
+	border: 1px solid black;
+}
+</style>
+</head>
+<body>
+<%
+	if(list==null){
+%>
+	<center>
+		<table>
+			<col width="150px" /><col width="150px" /><col width="150px" />
+			<col width="150px" /><col width="150px" /><col width="150px" />
+			<tr>
+				<td colspan="2"><h3><%=memberBean.getNickname()%>님 의 찜내역	</h3></td>
+				<td colspan="3"></td>
+				<td><h3>0개</h3></td>
+			</tr>
+			<tr>
+				<td colspan="6"><h4>찜한 내역이 없습니다.</h4></td>
+			</tr>
+		</table>
+	</center>
+<%
+	}else{
+%>
+	<center>
+		<table>
+			<col width="150px" />
+			<col width="150px" />
+			<col width="150px" />
+			<col width="150px" />
+			<col width="150px" />
+			<col width="150px" />
+			<tr>
+				<td colspan="2"><h3><%=memberBean.getNickname()%>
+						님 의 찜내역
+					</h3></td>
+				<td colspan="3"></td>
+				<td><h3><%=list.get(1).getTot_cnt()%>개
+					</h3></td>
+			</tr>
+			<tr>
+				<%
+					for (int i = 0; i < list.size(); ++i) {
+				%>
+				<td><img src="<%=list.get(i).getImg_name()%>" width="150px"
+					height="150px"></td>
+				<td style="text-align: left;"><%=list.get(i).getName()%><br>
+				<br> <%=list.get(i).getAddress()%><br> 일반실 : <%=list.get(i).getNormal_pri()%>원
+					<br> 특 실 : <%=list.get(i).getPremium_pri()%>원</td>
+				<%
+					if (i == 2)
+								break;
+						}
+				%>
+			</tr>
+			<%
+				if (list.size() > 3) {
+			%>
+			<tr>
+				<%
+					for (int i = 3; i < list.size(); ++i) {
+				%>
+				<td><img src="<%=list.get(i).getImg_name()%>" width="150px"
+					height="150px"></td>
+				<td><%=list.get(i).getName()%></td>
+				<%
+					}
+				%>
+			</tr>
+			<%
+				}
+			%>
+		</table>
+		<%
+			int count = (int) Math.ceil(list.get(1).getTot_cnt() / 6);
+				for (int i = 0; i <= count; ++i) {
+		%>
+		<a
+			href="mypage_Control.jsp?command=guestzzimlist&email=<%=memberBean.getEmail()%>&value=after&pageNum=<%= i+1%>"><%=i+1 %></a>
+		<%
+		}	
+	%>
+	</center>
+	<%
+	}
+	%>
+</body>
+</html>
