@@ -1,3 +1,4 @@
+package baekjun;
 import java.util.Scanner;
 
 public class Main {
@@ -8,27 +9,27 @@ public class Main {
 	
 	public Main() {
 		this.top = -1;
-		stackArray = new int[100000];
-		
+		stackArray = new int[30];
 	}
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		Main m = new Main();
-		System.out.print("숫자를 입력하시오 : ");
-		int orderNum = 6; 
+		
+		int orderNum = 1; 
 				//sc.nextInt();
 		ansArray = new String[orderNum];
-		
-		for(int i=0; i<orderNum; ++i){
-			ansArray[i] = sc.next();
-		}
+				
+		ansArray[0] = "(()[[]])([])"; 
+//		for(int i=0; i<orderNum; ++i){
+//			ansArray[i] = sc.next();
+//		}
 		
 		for(int i=0; i<orderNum; ++i){
 			if(m.isVPS(ansArray[i])){
 				System.out.println("YES");
 			}else{
-				System.out.println("NO");
+				System.out.println(0);
 			}
 		}
 		
@@ -36,16 +37,40 @@ public class Main {
 		
 	}
 	
+	public int calc(String str){
+		for(int i=0; i<str.length(); ++i){
+			
+		}
+	}
+	
 	public boolean isVPS(String str){
+		top = -1;
 		for(int i=0; i<str.length(); ++i){
 			if(str.charAt(i) == '('){
 				push(1);
-			}else{
-				pop();
+				
+			}else if(str.charAt(i) == ')'){
+				if(top() == -1){
+					return false;	
+				}else if(top() == 2){
+					return false;
+				}else{
+					pop();
+				}
+			}else if(str.charAt(i) == '['){
+				push(2);
+			}else if(str.charAt(i) == ']'){
+				if(top() == -1){
+					return false;	
+				}else if(top() == 1){
+					return false;
+				}else{
+					pop();
+				}
 			}
 		}
 		
-		return top==-1 ? true : false;
+		return pop()==-1 ? true : false;
 	}
 	
 	public int empty(){
@@ -56,6 +81,7 @@ public class Main {
 		}
 	}
 	
+	
 	public void push(int item){
         
         stackArray[++top] = item;
@@ -64,10 +90,10 @@ public class Main {
 	public int top(){
 	    
 		if(top == -1){
-			//System.out.println(-1);
+			
 			return -1;
 		}else{
-			//System.out.println(stackArray[top]);
+			
 			return stackArray[top];
 		}
 	        
@@ -75,7 +101,7 @@ public class Main {
 	}
 	
 	public int size(){
-		System.out.println(top+1);
+		
 		return top+1;
 	}
 	 
@@ -85,7 +111,7 @@ public class Main {
 			return -1;
 		}else{
 			int item = stackArray[top];
-			top--;
+			top = top-1;
 			return item;
 		}
         

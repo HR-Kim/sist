@@ -8,11 +8,13 @@ import java.util.EmptyStackException;
 
 import javax.sql.DataSource;
 
+
 import springbook.code.doamin.CodeM;
 
 public class CodeDao {
 	
 	private DataSource dataSource;
+	private JdbcContext jdbcContext;
 	
 	public DataSource getDataSource() {
 		return dataSource;
@@ -22,6 +24,10 @@ public class CodeDao {
 		this.dataSource = dataSource;
 	}
 
+	public void setJdbcContext(JdbcContext jdbcContext) {
+		this.jdbcContext = jdbcContext;
+	}
+
 	private CodeDao() {}
 	
 	public CodeDao(DataSource dataSource){
@@ -29,27 +35,15 @@ public class CodeDao {
 		this.dataSource = dataSource;
 	}
 	
-	
 	public int selectAll()throws ClassNotFoundException, SQLException{
 		int flag = 0;
 		Connection conn = dataSource.getConnection();
-		PreparedStatement psmt = null;
 		ResultSet rs = null;
-		
-		StatementStrategy ss = new StatementStrategy(){
-			@Override
-			public PreparedStatement makePreparedStatement(Connection c)throws ClassNotFoundException, SQLException {
-				PreparedStatement psmt = null;
-				psmt = c.prepareStatement("SELECT count(*)cnt FROM CODE_M ");
-				
-				return psmt;
-			}
-		};
+		 
+		String sql = "SELECT count(*)cnt FROM CODE_M ";
+		jdbcContext.executeSQL(sql);
 		try{
-
-		psmt = ss.makePreparedStatement(conn);
-		
-		
+			
 		rs = psmt.executeQuery();
 		
 		
@@ -58,28 +52,6 @@ public class CodeDao {
 		}
 		}catch(SQLException e){
 			throw e;
-		}finally{
-			if(null!=rs){
-				try{
-					rs.close();
-				}catch(SQLException sql){
-					throw sql;
-				}
-			}
-			if(null!=psmt){
-				try{
-					psmt.close();
-				}catch(SQLException sql){
-					throw sql;
-				}
-			}
-			if(null!=conn){
-				try{
-					conn.close();
-				}catch(SQLException sql){
-					throw sql;
-				}
-			}
 		}
 		
 		return flag;
